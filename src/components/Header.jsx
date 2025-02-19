@@ -3,18 +3,19 @@ import React from "react";
 
 const Header = () => {
 	return (
-		<header className="container mx-auto p-4 flex justify-between">
+		<section className="container mx-auto px-4 py-5 flex justify-between">
 			<div className="dev-name">
-                <h1>Zaki Ramadhan</h1>
+                <h1 className="inline">Zaki Ramadhan</h1>
+                <span className="text-secondary">, Front-End</span>
             </div>
 			<nav>
-                <ul className="flex">
-                    <li><a href="">Present</a></li>
-                    <li><a href="">Skills</a></li>
-                    <li><a href="">Contact</a></li>
+                <ul className="flex gap-12 text-secondary">
+                    <li><a href="" className="hover:text-white duration-100">Present</a></li>
+                    <li><a href="" className="hover:text-white duration-100">Skills</a></li>
+                    <li><a href="" className="hover:text-white duration-100">Contact</a></li>
                 </ul>
             </nav>
-		</header>
+		</section>
 	);
 };
 

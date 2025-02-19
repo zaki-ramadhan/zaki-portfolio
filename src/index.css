@@ -2,10 +2,20 @@
 
 @theme {
   /* font */
-
+  --font-Inter : 'Inter', sans-serif;
+  --font-Archivo : 'Archivo', sans-serif;
   /* colors */
   --color-primary: #1a1a1a;
   --color-secondary: #818181;
   --color-accent: #ff4a01;
-  
+  --color-accent-lighter: #ff9367;
+  --color-additional : #c4b1ac;
+}
+
+.container {
+  @apply mx-auto px-20;
+}
+
+img {
+  object-fit: cover;
 }
