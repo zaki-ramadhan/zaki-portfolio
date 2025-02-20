@@ -6,10 +6,13 @@ import ListSocialMedia from './ListSocialMedia';
 import avatarAi from "../assets/images/me_ai_vers.jpg";
 import { Icon } from "@iconify-icon/react";
 
+import zappifyPreview from "../assets/images/ss_pricing_page.png";
+import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.png";
+
 const Cards = () => {
     return (
-        <section id="cards" className="container p-4 flex flex-col -space-y-3">
-            <div className="card__wrp container p-4 flex gap-4 h-[26rem]">
+        <section id="cards" className="container py-4 flex flex-col -space-y-3">
+            <div className="card__wrp container flex gap-4">
 
             {/* hello card */}
                 <Card typeCard={'hello-card'} setBgColor = 'bg-gradient-to-tl from-additional from-[-130%] to-primary to-55%' className={'justify-between rounded-ee-lg basis-3/4'}> 
@@ -26,11 +29,10 @@ const Cards = () => {
                 </Card>
             </div>
 
-            <div className="card__wrp container grid grid-cols-2 p-10 gap-4 h-[30rem]">
-                <Card is_projectCard setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'}/>
-                <Card is_projectCard setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'}/>
-                <Card is_projectCard setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'}/>
-                <Card is_projectCard setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'}/>
+            <div className="card__wrp container grid grid-cols-2 py-4 mt-4 gap-4 h-[30rem]">
+                <Card is_projectCard projectStatus={'In Progress'} projectTitle={'zappify'} titleColor={'text-white/80'} projectDesc={'Simplify Investing, Maximize Returns.'} setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'} projectPreview={zappifyPreview} xPosition={'-bottom-85'}/>
+                
+                <Card is_projectCard projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-black'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} xPosition={'-bottom-55'}/>
             </div>
         </section>
     )
