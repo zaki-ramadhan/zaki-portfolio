@@ -4,7 +4,7 @@ import headAvatar from '../assets/images/me_ai_vers_2(big_head).png'
 
 const Badge = () => {
   return (
-    <span className='badge w-fit p-2 rounded-lg flex gap-3'>
+    <span className='badge w-fit p-2 rounded-lg flex gap-4'>
       <div className="avatar w-10 h-10 rounded-full bg-additional">
           <img src={headAvatar} alt='headAvatar' className='scale-120'/>
       </div>

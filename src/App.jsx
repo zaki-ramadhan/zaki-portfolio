@@ -8,9 +8,7 @@ const App = () => {
   return (
     <>
       <Header/>
-      <Cards is_reverse setBgColor = 'bg-gradient-to-tl from-additional from-[-100%] to-primary to-60%'/>
-      <Cards setBgColor = 'bg-radial-[at_100%_-50%] from-emerald-800 to-zappify/70 to-60%'/>
-      <Cards is_reverse/>
+      <Cards/>
     </>
   )
 }
