@@ -10,7 +10,7 @@ import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.png"
 
 const Cards = () => {
     return (
-        <section id="cards" className="container py-4 flex flex-col -space-y-3">
+        <main id="cards" className="container py-4 px-20 flex flex-col -space-y-3">
             <div className="card__wrp container flex gap-4">
 
             {/* hello card */}
@@ -33,7 +33,7 @@ const Cards = () => {
                 
                 <Card is_projectCard linkProject={'https://github.com/zaki-ramadhan/katering-ibu?tab=readme-ov-file#katering-ibu-a-laravel-based-catering-website'} projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-slate-700'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} btnColor={'bg-secondary/10'} xPosition={'-bottom-35'} bg={'bg-white/20'}/>
             </section>
-        </section>
+        </main>
     )
 }
 
