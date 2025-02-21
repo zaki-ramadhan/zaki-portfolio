@@ -2,7 +2,7 @@
 import { Icon } from "@iconify-icon/react";
 import TechIcons from "./TechIcon";
 
-const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, className, is_projectCard, projectTitle,  projectDesc, projectStatus, projectPreview, xPosition }) => {
+const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, className, is_projectCard, linkProject, projectTitle,  projectDesc, projectStatus, projectPreview, xPosition, bg }) => {
 
     is_image ? null : 'p-10';
     
@@ -11,7 +11,7 @@ const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, 
         <>
             <div className={`card relative ${typeCard} h-[36rem] ${setBgColor} ${!is_image ? 'p-10' : ''} ${className} rounded-[2.7rem] flex flex-col border border-additional/10 overflow-hidden`}>
                 <span>
-                    <h1 className={`text-3xl font-Archivo flex items-center gap-2 ${titleColor}`}>{projectTitle}<a href="https://github.com/zaki-ramadhan/zappify" target="_blank"><Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 p-2 ${btnColor} hover:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`}/></a></h1>
+                    <h1 className={`text-3xl font-Archivo flex items-center gap-2 ${titleColor}`}>{projectTitle}<a href={linkProject} target="_blank"><Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 p-2 ${btnColor} hover:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`}/></a></h1>
                     <p className="text-secondary mt-3 w-96 line-clamp-1">{projectDesc}</p>
                 </span>
 
@@ -21,7 +21,7 @@ const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, 
                 <span id="status-project" className={`status ${titleColor} absolute top-13 right-13 py-2 px-3 rounded-full ${btnColor} text-xs`}>{projectStatus}</span>
 
                 {/* icons teknologi disini */}
-                <TechIcons projectName={projectTitle}/>
+                <TechIcons projectName={projectTitle} bg={bg}/>
             </div>
         </>
 

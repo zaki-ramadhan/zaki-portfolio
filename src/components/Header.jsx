@@ -11,7 +11,7 @@ const Header = () => {
 			<nav>
                 <ul className="flex gap-12 text-secondary">
                     <li><a href="" className="hover:text-white duration-100">Present</a></li>
-                    <li><a href="" className="hover:text-white duration-100">Skills</a></li>
+                    <li><a href="#projects" className="hover:text-white duration-100">Projects</a></li>
                     <li><a href="" className="hover:text-white duration-100">Contact</a></li>
                 </ul>
             </nav>

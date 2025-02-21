@@ -14,6 +14,10 @@
   --color-zappify-lighter : #14555e;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   @apply mx-auto;
 }
