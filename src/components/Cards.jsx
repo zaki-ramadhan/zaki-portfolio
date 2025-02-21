@@ -4,7 +4,6 @@ import Card from "./Card";
 import Badge from "./Badge";
 import ListSocialMedia from './ListSocialMedia';
 import avatarAi from "../assets/images/me_ai_vers.jpg";
-import { Icon } from "@iconify-icon/react";
 
 import zappifyPreview from "../assets/images/ss_pricing_page.png";
 import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.png";
@@ -30,9 +29,9 @@ const Cards = () => {
             </div>
 
             <div className="card__wrp container grid grid-cols-2 py-4 mt-4 gap-4 h-[30rem]">
-                <Card is_projectCard projectStatus={'In Progress'} projectTitle={'zappify'} titleColor={'text-white/80'} projectDesc={'Simplify Investing, Maximize Returns.'} setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'} projectPreview={zappifyPreview} xPosition={'-bottom-85'}/>
+                <Card is_projectCard projectStatus={'In Progress'} projectTitle={'Zappify'} titleColor={'text-white/80'} projectDesc={'Simplify Investing, Maximize Returns.'} setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'} projectPreview={zappifyPreview} btnColor={'bg-secondary/20'} xPosition={'-bottom-65'}/>
                 
-                <Card is_projectCard projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-black'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} xPosition={'-bottom-55'}/>
+                <Card is_projectCard projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-slate-700'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} btnColor={'bg-secondary/10'} xPosition={'-bottom-35'}/>
             </div>
         </section>
     )
