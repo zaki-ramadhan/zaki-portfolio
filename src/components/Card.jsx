@@ -9,7 +9,7 @@ const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, 
     // apakah project card
     const projectCard = is_projectCard ? (
         <>
-            <div className={`card relative ${typeCard} h-[36rem] ${setBgColor} ${!is_image ? 'p-10' : ''} ${className} rounded-[2.7rem] flex flex-col border border-additional/10 overflow-hidden`}>
+            <div className={`card relative ${typeCard} h-[32rem] ${setBgColor} ${!is_image ? 'p-10' : ''} ${className} rounded-[2.7rem] flex flex-col border border-additional/10 overflow-hidden`}>
                 <span>
                     <h1 className={`text-3xl font-Archivo flex items-center gap-2 ${titleColor}`}>{projectTitle}<a href={linkProject} target="_blank"><Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 p-2 ${btnColor} hover:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`}/></a></h1>
                     <p className="text-secondary mt-3 w-96 line-clamp-1">{projectDesc}</p>
