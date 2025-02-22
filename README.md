@@ -10,7 +10,7 @@ This is my personal **frontend portfolio** showcasing my skills, projects, and e
 - **No Backend:** This project is **fully static** and does not require a backend.  
 
 ## 📸 Preview  
-![Portfolio Screenshot](https://i.postimg.cc/hPQ75gXs/image.png)  
+![Portfolio Screenshot](https://i.postimg.cc/2yddkkSR/image.png)  
 
 ## 🛠 Running the Project Locally  
 To run this project on your local machine, follow these steps:
