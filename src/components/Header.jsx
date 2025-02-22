@@ -3,9 +3,9 @@ import React from "react";
 
 const Header = () => {
 	return (
-		<section className="container mx-auto px-4 md:px-20 pt-7 pb-4 flex justify-between">
+		<section className="container mx-auto px-6 md:px-20 pt-7 pb-4 flex justify-between">
 			<div className="dev-name">
-                <h1 className="inline">Zaki Ramadhan</h1>
+                <h1 className="inline text-2xl lg:text-base">Zaki Ramadhan</h1>
                 <span className="text-secondary">, Front-End</span>
             </div>
 			<nav>
