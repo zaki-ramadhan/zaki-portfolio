@@ -12,11 +12,11 @@ const projectsData = [{
     { name: "Katering Ibu",
     techs : [
         { icon: "simple-icons:css3", color: "text-blue-400" },
+        { icon: "simple-icons:javascript", color: "text-yellow-300" },
+        { icon: "simple-icons:php", color: "text-purple-600" },
         { icon: "simple-icons:tailwindcss", color: "text-cyan-500" },
         { icon: "logos:daisyui-icon", color: "" },
-        { icon: "simple-icons:javascript", color: "text-yellow-300" },
         { icon: "simple-icons:jquery", color: "text-blue-600" },
-        { icon: "simple-icons:php", color: "text-purple-600" },
         { icon: "simple-icons:laravel", color: "text-red-500" },
         { icon: "simple-icons:mysql", color: "text-orange-300" },
     ]}
@@ -30,7 +30,7 @@ const TechIcon = ({projectName, bg}) => {
     if (!project) return null;
 
     return (
-        <span id="technologies" className={`group max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/5 absolute bottom-6 left-7 transition-all duration-300 overflow-hidden`} >
+        <span id="technologies" className={`group max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 absolute bottom-6 left-7 transition-all duration-300 overflow-hidden z-20`} >
 
         {/* Ikon HTML5 (selalu terlihat) */}
         <span className="logo__wrp not-odd:inline-block text-orange-500">
