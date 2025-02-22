@@ -5,7 +5,7 @@ import { Icon } from "@iconify-icon/react";
 
 const ListSocialMedia = ({ size }) => {
     return (
-        <span className='flex gap-3 items-start'>
+        <span className='hidden md:flex gap-3 items-start'>
             {[
                 { href: "https://www.instagram.com/zaki_ramadhannn", icon: "basil:instagram-outline", label: "Instagram" },
                 { href: "https://www.linkedin.com/in/zaki-ramadhan", icon: "la:linkedin-in", label: "LinkedIn" },

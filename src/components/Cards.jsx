@@ -21,7 +21,7 @@ const Cards = () => {
                         <Badge />
                         <ListSocialMedia size={26} />
                     </header>
-                    <h1 className="text-5xl w-[32rem] font-Archivo font-light leading-14">Passionate to pursue the technology.</h1>
+                    <h1 className="text-5xl sm:w-[32rem] font-Archivo font-light leading-14">Passionate to pursue the technology.</h1>
                     <p className="text-secondary text-lg w-8/12 font-light">I enjoy learning new things and try to overcome new challenges while analyzing how I improve through them.</p>
 
                     <span className="flex items-center gap-1 text-2xl lg:text-lg font-semibold text-secondary">
