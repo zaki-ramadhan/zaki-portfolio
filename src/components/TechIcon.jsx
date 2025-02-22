@@ -30,7 +30,7 @@ const TechIcon = ({projectName, bg}) => {
     if (!project) return null;
 
     return (
-        <span id="technologies" className={`group max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 absolute bottom-6 right-7 transition-all duration-300 overflow-hidden z-20`} >
+        <span id="technologies" className={`group max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 active:shadow-lg active:shadow-black/2 absolute bottom-6 right-7 transition-all duration-300 overflow-hidden z-20`} >
 
         {/* Ikon HTML5 (selalu terlihat) */}
         <span className="logo__wrp not-odd:inline-block text-orange-500">
@@ -39,7 +39,7 @@ const TechIcon = ({projectName, bg}) => {
 
          {/* Ikon lainnya (muncul saat hover) */}
             {project.techs.map((item, index) => (
-                <span key={index} className="logo__wrp opacity-0 whitespace-nowrap overflow-hidden max-w-0 transition-all duration-300 group-hover:opacity-100 group-hover:max-w-[28px] group-hover:ms-4" >
+                <span key={index} className="logo__wrp opacity-0 whitespace-nowrap overflow-hidden max-w-0 transition-all duration-300 group-hover:opacity-100 group-hover:max-w-[28px] group-hover:ms-4 group-active:opacity-100 group-active:max-w-[28px] group-active:ms-4" >
                     <Icon icon={item.icon} width="28" height="28" className={`inline-block ${item.color}`} />
                 </span>
             ))}
