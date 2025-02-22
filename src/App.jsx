@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import Header from './components/Header.jsx';
+import MainHeader from './components/MainHeader.jsx';
 import Cards from './components/Cards.jsx';
 
 
 const App = () => {
   return (
     <>
-      <Header/>
+      <MainHeader/>
       <Cards/>
     </>
   )

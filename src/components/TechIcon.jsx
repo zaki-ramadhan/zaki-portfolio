@@ -33,17 +33,20 @@ const TechIcon = ({projectName, bg}) => {
 
 
     // Cari project yang sesuai
-    const project = projectsData.find((p) => p.name === projectName);
+    const project = projectsData.find((item) => item.name === projectName);
     
     // Jika project tidak ditemukan, tampilkan pesan atau kosongkan
     if (!project) return null;
 
     return (
-        <span id="technologies" onClick={handleClick} className={`group max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 active:shadow-lg active:shadow-black/2 absolute bottom-6 right-7 transition-all duration-300 overflow-hidden z-20`} >
+        <span id="technologies" onClick={handleClick} className={`group overflow-visible max-w-fit p-3 pb-1.5 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 active:shadow-lg active:shadow-black/2 absolute bottom-6 right-7 transition-all duration-300 overflow-hidden z-20`} >
 
         {/* Ikon HTML5 (selalu terlihat) */}
         <span className="logo__wrp not-odd:inline-block text-orange-500">
             <Icon icon="simple-icons:html5" width="28" height="28" />
+            {project.techs.map((item, index) => (
+                <span key={index} className={`count-badge absolute top-[-.5rem] right-[-.5rem] hidden last:grid place-content-center z-20 text-white text-xs scale-90 p-2 rounded-full bg-blue-400 max-w-fit max-h-fit aspect-square animate-bounce font-medium group-hover:opacity-0 ${isActive ? "opacity-0" : ""} transition-all`}>{index + 1}</span>
+            ))}
         </span>
 
          {/* Ikon lainnya (muncul saat hover) */}
