@@ -24,10 +24,10 @@ const Cards = () => {
                     <h1 className="text-5xl sm:w-[32rem] font-Archivo font-light leading-14">Passionate to pursue the technology.</h1>
                     <p className="text-secondary text-lg w-8/12 font-light">I enjoy learning new things and try to overcome new challenges while analyzing how I improve through them.</p>
 
-                    <span className="flex items-center gap-1 text-2xl lg:text-lg font-semibold text-secondary">
-                        <Icon icon="famicons:logo-html5" className="lg:p-1.5 w-10 h-auto aspect-square lg:bg-secondary/10 hover:text-orange-500 transition-all duration-150 rounded-full" />
-                        <Icon icon="ion:logo-css3" className="lg:p-1.5 w-10 h-auto aspect-square lg:bg-secondary/10 hover:text-blue-500 transition-all duration-150 rounded-full" />
-                        <Icon icon="mdi:language-javascript" className="lg:p-1.5 w-10 h-auto aspect-square lg:bg-secondary/10 hover:text-yellow-400 transition-all duration-150 rounded-full" />
+                    <span className="flex items-center gap-2 text-2xl lg:text-lg font-semibold text-secondary">
+                        <Icon icon="famicons:logo-html5" width={40} height={40} className="lg:p-2 aspect-square lg:bg-secondary/10 hover:text-orange-500 transition-all duration-150 rounded-full" />
+                        <Icon icon="ion:logo-css3" width={40} height={40} className="lg:p-2 aspect-square lg:bg-secondary/10 hover:text-blue-500 transition-all duration-150 rounded-full" />
+                        <Icon icon="mdi:language-javascript" width={46} height={46} className="lg:p-2 aspect-square lg:bg-secondary/10 hover:text-yellow-400 transition-all duration-150 rounded-full" />
                         <span className="ms-1">+3</span>
 
                     </span>
