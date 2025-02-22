@@ -39,9 +39,9 @@ const Cards = () => {
             </div>
 
             <section id="projects" className="card__wrp container grid lg:grid-cols-2 py-4 mt-4 gap-4">
-                <Card is_projectCard linkProject={'https://github.com/zaki-ramadhan/zappify?tab=readme-ov-file#zappify'} projectStatus={'In Progress'} projectTitle={'Zappify'} titleColor={'text-white/80'} projectDesc={'Simplify Investing, Maximize Returns.'} setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'} projectPreview={zappifyPreview} btnColor={'bg-secondary/20'} xPosition={'-bottom-75 md:-bottom-95 lg:-bottom-55'} bg={'bg-white/5'} overlayColor={'from-zappify to-zappify/0'} />
+                <Card is_projectCard linkProject={'https://github.com/zaki-ramadhan/zappify?tab=readme-ov-file#zappify'} projectStatus={'In Progress'} projectTitle={'Zappify'} titleColor={'text-white/80'} projectDesc={'Simplify Investing, Maximize Returns.'} setBgColor={'bg-radial-[at_100%_-40%] from-emerald-800 to-zappify/40 to-60%'} projectPreview={zappifyPreview} btnColor={'bg-secondary/20'} xPosition={'-bottom-25 sm:-bottom-75 md:-bottom-95 lg:-bottom-55'} bg={'bg-white/5'} overlayColor={'from-zappify to-zappify/0'} />
 
-                <Card is_projectCard linkProject={'https://github.com/zaki-ramadhan/katering-ibu?tab=readme-ov-file#katering-ibu-a-laravel-based-catering-website'} projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-slate-700'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} btnColor={'bg-secondary/10'} xPosition={'-bottom-45 md:-bottom-60 lg:-bottom-30'} bg={'bg-white/20'} overlayColor={'from-white to-white/0'}/>
+                <Card is_projectCard linkProject={'https://github.com/zaki-ramadhan/katering-ibu?tab=readme-ov-file#katering-ibu-a-laravel-based-catering-website'} projectStatus={'Under Maintenance'} projectTitle={'Katering Ibu'} titleColor={'text-slate-700'} projectDesc={'Homemade Goodness, Anytime You Need It'} setBgColor={'bg-radial-[at_100%_-40%] from-white to-slate-200 to-60%'} projectPreview={katIbuPreview} btnColor={'bg-secondary/10'} xPosition={'-bottom-5 sm:-bottom-45 md:-bottom-60 lg:-bottom-30'} bg={'bg-white/20'} overlayColor={'from-white to-white/0'}/>
             </section>
         </main>
     )
