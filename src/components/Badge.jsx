@@ -9,7 +9,7 @@ const Badge = () => {
           <img src={headAvatar} alt='headAvatar' className='scale-120'/>
       </div>
         <div className='bio__wrp'>
-            <h2 className=' text-2xl lg:text-base'>Hi, I&apos;m Zaki.</h2>
+            <h2 className=' text-xl lg:text-base'>Hi, I&apos;m Zaki.</h2>
             <p className='text-secondary text-lg lg:text-xs line-clamp-1'>Front-end developer</p>
         </div>
     </span>
