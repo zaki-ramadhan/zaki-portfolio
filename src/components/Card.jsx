@@ -28,7 +28,7 @@ const Card = ({ typeCard, setBgColor, titleColor, btnColor, is_image, children, 
 
     // card biasa
     ) : (
-        <div className={`card ${typeCard} ${setBgColor} ${!is_image ? 'p-16 pb-10' : ''} ${className} rounded-[2.7rem] flex flex-col space-y-6 border border-additional/10`}>
+        <div className={`card ${typeCard} ${setBgColor} ${!is_image ? 'p-10 sm:p-16 pb-10' : ''} ${className} rounded-[2.7rem] flex flex-col space-y-6 border border-additional/10`}>
             {children} {/*isinya custom sendiri*/}
         </div>
     );
