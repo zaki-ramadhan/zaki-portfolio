@@ -4,7 +4,7 @@ import {Icon} from "@iconify-icon/react";
 
 const Header = () => {
 	return (
-		<section className="container mx-auto px-6 md:px-12 lg:px-20 pt-7 pb-4 flex justify-between">
+		<section className="container mx-auto px-6 md:px-12 xl:px-20 pt-7 pb-4 flex justify-between">
 			<div className="dev-name">
                 <h1 className="inline text-xl lg:text-base">Zaki R<span className="hidden sm:inline-block">amadhan</span></h1>
                 <span className="text-secondary text-xl lg:text-base">, Front-End</span>
