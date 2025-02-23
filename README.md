@@ -21,11 +21,11 @@ Ensure you have **Node.js** and **npm** installed. If not, download and install 
 ### Installation  
 1. Clone the repository:
    ```sh
-   git clone https://github.com/zaki-ramadhan/zaki-portfolio.git
+   git clone https://github.com/<your-github-username>/<your-repository-name>.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd zaki-portfolio
+   cd <your-repository-name>
    ```
 3. Install dependencies:
    ```sh
@@ -35,26 +35,14 @@ Ensure you have **Node.js** and **npm** installed. If not, download and install 
    ```sh
    npm run dev
    ```
-
-### Running on a Mobile Device  
-To access your local development server from a mobile device on the same network, use the following command:
-```sh
-npm run dev -- --host
-```
-This will output something like:
-```sh
-> project@0.0.1 dev
-> vite dev "--host"
-
-Vite v4.x.x ready in xx ms
-
-  Local:   http://localhost:3000
-  Network: http://YOUR_LOCAL_IP:3000
-```
-Now, open the **Network URL** (`http://YOUR_LOCAL_IP:3000`) on your mobile browser while connected to the same Wi-Fi as your development machine.
+   > **Note:** If you want to run it on a mobile device, use:
+   ```sh
+   npm run dev -- --host
+   ```
+   Ensure your device is on the same network as your development machine.
 
 ### Custom Vite Configuration  
-If you use Vite in the `package.json` file, modify the `dev` script as follows:
+To ensure consistency when running locally and deploying, modify `package.json`:
 ```json
   "scripts": {
     "dev": "vite --host --port 5173",
@@ -63,16 +51,31 @@ If you use Vite in the `package.json` file, modify the `dev` script as follows:
   }
 ```
 
-## 💾 Deploying to GitHub Pages  
+## 🚀 Deploying to GitHub Pages  
 To deploy the project using **GitHub Pages**, follow these steps:
 
-### 1. Install `gh-pages`
+### 1. Create a GitHub Repository  
+1. Go to [GitHub](https://github.com/) and create a new repository.
+2. Name it `<your-repository-name>` and make sure it's **public**.
+3. Copy the repository URL.
+
+### 2. Initialize Git and Push the Project  
+In your local project directory, run:
+```sh
+git init
+git remote add origin https://github.com/<your-github-username>/<your-repository-name>.git
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+```
+
+### 3. Install `gh-pages`  
 ```sh
 npm install gh-pages --save-dev
 ```
 
-### 2. Update `package.json`
-Add the following scripts under the `scripts` section:
+### 4. Update `package.json`  
+Add the following scripts:
 ```json
 "predeploy": "npm run build",
 "deploy": "gh-pages -d dist"
@@ -82,23 +85,33 @@ Also, add this outside the `scripts` section:
 "homepage": "https://<your-github-username>.github.io/<your-repository-name>/"
 ```
 
-### 3. Update `vite.config.js`
-Modify the `vite.config.js` file by adding:
+### 5. Update `vite.config.js`  
+Modify `vite.config.js` to set the correct base path:
 ```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
 export default defineConfig({
   base: '/<your-repository-name>/',
   plugins: [react()],
 });
 ```
 
-### 4. Deploy the Project
-Run the following command to deploy:
+### 6. Deploy the Project  
+Run the following command:
 ```sh
 npm run deploy
 ```
 
+### 7. Push the Changes  
+After deploying, commit and push your changes:
+```sh
+git add .
+git commit -m "Deploy to GitHub Pages"
+git push origin main
+```
+
 ## 📩 Connect with Me  
-[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zaki-ramadhan)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230A66C2.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/zaki-ramadhan)  [![Email](https://img.shields.io/badge/Email-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)  
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zaki-ramadhan)  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230A66C2.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/zaki-ramadhan)  [![Email](https://img.shields.io/badge/Email-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:zakiram4dhan@gmail.com)  
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Click%20Here-blue?style=for-the-badge)](https://zaki-ramadhan.github.io/zaki-portfolio/)
-
