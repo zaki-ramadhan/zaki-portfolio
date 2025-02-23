@@ -1,29 +1,44 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from "react";
 import { Icon } from "@iconify-icon/react";
 
 const ListSocialMedia = ({ size }) => {
+    const [open, setOpen] = useState({}); // ✅ State sebagai objek
+
+    const handleOpen = (index) => {
+        setOpen((prev) => ({
+            ...prev,
+            [index]: true, // Hanya item ini yang terbuka
+        }));
+        setTimeout(() => {
+            setOpen((prev) => ({
+                ...prev,
+                [index]: false, // Tutup lagi setelah 1.5 detik
+            }));
+        }, 2000);
+    };
+
     return (
-        <span className='hidden md:flex gap-3 items-start'>
+        <span className="hidden md:flex gap-3 items-start">
             {[
                 { href: "https://www.instagram.com/zaki_ramadhannn", icon: "basil:instagram-outline", label: "Instagram" },
                 { href: "https://www.linkedin.com/in/zaki-ramadhan", icon: "la:linkedin-in", label: "LinkedIn" },
-                { href: "https://github.com/zaki-ramadhan", icon: "mdi:github", label: "Github" }
+                { href: "https://github.com/zaki-ramadhan", icon: "mdi:github", label: "Github" },
+                { href: "mailto:zakiram4dhan@gmail.com", icon: "mdi:gmail", label: "Email" } 
 
             ].map((item, index) => (
-                <a key={index} href={item.href} target='_blank' className='socmed group w-fit flex items-center gap-2 p-2 pr-0 hover:pr-2 rounded-lg transition-all duration-300 bg-secondary/5 hover:bg-secondary/10 group-hover:pr-4 hover:animate-pulse overflow-hidden *:transition-all'>
-
-                    <Icon icon={item.icon} width={size} height={size} className="duration-300"/>
+                <span key={index} onClick={() => handleOpen(index)} className={`socmed group w-fit flex items-center p-2 pr-0 rounded-lg transition-all duration-300 bg-secondary/5 ${open[index] ? "bg-secondary/10 pr-5 gap-0" : " gap-2" } overflow-hidden *:transition-all`}>
+                    <Icon icon={item.icon} width={size} height={size} className="duration-300" />
 
                     {/* Animasi width & opacity */}
-                    <span className='max-w-0 opacity-0 overflow-hidden whitespace-nowrap group-hover:max-w-[100px] group-hover:opacity-100 duration-500 text-sm translate-x-2 group-hover:translate-x-0'>
+                    <a href={item.href} target="_blank" className={`max-w-0 opacity-0 overflow-hidden whitespace-nowrap transition-all duration-500 text-sm translate-x-2 hover:text-secondary active:text-secondary ${open[index] ? "max-w-[100px] opacity-100 translate-x-0" : ""}`}>
                         {item.label}
-                    </span>
-                </a>
+                    </a>
+                </span>
             ))}
         </span>
     );
-}
+};
 
 export default ListSocialMedia;
