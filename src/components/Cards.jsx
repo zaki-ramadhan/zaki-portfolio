@@ -25,10 +25,10 @@ const Cards = () => {
                     <h1 className="text-5xl sm:w-[32rem] -mt-2 md:mt-0 font-Archivo font-light leading-14">Passionate to pursue the technology.</h1>
                     <p className="text-secondary text-base md:text-lg w-10/12 lg:w-8/12 font-light">I enjoy learning new things and try to overcome new challenges while analyzing how I improve through them.</p>
 
-                    <span className="flex items-center gap-2 lg:gap-0.5 text-xl font-semibold text-secondary">
-                        <Icon icon="famicons:logo-html5" width={40} height={40} className="lg:p-2 lg:scale-85 aspect-square lg:bg-secondary/10 hover:text-orange-500 active:text-orange-500 transition-all duration-150 rounded-full" />
-                        <Icon icon="ion:logo-css3" width={40} height={40} className="lg:p-2 lg:scale-85 aspect-square lg:bg-secondary/10 hover:text-blue-500 active:text-blue-500 transition-all duration-150 rounded-full" />
-                        <Icon icon="mdi:language-javascript" width={42} height={42} className="lg:p-2 lg:scale-80 aspect-square lg:bg-secondary/10 hover:text-yellow-400 active:text-yellow-400 transition-all duration-150 rounded-full" />
+                    <span className="flex items-center gap-1 lg:gap-0.5 text-xl font-semibold text-secondary *:lg:p-2 *:transition-all *:duration-150 *:aspect-square *:rounded-full *:lg:bg-secondary/10 *:lg:scale-85">
+                        <Icon icon="famicons:logo-html5" width={40} height={40} className="hover:text-orange-500 active:text-orange-500" />
+                        <Icon icon="ion:logo-css3" width={40} height={40} className="hover:text-blue-500 active:text-blue-500" />
+                        <Icon icon="mdi:language-javascript" width={42} height={42} className="hover:text-yellow-400 active:text-yellow-400" />
                         <span className="ms-1">+7</span>
 
                     </span>

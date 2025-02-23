@@ -10,7 +10,7 @@ const Badge = () => {
       </div>
         <div className='bio__wrp'>
             <h2 className='text-base lg:text-lg'>Hi, I&apos;m Zaki.</h2>
-            <p className='text-secondary text-base lg:text-base line-clamp-1'>Front-end developer</p>
+            <p className='text-secondary text-base line-clamp-1'>Front-end developer</p>
         </div>
     </span>
   )

@@ -12,13 +12,12 @@ const ListSocialMedia = ({ size }) => {
                 { href: "https://github.com/zaki-ramadhan", icon: "mdi:github", label: "Github" }
 
             ].map((item, index) => (
-                <a key={index} href={item.href} target='_blank' 
-                    className='socmed group w-fit flex items-center gap-2 p-2 pr-0 hover:pr-2 rounded-lg transition-all duration-300 bg-secondary/5 hover:bg-secondary/10 group-hover:pr-4 hover:animate-pulse overflow-hidden'>
+                <a key={index} href={item.href} target='_blank' className='socmed group w-fit flex items-center gap-2 p-2 pr-0 hover:pr-2 rounded-lg transition-all duration-300 bg-secondary/5 hover:bg-secondary/10 group-hover:pr-4 hover:animate-pulse overflow-hidden *:transition-all'>
 
-                    <Icon icon={item.icon} width={size} height={size} className="transition-all duration-300"/>
+                    <Icon icon={item.icon} width={size} height={size} className="duration-300"/>
 
                     {/* Animasi width & opacity */}
-                    <span className='max-w-0 opacity-0 overflow-hidden whitespace-nowrap group-hover:max-w-[100px] group-hover:opacity-100 transition-all duration-500 text-sm translate-x-2 group-hover:translate-x-0'>
+                    <span className='max-w-0 opacity-0 overflow-hidden whitespace-nowrap group-hover:max-w-[100px] group-hover:opacity-100 duration-500 text-sm translate-x-2 group-hover:translate-x-0'>
                         {item.label}
                     </span>
                 </a>

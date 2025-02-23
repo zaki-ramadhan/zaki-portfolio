@@ -10,10 +10,10 @@ const Header = () => {
                 <span className="text-secondary text-base md:text-xl lg:text-base">, Front-End</span>
             </div>
 			<nav>
-                <ul className="hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg lg:text-base">
-                    <li><a href="" className="hover:text-white active:text-white duration-100">Present</a></li>
-                    <li><a href="#projects" className="hover:text-white active:text-white duration-100">Projects</a></li>
-                    <li><a href="" className="hover:text-white active:text-white duration-100">Contact</a></li>
+                <ul className="hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base">
+                    <li><a href="">Present</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="">Contact</a></li>
                 </ul>
                 <Icon icon="hugeicons:menu-01" width="26" height="26" className="md:hidden text-secondary active:text-white"/>
             </nav>

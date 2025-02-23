@@ -4,7 +4,7 @@ import TechIcons from "./TechIcon";
 
 const ProjectCard = ({ setBgColor, titleColor, btnColor, is_image, className, linkProject, projectTitle,  projectDesc, projectStatus, projectPreview, bg, overlayColor }) => {
   return (
-        <div className={`project-card relative h-80 md:95 lg:h-110 ${setBgColor} ${!is_image ? 'p-7 sm:p-10' : ''} ${className} rounded-[2.7rem] flex flex-col border border-additional/10 overflow-hidden`}>
+        <div className={`project-card relative h-90 lg:h-110 ${setBgColor} ${!is_image ? 'p-7 sm:p-10' : ''} ${className} rounded-[2.7rem] flex flex-col border border-additional/10 overflow-hidden`}>
             <div>
                 <div className="container title-status__wrp flex items-center justify-between">
                     <span className="title-icon__wrp flex items-center gap-2 basis-1/2">
@@ -13,7 +13,7 @@ const ProjectCard = ({ setBgColor, titleColor, btnColor, is_image, className, li
                     </h1>
 
 
-                        <a href={linkProject} target="_blank"><Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 scale-90 -ml-1 md:ml-0 md:scale-100 p-2 ${btnColor} hover:bg-secondary/30 active:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`}/></a>
+                        <a href={linkProject} target="_blank"><Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 scale-75 -mt-1 md:-mt-0 -ml-1 md:ml-0 md:scale-100 p-1.5 ${btnColor} hover:bg-secondary/30 active:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`}/></a>
                     </span>
                     <span id="status-project" className={`status basis-1/2 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs`}>{projectStatus}</span>
                 </div>
