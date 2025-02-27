@@ -6,8 +6,11 @@ import Badge from "./Badge";
 import ListSocialMedia from './ListSocialMedia';
 import avatarAi from "../assets/images/me_ai_vers.jpg";
 import { Icon } from "@iconify-icon/react";
+import { useTranslation } from "react-i18next";
 
 const Cards = () => {
+    const { t } = useTranslation();
+
     return (
         <main id="cards" className="container py-4 px-4 md:px-10 xl:px-20 flex flex-col -space-y-3">
             <div className="card__wrp container flex flex-col lg:flex-row gap-4">
@@ -18,8 +21,8 @@ const Cards = () => {
                         <Badge />
                         <ListSocialMedia size={30} />
                     </header>
-                    <h1 className="text-5xl sm:w-[32rem] -mt-2 md:mt-0 font-Archivo font-light leading-14">Passionate to pursue the technology.</h1>
-                    <p className="text-secondary text-base md:text-lg w-10/12 lg:w-8/12 font-light">I enjoy learning new things and try to overcome new challenges while analyzing how I improve through them.</p>
+                    <h1 className="text-5xl sm:w-[32rem] -mt-2 md:mt-0 font-Archivo font-light leading-14">{t("helloCard.title")}</h1>
+                    <p className="text-secondary text-base md:text-lg w-10/12 lg:w-8/12 font-light">{t("helloCard.subtitle")}</p>
 
                     <span className="flex items-center gap-1 lg:gap-0.5 text-xl font-semibold text-secondary *:lg:p-2 *:transition-all *:duration-150 *:aspect-square *:rounded-full *:lg:bg-secondary/10 *:lg:scale-85">
                         <Icon icon="famicons:logo-html5" width={40} height={40} className="hover:text-orange-500 active:text-orange-500" />
@@ -31,7 +34,7 @@ const Cards = () => {
                 </Card>
 
                 <Card is_image className={'card hidden lg:inline-block group lg:basis-2/4 xl:basis-2/4 max-w-80 rounded-es-lg border border-secondary/15 overflow-hidden'}>
-                    <img src={avatarAi} className="h-full group-hover:scale-105 transition-all duration-500"/>
+                    <img src={avatarAi} className="h-full"/>
                 </Card>
             </div>
 
