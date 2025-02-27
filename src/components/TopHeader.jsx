@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify-icon/react";
+import { useTranslation } from "react-i18next";
+
 
 const TopHeader = () => {
+    const { t } = useTranslation();
     const [visible, setVisible] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [closed, setClosed] = useState(false); // State untuk manual close
@@ -26,11 +29,11 @@ const TopHeader = () => {
     }, [lastScrollY, closed]);
 
     const phoneNumber = "6281214772370"; // Ganti dengan nomor Anda
-    const message = "Halo, saya baru saja melihat website portofolio Anda dan saya tertarik dengan Layanan Anda!"; // Template pesan
+    const message = t("wa.message"); // Template pesan
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     return (
-        <div className={`w-full bg-green-500 text-white text-sm py-2 text-center flex justify-center items-center fixed top-0 left-0 z-50 transition-transform duration-300 ${visible && !closed ? "translate-y-0" : "-translate-y-full"}`}>
+        <div className={`w-full bg-green-600 text-white text-sm py-2 text-center flex justify-center items-center fixed top-0 left-0 z-50 transition-transform duration-300 ${visible && !closed ? "translate-y-0" : "-translate-y-full"}`}>
             {/* Tombol Close */}
             <button onClick={() => setClosed(true)} className="absolute right-4 top-2 text-white hover:text-gray-300">
                 <Icon icon="mdi:close" className="text-xl" />

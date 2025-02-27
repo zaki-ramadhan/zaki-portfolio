@@ -8,7 +8,7 @@ const projectData = [
     {
         id: 1,
         name: "Zappify",
-        desc: "Simplify Investing, Maximize Returns",
+        desc: "A Practice Project: Sharpening UI & React Skills",
         link: "https://github.com/zaki-ramadhan/zappify?tab=readme-ov-file#zappify",
         status: "In Progress",
         preview: zappifyPreview,
@@ -48,11 +48,11 @@ const ProjectCards = ({ is_image, className }) => {
                         <div>
                             <div className="container title-status__wrp flex items-center justify-between">
                                 <span className="title-icon__wrp flex items-center gap-2 basis-1/2">
-                                    <h1 className={`${titleColor} text-2xl md:text-3xl font-Archivo max-w-[8ch] md:max-w-none overflow-hidden text-ellipsis whitespace-nowrap`}>
+                                    <h1 className={`${titleColor} text-3xl md:text-3xl font-Archivo max-w-[8ch] md:max-w-none overflow-hidden text-ellipsis whitespace-nowrap`}>
                                         {project.name}
                                     </h1>
                                     <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                        <Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 scale-95 md:scale-100 -mt-1 md:-mt-0 md:ml-0 p-1.5 ${btnColor} hover:bg-secondary/30 active:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`} />
+                                        <Icon icon="stash:arrow-up-light" width="24" height="24" className={`${titleColor} rotate-45 scale-95 md:scale-100 md:ml-0 p-1.5 ${btnColor} hover:bg-secondary/30 active:bg-secondary/30 rounded-full ms-1 translate-y-1 cursor-pointer`} />
                                     </a>
                                 </span>
                                 <span id="status-project" className={`status basis-1/2 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs`}>
