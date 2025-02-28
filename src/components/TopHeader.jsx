@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Icon } from "@iconify-icon/react";
 import { useTranslation } from "react-i18next";
 
@@ -30,17 +30,23 @@ const TopHeader = () => {
 
     const phoneNumber = "6281214772370"; // Ganti dengan nomor Anda
     const message = t("wa.message"); // Template pesan
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    //!Gunakan useMemo agar whatsappURL tidak dihitung ulang setiap render
+    // URL hanya berubah jika 'message' berubah (misalnya karena perubahan bahasa)
+    const whatsappURL = useMemo(() => {
+        return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    }, [message]);
+
+        
 
     return (
         <div className={`w-full bg-green-600 text-white text-sm py-2 text-center flex justify-center items-center fixed top-0 left-0 z-50 transition-transform duration-300 ${visible && !closed ? "translate-y-0" : "-translate-y-full"}`}>
             {/* Tombol Close */}
-            <button onClick={() => setClosed(true)} className="absolute right-4 top-2 text-white hover:text-gray-300">
+            <button onClick={() => setClosed(true)} className="absolute right-4 top-2.5 text-white hover:text-gray-300">
                 <Icon icon="mdi:close" className="text-xl" />
             </button>
 
             {/* Link WhatsApp */}
-            <a href={whatsappURL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+            <a href={whatsappURL} target="_blank" rel="noopener noreferrer" className="flex text-lg md:text-base items-center gap-2 hover:underline">
                 Contact me via WhatsApp
                 <Icon icon="mdi:open-in-new" className="text-base" />
             </a>

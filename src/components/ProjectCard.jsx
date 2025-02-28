@@ -37,7 +37,7 @@ const projectData = [
     }
 ];
 
-const ProjectCards = ({ is_image, className }) => {
+const ProjectCard = ({ is_image, className }) => {
     return (
         <>
             {projectData.map((project) => {
@@ -76,4 +76,4 @@ const ProjectCards = ({ is_image, className }) => {
     );
 };
 
-export default ProjectCards;
+export default ProjectCard;
