@@ -22,6 +22,7 @@ const DropdownLanguages = () => {
     const switchLanguage = (lang) => {
         setLanguage(lang);
         i18n.changeLanguage(lang);
+        // kalo dia selesai milih bahasa dan atau dia klik di luar elemen, maka tutup elemen dropdownnya
         setIsOpen(false);
     };
 

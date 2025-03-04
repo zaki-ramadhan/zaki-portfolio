@@ -46,7 +46,7 @@ const TopHeader = () => {
             </button>
 
             {/* Link WhatsApp */}
-            <a href={whatsappURL} target="_blank" rel="noopener noreferrer" className="flex text-lg md:text-base items-center gap-2 hover:underline">
+            <a href={whatsappURL} target="_blank" rel="noopener noreferrer" className="flex text-lg md:text-sm items-center gap-2 hover:underline">
                 Contact me via WhatsApp
                 <Icon icon="mdi:open-in-new" className="text-base" />
             </a>
