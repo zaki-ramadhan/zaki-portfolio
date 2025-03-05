@@ -45,7 +45,7 @@ const TechIcon = ({projectName, bg}) => {
         <span className={`logo__wrp not-odd:inline-block transation-all duration-300 delay-75 ${!isActive ? "text-zinc-400" : "text-orange-500"} `}>
             <Icon icon="simple-icons:html5" width="26" height="26" />
             {project.techs.map((item, index) => (
-                <span key={index} className={`count-badge absolute top-[-.5rem] right-[-.5rem] hidden last:grid place-content-center z-20 text-white text-xs scale-80 p-2 rounded-full bg-blue-400 max-w-fit max-h-fit aspect-square animate-bounce font-medium delay-200 md:delay-0 ${isActive ? "opacity-0" : ""} transition-all`}>{index + 1}</span>
+                <span key={index} className={`count-badge absolute top-[-.5rem] right-[-.5rem] hidden last:grid place-content-center z-20 text-white text-xs scale-80 p-2 rounded-full bg-blue-400 max-w-fit max-h-fit aspect-square animate-bounce font-medium delay-200 md:delay-0 ${isActive ? "opacity-0" : ""} transition-all`}>{index + 2}</span>
             ))}
         </span>
 
