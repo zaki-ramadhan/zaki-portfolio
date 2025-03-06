@@ -3,14 +3,15 @@ import { Icon } from "@iconify-icon/react";
 import TechIcons from "./TechIcon";
 import zappifyPreview from "../assets/images/ss_pricing_page.png";
 import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.png";
+import { useTranslation } from "react-i18next";
 
 const projectData = [
     {
         id: 1,
         name: "Zappify",
-        desc: "A Practice Project: Sharpening UI & React Skills",
+        desc: "projectCard.zappify.desc",
         link: "https://github.com/zaki-ramadhan/zappify?tab=readme-ov-file#zappify",
-        status: "In Progress",
+        status: "projectCard.zappify.status",
         preview: zappifyPreview,
         colors: {
             titleColor: 'text-white/80',
@@ -23,9 +24,9 @@ const projectData = [
     {
         id: 2,
         name: "Katering Ibu",
-        desc: "Admin Dashboard for Katering Ibu",
+        desc: "projectCard.kateringIbu.desc",
         link: "https://github.com/zaki-ramadhan/katering-ibu?tab=readme-ov-file#katering-ibu-a-laravel-based-catering-website",
-        status: "Maintenance",
+        status: "projectCard.kateringIbu.status",
         preview: katIbuPreview,
         colors: {
             titleColor: 'text-primary',
@@ -38,6 +39,7 @@ const projectData = [
 ];
 
 const ProjectCard = ({ is_image, className }) => {
+    const {t} = useTranslation();
     return (
         <>
             {projectData.map((project) => {
@@ -56,10 +58,10 @@ const ProjectCard = ({ is_image, className }) => {
                                     </a>
                                 </span>
                                 <span id="status-project" className={`status basis-1/2 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs`}>
-                                    {project.status}
+                                    {t(project.status)}
                                 </span>
                             </div>
-                            <p className="text-secondary md:text-base mt-1 lg:mt-3 lg:w-96 line-clamp-1">{project.desc}</p>
+                            <p className="text-secondary md:text-base mt-1 lg:mt-3 lg:w-96 line-clamp-1">{t(project.desc)}</p>
                         </div>
 
                         <div className="web-preview__wrp relative w-full h-fit mt-8">

@@ -1,17 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const projectCardData = [
-  {
-    name: "Zappify",
-    description: "A Practice Project: Sharpening UI & React Skills",
-  },
-  {
-    name: "Katering Ibu",
-    description: "Admin Dashboard for Katering Ibu",
-  },
-];
-
 const resources = {
   en: {
     translation: {
@@ -30,7 +19,16 @@ const resources = {
         message:
           "Hello, I just saw your portfolio website, and I'm very interested in your skills!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "A Practice Project: Sharpening UI & React Skills",
+          status: "In Progress",
+        },
+        kateringIbu: {
+          desc: "Admin Dashboard for Katering Ibu",
+          status: "Maintenance",
+        },
+      },
     },
   },
 
@@ -52,7 +50,16 @@ const resources = {
         message:
           "¡Hola! Acabo de ver tu sitio web de portafolio y estoy muy interesado en tus habilidades.",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Un proyecto de práctica: Mejorando habilidades de UI y React",
+          status: "En Progreso",
+        },
+        kateringIbu: {
+          desc: "Panel de administración para Katering Ibu",
+          status: "Mantenimiento",
+        },
+      },
     },
   },
 
@@ -74,7 +81,16 @@ const resources = {
         message:
           "Bonjour, je viens de voir votre site de portfolio et je suis très intéressé par vos compétences!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Un projet d'entraînement : Améliorer les compétences en UI et React",
+          status: "En Cours",
+        },
+        kateringIbu: {
+          desc: "Tableau de bord d'administration pour Katering Ibu",
+          status: "Maintenance",
+        },
+      },
     },
   },
 
@@ -95,7 +111,16 @@ const resources = {
         message:
           "Hallo, ich habe gerade deine Portfolio-Website gesehen und bin sehr an deinen Fähigkeiten interessiert!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Ein Übungsprojekt: Verbesserung der UI- und React-Fähigkeiten",
+          status: "In Bearbeitung",
+        },
+        kateringIbu: {
+          desc: "Admin-Dashboard für Katering Ibu",
+          status: "Wartung",
+        },
+      },
     },
   },
 
@@ -116,7 +141,16 @@ const resources = {
         message:
           "Olá, acabei de ver seu site de portfólio e estou muito interessado em suas habilidades!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Um projeto de prática: Aprimorando habilidades de UI e React",
+          status: "Em Progresso",
+        },
+        kateringIbu: {
+          desc: "Painel de administração para Katering Ibu",
+          status: "Manutenção",
+        },
+      },
     },
   },
 
@@ -137,7 +171,16 @@ const resources = {
         message:
           "Привет, я только что посмотрел ваш сайт-портфолио и очень заинтересован в ваших навыках!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Учебный проект: Совершенствование навыков UI и React",
+          status: "В процессе",
+        },
+        kateringIbu: {
+          desc: "Административная панель для Katering Ibu",
+          status: "Обслуживание",
+        },
+      },
     },
   },
 
@@ -156,7 +199,16 @@ const resources = {
       wa: {
         message: "你好，我刚刚看到了你的作品集网站，我对你的技能很感兴趣！",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "一个练习项目：提升UI和React技能",
+          status: "进行中",
+        },
+        kateringIbu: {
+          desc: "Katering Ibu的管理仪表板",
+          status: "维护中",
+        },
+      },
     },
   },
 
@@ -176,7 +228,16 @@ const resources = {
         message:
           "こんにちは、あなたのポートフォリオサイトを拝見しました。あなたのスキルにとても興味があります！",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "練習プロジェクト：UIとReactスキルの向上",
+          status: "進行中",
+        },
+        kateringIbu: {
+          desc: "Katering Ibuの管理ダッシュボード",
+          status: "メンテナンス中",
+        },
+      },
     },
   },
 
@@ -198,7 +259,16 @@ const resources = {
         message:
           "Ciao, ho appena visto il tuo sito portfolio e sono molto interessato alle tue competenze!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Un progetto di pratica: Migliorare le competenze di UI e React",
+          status: "In Corso",
+        },
+        kateringIbu: {
+          desc: "Pannello di amministrazione per Katering Ibu",
+          status: "Manutenzione",
+        },
+      },
     },
   },
 
@@ -219,7 +289,16 @@ const resources = {
         message:
           "Halo, saya baru saja melihat website portofolio Anda dan saya tertarik dengan kemampuan Anda!",
       },
-      projectCard: projectCardData,
+      projectCard: {
+        zappify: {
+          desc: "Proyek Latihan: Mengasah Keterampilan UI & React",
+          status: "Dalam Proses",
+        },
+        kateringIbu: {
+          desc: "Dashboard Admin untuk Katering Ibu",
+          status: "Pemeliharaan",
+        },
+      },
     },
   },
 };
@@ -228,7 +307,7 @@ i18n.use(initReactI18next).init({
   resources,
   lng: "en", // Default bahasa
   fallbackLng: "en",
-  interpolation: { escapeValue: false }
+  interpolation: { escapeValue: false },
 });
 
 export default i18n;

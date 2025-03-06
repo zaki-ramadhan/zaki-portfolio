@@ -27,7 +27,14 @@ const MainHeader = () => {
                  <span className="flex items-center gap-2">
                     <Icon icon="hugeicons:menu-01" width="26" height="26" className={`md:hidden text-secondary active:text-white `}/>
                  </span>
-            </nav>
+                 </nav>
+                 {/* <nav id="mobile-menu" className={`container fixed top-0 left-0 w-screen h-0 bg-primary z-50 p-12`}>
+                    <ul className="flex flex-col items-center gap-6 text-secondary text-xl *:hover:text-white *:active:text-white">
+                        <li><a href="">Present</a></li>
+                        <li><a href="">Projects</a></li>
+                        <li><a href="">Skillls</a></li>
+                    </ul>
+            </nav> */}
         </header>
     );
 };
