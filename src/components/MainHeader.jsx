@@ -1,10 +1,8 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect, useRef } from "react";
+/* eslint-disable react/prop-types */
 import { Icon } from "@iconify-icon/react";
 import { useTranslation } from "react-i18next";
-import DropdownLanguages from './DropdownLanguages';
 
-const MainHeader = () => {
+const MainHeader = ({children}) => {
     const {t} = useTranslation();
     
     return (
@@ -21,7 +19,7 @@ const MainHeader = () => {
                     <li><a href="">{t("header.contact")}</a></li>
                 </ul>
 
-                <DropdownLanguages />
+                {children}
 
                  {/* Button untuk menu mobile */}
                  <span className="flex items-center gap-2">
