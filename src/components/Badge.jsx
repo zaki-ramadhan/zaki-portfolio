@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import headAvatar from '../assets/images/me_ai_vers_2(big_head).png'
+import headAvatar from '../assets/images/me_ai_vers_2(big_head).webp'
 import { useTranslation } from "react-i18next";
 
 const Badge = () => {

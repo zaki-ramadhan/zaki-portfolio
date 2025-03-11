@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Icon } from "@iconify-icon/react";
 import TechIcons from "./TechIcon";
-import zappifyPreview from "../assets/images/ss_pricing_page.png";
-import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.png";
+import zappifyPreview from "../assets/images/ss_pricing_page.webp";
+import katIbuPreview from "../assets/images/ss_dashboard_admin_katering_ibu.webp";
 import { useTranslation } from "react-i18next";
 
 const projectData = [

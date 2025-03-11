@@ -2,7 +2,7 @@ import Card from "./Card";
 import ProjectCard from "./ProjectCard";
 import Badge from "./Badge";
 import ListSocialMedia from './ListSocialMedia';
-import avatarAi from "../assets/images/me_ai_vers.jpg";
+import avatarAi from "../assets/images/me_ai_vers.webp";
 // import { Icon } from "@iconify-icon/react";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
@@ -43,7 +43,7 @@ const Cards = () => {
                 </Card>
 
                 <Card is_image className={'card hidden lg:inline-block group lg:basis-2/4 xl:basis-2/4 max-w-80 rounded-es-lg border border-secondary/15 overflow-hidden'}>
-                    <img src={avatarAi} className="h-full"/>
+                    <img src={avatarAi} alt="avatar ai" className="h-full"/>
                 </Card>
             </div>
 
