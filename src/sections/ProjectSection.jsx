@@ -11,7 +11,7 @@ export default function ProjectSection() {
 					My
 					Projects
 				</h1>
-				<span className="inline w-full grow h-[0.05rem] bg-gradient-to-r from-stone-400 from-30% to-white/0 ml-4"></span>
+				<span className="inline w-full grow h-[0.05rem] bg-gradient-to-r from-stone-400 from-20% to-stone-200/0 ml-4"></span>
 			</div>
 			<ProjectCard />
 		</section>
