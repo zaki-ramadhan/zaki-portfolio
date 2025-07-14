@@ -57,7 +57,7 @@ const TechIcon = ({ projectName, bg }) => {
 							key={
 								index
 							}
-							className={`count-badge absolute top-[-.5rem] right-[-.5rem] hidden last:grid place-content-center z-20 text-white text-xs scale-80 p-2 rounded-full bg-blue-400 max-w-fit max-h-fit aspect-square animate-bounce font-medium delay-200 md:delay-0 ${
+							className={`count-badge absolute top-[-.5rem] right-[-.5rem] hidden last:grid place-content-center z-20 text-white text-xs scale-80 p-2 rounded-full bg-blue-500 max-w-fit max-h-fit aspect-square animate-bounce font-medium delay-200 md:delay-0 ${
 								isActive
 									? "opacity-0"
 									: ""

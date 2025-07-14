@@ -29,6 +29,10 @@ export default defineConfig({
 				__dirname,
 				"./src/assets"
 			),
+			"@sections": path.resolve(
+				__dirname,
+				"./src/sections"
+			),
 		},
 	},
 });

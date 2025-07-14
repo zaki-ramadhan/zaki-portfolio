@@ -62,11 +62,11 @@ const TopHeader = () => {
 
 	return (
 		<div
-			className={`w-full bg-green-600 text-white text-sm py-2 text-center flex justify-center items-center fixed top-0 left-0 z-50 transition-transform duration-300 ${
+			className={`w-full bg-green-500 text-white outline-[1.3px] outline-green-700 font-medium text-sm py-1.5 text-center flex justify-center items-center fixed top-0 left-0 z-50 transition-transform duration-300 ${
 				visible &&
 				!closed
 					? "translate-y-0"
-					: "-translate-y-full"
+					: "-translate-y-[110%]"
 			}`}
 		>
 			{/* Tombol Close */}
@@ -76,11 +76,11 @@ const TopHeader = () => {
 						true
 					)
 				}
-				className="absolute right-4 top-2.5 text-white hover:text-gray-300"
+				className="absolute right-4 top-2.5 text-white hover:text-gray-600 active:text-gray-600 transition-all"
 			>
 				<Icon
 					icon="mdi:close"
-					className="text-xl"
+					className="text-xl -translate-y-1"
 				/>
 			</button>{" "}
 			{/* Link WhatsApp */}{" "}

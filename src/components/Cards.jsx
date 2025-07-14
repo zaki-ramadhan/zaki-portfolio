@@ -1,11 +1,10 @@
 import Card from "./Card";
-import ProjectCard from "./ProjectCard";
 import Badge from "./Badge";
 import ListSocialMedia from "./ListSocialMedia";
 import avatarAi from "@assets/images/me_ai_vers.webp";
-// import { Icon } from "@iconify-icon/react";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
+import ProjectSection from './../sections/ProjectSection';
 
 const Cards = () => {
 	const { t } = useTranslation();
@@ -96,12 +95,7 @@ const Cards = () => {
 				</Card>
 			</div>
 
-			<section
-				id="projects"
-				className="card__wrp container grid lg:grid-cols-2 py-4 mt-4 gap-4"
-			>
-				<ProjectCard />
-			</section>
+			<ProjectSection />
 		</main>
 	);
 };

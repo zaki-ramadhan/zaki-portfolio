@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
+	// english
 	en: {
 		translation: {
 			header: {
@@ -17,20 +18,28 @@ const resources = {
 			wa: {
 				message: "Hello, I just saw your portfolio website, and I'm very interested in your skills!",
 				contactText: "Contact me via WhatsApp",
-			},
-			projectCard: {
+			}, projectCard: {
 				zappify: {
 					desc: "A Practice Project: Sharpening UI & React Skills",
-					status: "In Progress",
+					status: "Individual",
 				},
 				kateringIbu: {
-					desc: "Admin Dashboard for Katering Ibu",
-					status: "Maintenance",
+					desc: "Digital Solution for Home Catering Business to Boost Competitiveness",
+					status: "Collaboration",
+				},
+				ortuPintar: {
+					desc: "Child Development Platform for Parents with 0-6 Years Old Children",
+					status: "Collaboration",
+				},
+				webBlog: {
+					desc: "Full-Stack Blog Management System with CRUD Operations",
+					status: "Individual",
 				},
 			},
 		},
 	},
 
+	// espanol
 	es: {
 		translation: {
 			header: {
@@ -46,20 +55,28 @@ const resources = {
 			wa: {
 				message: "¡Hola! Acabo de ver tu sitio web de portafolio y estoy muy interesado en tus habilidades.",
 				contactText: "Contáctame por WhatsApp",
-			},
-			projectCard: {
+			}, projectCard: {
 				zappify: {
 					desc: "Proyecto de Práctica: Perfeccionando Habilidades de UI y React",
-					status: "En Desarrollo",
+					status: "Individual",
 				},
 				kateringIbu: {
-					desc: "Panel de Administración para Katering Ibu",
-					status: "En Mantenimiento",
+					desc: "Solución Digital para Negocio de Catering Casero y Mejorar Competitividad",
+					status: "Colaboración",
+				},
+				ortuPintar: {
+					desc: "Plataforma de Desarrollo Infantil para Padres con Niños de 0-6 Años",
+					status: "Colaboración",
+				},
+				webBlog: {
+					desc: "Sistema de Gestión de Blogs Full-Stack con Operaciones CRUD",
+					status: "Individual",
 				},
 			},
 		},
 	},
 
+	// chinese
 	zh: {
 		translation: {
 			header: {
@@ -75,20 +92,28 @@ const resources = {
 			wa: {
 				message: "你好，我刚刚看到了你的作品集网站，我对你的技能很感兴趣！",
 				contactText: "通过WhatsApp联系我",
-			},
-			projectCard: {
+			}, projectCard: {
 				zappify: {
 					desc: "练习项目：提升UI和React技能",
-					status: "开发中",
+					status: "个人",
 				},
 				kateringIbu: {
-					desc: "Katering Ibu 管理仪表板",
-					status: "维护中",
+					desc: "家庭餐饮业务数字化解决方案，提升市场竞争力",
+					status: "合作项目",
+				},
+				ortuPintar: {
+					desc: "0-6岁儿童发展平台，帮助父母监测孩子成长",
+					status: "合作项目",
+				},
+				webBlog: {
+					desc: "全栈博客管理系统，具备完整CRUD功能",
+					status: "个人",
 				},
 			},
 		},
 	},
 
+	// japanese
 	ja: {
 		translation: {
 			header: {
@@ -104,20 +129,28 @@ const resources = {
 			wa: {
 				message: "こんにちは、あなたのポートフォリオサイトを拝見しました。あなたのスキルにとても興味があります！",
 				contactText: "WhatsAppでお気軽にご連絡ください",
-			},
-			projectCard: {
+			}, projectCard: {
 				zappify: {
 					desc: "練習プロジェクト：UIとReactスキルの向上",
-					status: "開発中",
+					status: "個人",
 				},
 				kateringIbu: {
-					desc: "Katering Ibu 管理ダッシュボード",
-					status: "メンテナンス中",
+					desc: "家庭向けケータリング事業のデジタル化ソリューション",
+					status: "コラボレーション",
+				},
+				ortuPintar: {
+					desc: "0-6歳児の発達をサポートする親向けプラットフォーム",
+					status: "コラボレーション",
+				},
+				webBlog: {
+					desc: "CRUD機能を備えたフルスタックブログ管理システム",
+					status: "個人",
 				},
 			},
 		},
 	},
 
+	// bahasa indonesia
 	id: {
 		translation: {
 			header: {
@@ -133,15 +166,22 @@ const resources = {
 			wa: {
 				message: "Halo, saya baru saja melihat website portofolio Anda dan saya tertarik dengan kemampuan Anda!",
 				contactText: "Hubungi saya melalui WhatsApp",
-			},
-			projectCard: {
+			}, projectCard: {
 				zappify: {
 					desc: "Proyek Latihan: Mengasah Keterampilan UI & React",
-					status: "Sedang Dikembangkan",
+					status: "Individual",
 				},
 				kateringIbu: {
-					desc: "Dashboard Admin untuk Katering Ibu",
-					status: "Dalam Pemeliharaan",
+					desc: "Solusi Digital untuk Usaha Katering Rumahan Meningkatkan Daya Saing",
+					status: "Kolaborasi",
+				},
+				ortuPintar: {
+					desc: "Platform Tumbuh Kembang Anak untuk Orang Tua dengan Anak 0-6 Tahun",
+					status: "Kolaborasi",
+				},
+				webBlog: {
+					desc: "Sistem Manajemen Blog Full-Stack dengan Operasi CRUD Lengkap",
+					status: "Individual",
 				},
 			},
 		},
