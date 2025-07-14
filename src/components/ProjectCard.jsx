@@ -60,7 +60,7 @@ const ProjectCard = ({ is_image, className }) => {
 									</span>
 									<span
 										id="status-project"
-										className={`status basis-1/4 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30`}
+										className={`status basis-1/4 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none`}
 									>
 										{t(project.status)}
 									</span>
@@ -70,7 +70,7 @@ const ProjectCard = ({ is_image, className }) => {
 								</p>
 							</div>
 
-							<div className="web-preview__wrp relative w-full h-fit mt-8">
+							<div className="web-preview__wrp relative w-full h-fit mt-8 select-none">
 								<img
 									src={project.preview}
 									className="rounded-3xl md:rounded-2xl"

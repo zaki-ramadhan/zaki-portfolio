@@ -13,7 +13,7 @@ const Badge = () => {
 						headAvatar
 					}
 					alt="headAvatar"
-					className="scale-120"
+					className="scale-120 select-none"
 				/>
 			</div>
 			<div className="bio__wrp">

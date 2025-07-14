@@ -4,7 +4,7 @@ import ListSocialMedia from "./ListSocialMedia";
 import avatarAi from "@assets/images/me_ai_vers.webp";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
-import ProjectSection from './../sections/ProjectSection';
+import ProjectSection from '@sections/ProjectSection';
 
 const Cards = () => {
 	const { t } = useTranslation();
@@ -90,7 +90,7 @@ const Cards = () => {
 							avatarAi
 						}
 						alt="avatar ai"
-						className="h-full"
+						className="h-full select-none"
 					/>
 				</Card>
 			</div>
