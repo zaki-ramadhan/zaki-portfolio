@@ -1,51 +1,93 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 
 <head>
-  <title>Zaki Ramadhan – Web Developer & UI Designer | Indonesia-Based</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://zaki-ramadhan.github.io/zaki-portfolio/" />
+  <!-- Primary Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zaki Ramadhan – Web Developer & UI Designer Portfolio Indonesia</title>
+  <meta name="description"
+    content="Portfolio Zaki Ramadhan - Web Developer & UI/UX Designer Indonesia. Spesialis frontend development dengan React, JavaScript, dan modern web technologies. Lihat proyek-proyek web terbaru saya." />
+  <meta name="keywords"
+    content="Zaki Ramadhan, Web Developer Indonesia, Frontend Developer, UI UX Designer, Portfolio Developer, React Developer, JavaScript, HTML CSS, Polindra" />
+  <meta name="author" content="Zaki Ramadhan" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="language" content="Indonesian" />
+  <meta name="revisit-after" content="7 days" />
+  <link rel="canonical" href="https://zaki-ramadhan.github.io/zaki-portfolio/" />
 
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link href="https://fonts.googleapis.com/css?family=Archivo:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="pWLn7meEFbzXvkZvqjIW2NEI6IT1UuAybsJmJpQlJ-M" />
 
-    <!-- SEO Metadata -->
-     <meta name="google-site-verification" content="pWLn7meEFbzXvkZvqjIW2NEI6IT1UuAybsJmJpQlJ-M" />
-    <meta name="description" content="Portofolio Zaki Ramadhan. Eksplorasi proyek web modern, keterampilan teknis, dan pengalaman saya sebagai Web Developer & UI/UX Designer." />
-    <meta name="keywords" content="Zaki Ramadhan, Zaki Ramadhan Polindra, Web Developer, Frontend Developer, UI/UX Designer, Portofolio" />
-    <meta name="author" content="Zaki Ramadhan" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="apple-touch-icon" href="/vite.svg" />
 
-    <!-- Open Graph -->
-    <meta property="og:url" content="https://zaki-ramadhan.github.io/zaki-portfolio/" />
-    <meta property="og:title" content="Zaki Ramadhan – Web Developer & UI/UX Designer" />
-    <meta property="og:description" content="Portofolio Zaki Ramadhan. Eksplorasi proyek web modern, keterampilan teknis, dan pengalaman saya." />
-    <meta property="og:image" content="https://zaki-ramadhan.github.io/zaki-portfolio/og-image.jpg" />
-    <meta property="og:type" content="profile" />
+  <!-- Fonts with Performance Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Archivo:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://zaki-ramadhan.github.io/zaki-portfolio/" />
-    <meta name="twitter:title" content="Zaki Ramadhan – Web Developer & UI/UX Designer" />
-    <meta name="twitter:description" content="Portofolio Zaki Ramadhan. Eksplorasi proyek web modern, keterampilan teknis, dan pengalaman saya." />
-    <meta name="twitter:image" content="https://zaki-ramadhan.github.io/zaki-portfolio/og-image.jpg" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zaki-ramadhan.github.io/zaki-portfolio/" />
+  <meta property="og:title" content="Zaki Ramadhan – Web Developer & UI Designer Portfolio Indonesia" />
+  <meta property="og:description"
+    content="Portfolio Zaki Ramadhan - Web Developer & UI/UX Designer Indonesia. Spesialis frontend development dengan React, JavaScript, dan modern web technologies." />
+  <meta property="og:image"
+    content="https://zaki-ramadhan.github.io/zaki-portfolio/src/assets/images/me_ai_vers.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Zaki Ramadhan Portfolio" />
+  <meta property="og:locale" content="id_ID" />
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://zaki-ramadhan.github.io/zaki-portfolio/" />
+  <meta name="twitter:title" content="Zaki Ramadhan – Web Developer & UI Designer Portfolio" />
+  <meta name="twitter:description"
+    content="Portfolio Zaki Ramadhan - Web Developer & UI/UX Designer Indonesia. Lihat proyek-proyek web modern dan skill teknis saya." />
+  <meta name="twitter:image"
+    content="https://zaki-ramadhan.github.io/zaki-portfolio/src/assets/images/me_ai_vers.webp" />
+  <meta name="twitter:creator" content="@zakiramadhan" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Zaki Ramadhan",
         "jobTitle": "Web Developer & UI/UX Designer",
         "url": "https://zaki-ramadhan.github.io/zaki-portfolio/",
-        "description": "Portofolio Zaki Ramadhan – Web Developer & UI/UX Designer dengan fokus pada pengembangan web modern dan desain antarmuka pengguna.",
+        "description": "Web Developer & UI/UX Designer Indonesia dengan spesialisasi frontend development menggunakan React, JavaScript, dan teknologi web modern.",
+        "image": "https://zaki-ramadhan.github.io/zaki-portfolio/src/assets/images/me_ai_vers.webp",
         "sameAs": [
           "https://github.com/zaki-ramadhan",
           "https://linkedin.com/in/zaki-ramadhan"
-        ]
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Frontend Development", 
+          "UI/UX Design",
+          "React",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Tailwind CSS"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Politeknik Negeri Indramayu"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "Indonesia"
+        }
       }
       </script>
-    
+
 </head>
 
 <body class=" bg-primary text-white font-Inter pb-32">
