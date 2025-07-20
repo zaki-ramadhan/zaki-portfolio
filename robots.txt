@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://zaki-ramadhan.github.io/zaki-portfolio/sitemap.xml
+
+# Disallow unnecessary files
+Disallow: /vite.svg
+Disallow: /*.js.map
+Disallow: /*.css.map
