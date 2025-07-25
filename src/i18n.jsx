@@ -35,6 +35,15 @@ const resources = {
 					desc: "Full-Stack Blog Management System with CRUD Operations",
 					status: "Individual",
 				},
+				peerNote: {
+					desc: "A digital platform for sharing study materials and online group discussions.",
+					status: "Collaboration",
+				},
+				rancangin: {
+					desc: "A web service offering website development and UI/UX design solutions.",
+					status: "Collaboration",
+				},
+
 			},
 		},
 	},
@@ -72,6 +81,15 @@ const resources = {
 					desc: "Sistema de Gestión de Blogs Full-Stack con Operaciones CRUD",
 					status: "Individual",
 				},
+				peerNote: {
+					desc: "Plataforma digital para compartir materiales de estudio y discusiones grupales en línea.",
+					status: "Colaboración",
+				},
+				rancangin: {
+					desc: "Servicio web que ofrece desarrollo de sitios y soluciones de diseño UI/UX.",
+					status: "Colaboración",
+				},
+
 			},
 		},
 	},
@@ -109,6 +127,15 @@ const resources = {
 					desc: "全栈博客管理系统，具备完整CRUD功能",
 					status: "个人",
 				},
+				peerNote: {
+					desc: "用于分享学习资料和在线小组讨论的数字平台。",
+					status: "合作项目",
+				},
+				rancangin: {
+					desc: "提供网站开发和UI/UX设计解决方案的网络服务。",
+					status: "合作项目",
+				},
+
 			},
 		},
 	},
@@ -146,6 +173,15 @@ const resources = {
 					desc: "CRUD機能を備えたフルスタックブログ管理システム",
 					status: "個人",
 				},
+				peerNote: {
+					desc: "グループで学習資料を共有し、オンラインでディスカッションできるデジタルプラットフォーム。",
+					status: "コラボレーション",
+				},
+				rancangin: {
+					desc: "Webサイト制作とUI/UXデザインサービスを提供するウェブサービス。",
+					status: "コラボレーション",
+				},
+
 			},
 		},
 	},
@@ -183,6 +219,15 @@ const resources = {
 					desc: "Sistem Manajemen Blog Full-Stack dengan Operasi CRUD Lengkap",
 					status: "Individual",
 				},
+				peerNote: {
+					desc: "Platform digital untuk berbagi materi belajar dan diskusi kelompok secara online.",
+					status: "Kolaborasi",
+				},
+				rancangin: {
+					desc: "Layanan web untuk pembuatan website dan solusi desain UI/UX.",
+					status: "Kolaborasi",
+				},
+
 			},
 		},
 	},

@@ -3,6 +3,8 @@ import zappifyPreview from "@assets/images/ss_pricing_page.webp";
 import katIbuPreview from "@assets/images/ss_dashboard_admin_katering_ibu.webp";
 import ortuPintarPreview from "@assets/images/ss_ortupintar (2).webp";
 import webBlogPreview from "@assets/images/ss-web-blog.webp";
+import peerNotePreview from "@assets/images/ss_landing_peerNote.webp";
+import rancanginPreview from "@assets/images/ss_landing_rancangin.webp";
 
 export const projectData = [
 	// Zappify
@@ -137,6 +139,68 @@ export const projectData = [
 			{
 				icon: "simple-icons:sqlite",
 				color: "text-blue-600",
+			},
+		],
+	},
+
+	// peerNote
+	{
+		name: "PeerNote",
+		desc: "projectCard.peerNote.desc",
+		link: "https://github.com/zaki-ramadhan/peer-note-sharing-platform",
+		status: "projectCard.peerNote.status",
+		preview: peerNotePreview,
+		colors: {
+			titleColor: "text-primary",
+			bgColor: "from-white to-slate-200",
+			btnColor: "bg-secondary/10",
+			iconsBgColor: "bg-white/20",
+			overlayColor: "from-slate-200 to-slate-200/0",
+		},
+		is_published: false,
+		techs: [
+			{
+				icon: "simple-icons:javascript",
+				color: "text-yellow-300",
+			},
+			{
+				icon: "simple-icons:tailwindcss",
+				color: "text-cyan-500",
+			},
+			{
+				icon: "simple-icons:react",
+				color: "text-blue-400",
+			},
+		],
+	},
+
+	// rancangin
+	{
+		name: "Rancangin",
+		desc: "projectCard.peerNote.desc",
+		link: "https://github.com/akbarryyan/rancanginid",
+		status: "projectCard.rancangin.status",
+		preview: rancanginPreview,
+		colors: {
+			titleColor: "text-white/80",
+			bgColor: "from-blue-900/90 to-slate-950",
+			btnColor: "bg-secondary/10",
+			iconsBgColor: "bg-white/20",
+			overlayColor: "from-slate-950 to-slate-950/0",
+		},
+		is_published: false,
+		techs: [
+			{
+				icon: "simple-icons:javascript",
+				color: "text-yellow-300",
+			},
+			{
+				icon: "simple-icons:tailwindcss",
+				color: "text-cyan-500",
+			},
+			{
+				icon: "simple-icons:react",
+				color: "text-blue-400",
 			},
 		],
 	},
