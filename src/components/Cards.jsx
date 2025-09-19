@@ -1,7 +1,7 @@
 import Card from "./Card";
 import Badge from "./Badge";
 import ListSocialMedia from "./ListSocialMedia";
-import avatarAi from "@assets/images/me(cropped).jpg";
+import avatarAi from "@assets/images/me(cropped).webp";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import ProjectSection from '@sections/ProjectSection';
