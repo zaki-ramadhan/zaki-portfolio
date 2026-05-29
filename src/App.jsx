@@ -4,6 +4,7 @@ import i18n from "./i18n";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Login from "./pages/Login";
+import ScrollToTop from "./components/ScrollToTop";
 
 import ErrorPage from "./pages/ErrorPage";
 
@@ -19,6 +20,7 @@ const App = () => {
                     {/* Catch-all 404 route - Now works for /asas/asa style paths */}
                     <Route path="*" element={<ErrorPage code="404" />} />
                 </Routes>
+                <ScrollToTop />
             </Router>
         </I18nextProvider>
     );

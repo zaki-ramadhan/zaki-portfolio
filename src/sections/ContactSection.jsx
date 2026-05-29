@@ -82,12 +82,6 @@ export default function ContactSection() {
                         </div>
                         <div className="flex items-center gap-4 text-secondary group">
                             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
-                                <Icon icon="hugeicons:whatsapp" className="group-hover:text-additional transition-colors" width="24" />
-                            </div>
-                            <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="font-Archivo hover:text-white transition-colors">+62 812-3456-7890</a>
-                        </div>
-                        <div className="flex items-center gap-4 text-secondary group">
-                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
                                 <Icon icon="mdi:github" className="group-hover:text-additional transition-colors" width="24" />
                             </div>
                             <a href="https://github.com/zaki-ramadhan" target="_blank" rel="noreferrer" className="font-Archivo hover:text-white transition-colors">zaki-ramadhan</a>
@@ -104,8 +98,9 @@ export default function ContactSection() {
                 {/* Right Side: Form */}
                 <div className="lg:basis-2/3">
                     <form onSubmit={handleSubmit} className="bg-stone-900/40 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-10 space-y-6 relative overflow-hidden group">
-                        {/* Decorative glow */}
-                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-additional/5 blur-3xl rounded-full group-hover:bg-additional/10 transition-all duration-700" />
+                        {/* Decorative glows (Coklat Muda / Additional) */}
+                        <div className="absolute -top-32 -right-32 w-80 h-80 bg-additional/10 blur-[100px] rounded-full group-hover:bg-additional/20 transition-all duration-1000" />
+                        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-additional/5 blur-[120px] rounded-full group-hover:bg-additional/15 transition-all duration-1000" />
                         
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
