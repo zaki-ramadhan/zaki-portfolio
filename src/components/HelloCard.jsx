@@ -13,6 +13,7 @@ const HelloCard = () => {
 
     return (
         <Card
+            id="profile"
             typeCard="hello-card"
             setBgColor="bg-linear-340/srgb from-additional from-[-110%] to-primary to-55%"
             className="justify-between lg:rounded-ee-lg lg:basis-2/4 xl:basis-3/4"

@@ -51,6 +51,8 @@ export default function ProjectSection() {
         return allProjects.filter(p => p.category === cat).length;
     };
 
+    const [visibleCount, setVisibleCount] = useState(6);
+
     const filteredProjects = allProjects.filter(p => {
         let matchesCategory = selectedCategory === "All";
         if (selectedCategory === "Individual" || selectedCategory === "Collaboration") {
@@ -63,12 +65,15 @@ export default function ProjectSection() {
         return matchesCategory && matchesSearch;
     });
 
+    const displayProjects = filteredProjects.slice(0, visibleCount);
+    const hasMore = filteredProjects.length > visibleCount;
+
 	return (
 		<section
 			id="projects"
-			className="card__wrp container mx-auto grid lg:grid-cols-2 py-4 mt-16 lg:mt-12 gap-4"
+			className="container mx-auto py-4 mt-16 lg:mt-12"
 		>
-			<div className="w-full flex flex-col space-y-6 lg:col-span-2 mb-2">
+			<div className="w-full flex flex-col space-y-6 mb-8">
 				<div className="flex items-center w-full">
                     <h1 className="heading text-nowrap text-2xl md:text-3xl lg:text-4xl ml-1">
                         {t("projectSection.title")}
@@ -85,7 +90,10 @@ export default function ProjectSection() {
                             return (
                                 <button
                                     key={cat}
-                                    onClick={() => setSelectedCategory(cat)}
+                                    onClick={() => {
+                                        setSelectedCategory(cat);
+                                        setVisibleCount(6); // Reset count on category change
+                                    }}
                                     className={`px-4 py-2.5 rounded-xl text-sm md:text-[15px] font-Archivo font-medium transition-all duration-300 border flex items-center gap-2 ${
                                         selectedCategory === cat
                                             ? "bg-additional text-stone-900 border-additional shadow-lg shadow-additional/20"
@@ -112,12 +120,18 @@ export default function ProjectSection() {
                             type="text"
                             placeholder={t("projectSection.searchPlaceholder")}
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full bg-stone-900/80 border border-white/15 rounded-xl py-3 pl-12 pr-4 text-sm md:text-base font-Archivo font-medium outline-none focus:ring-1 focus:ring-additional/50 focus:border-additional/30 transition-all placeholder:text-stone-500"
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setVisibleCount(6); // Reset count on search
+                            }}
+                            className="w-full bg-stone-900/80 border border-white/15 rounded-xl py-3.5 pl-12 pr-4 text-sm md:text-base font-Archivo font-medium outline-none focus:ring-1 focus:ring-additional/50 focus:border-additional/30 transition-all placeholder:text-stone-500"
                         />
                         {searchTerm && (
                             <button 
-                                onClick={() => setSearchTerm("")}
+                                onClick={() => {
+                                    setSearchTerm("");
+                                    setVisibleCount(6);
+                                }}
                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 hover:text-white transition-colors flex items-center justify-center font-bold"
                             >
                                 <Icon icon="solar:close-circle-broken" width="20" />
@@ -127,10 +141,26 @@ export default function ProjectSection() {
                 </div>
 			</div>
 			
-            <ProjectCard 
-                projects={filteredProjects}
-                isLoading={isLoading}
-            />
+            <div className="grid lg:grid-cols-2 gap-6">
+                <ProjectCard 
+                    projects={displayProjects}
+                    isLoading={isLoading}
+                />
+            </div>
+
+            {hasMore && (
+                <div className="flex justify-center mt-12 mb-4">
+                    <button 
+                        onClick={() => setVisibleCount(prev => prev + 6)}
+                        className="group flex flex-col items-center gap-3 text-secondary hover:text-additional transition-all duration-300"
+                    >
+                        <span className="font-Archivo text-sm font-medium tracking-widest uppercase">{t("projectSection.showMore") || "Show More"}</span>
+                        <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-additional/30 group-hover:bg-additional/5 transition-all">
+                            <Icon icon="solar:alt-arrow-down-broken" width="24" className="group-hover:translate-y-1 transition-transform" />
+                        </div>
+                    </button>
+                </div>
+            )}
 		</section>
 	);
 }

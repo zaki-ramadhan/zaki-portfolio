@@ -14,6 +14,7 @@ const resources = {
 			projectSection: {
 				title: "My Projects",
 				searchPlaceholder: "Search project name...",
+				showMore: "Show More",
 			},
 			helloCard: {
 				greeting: "Hi, I'm Zaki.",
@@ -69,6 +70,17 @@ const resources = {
 				desc_404: "The page you are looking for doesn't exist or has been moved.",
 				desc_401: "You don't have permission to access this area.",
 			},
+			contactSection: {
+				title: "Get In Touch",
+				subtitle: "Have a project in mind or just want to say hi? Feel free to reach out!",
+				nameLabel: "Your Name",
+				emailLabel: "Email Address",
+				messageLabel: "Message",
+				sendButton: "Send Message",
+				sending: "Sending...",
+				success: "Message sent successfully!",
+				error: "Failed to send message. Please try again.",
+			},
 		},
 	},
 
@@ -84,6 +96,7 @@ const resources = {
 			projectSection: {
 				title: "Proyek Saya",
 				searchPlaceholder: "Cari nama proyek...",
+				showMore: "Tampilkan Lebih Banyak",
 			},
 			helloCard: {
 				greeting: "Halo, saya Zaki.",
@@ -138,6 +151,17 @@ const resources = {
 				go_home: "Back to Home",
 				desc_404: "The page you are looking for doesn't exist or has been moved.",
 				desc_401: "You don't have permission to access this area.",
+			},
+			contactSection: {
+				title: "Kontak",
+				subtitle: "Punya proyek menarik atau sekadar ingin menyapa? Silakan hubungi saya!",
+				nameLabel: "Nama Anda",
+				emailLabel: "Alamat Email",
+				messageLabel: "Pesan",
+				sendButton: "Kirim Pesan",
+				sending: "Mengirim...",
+				success: "Pesan berhasil terkirim!",
+				error: "Gagal mengirim pesan. Silakan coba lagi.",
 			},
 		},
 	},

@@ -1,7 +1,7 @@
 // Navigation configuration data
 export const navigationData = [
 	{
-		href: "",
+		href: "#profile",
 		labelKey: "header.present",
 	},
 	{
@@ -9,7 +9,7 @@ export const navigationData = [
 		labelKey: "header.projects",
 	},
 	{
-		href: "",
+		href: "#contact",
 		labelKey: "header.contact",
 	},
 ];

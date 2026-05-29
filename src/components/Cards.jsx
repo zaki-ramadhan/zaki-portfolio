@@ -1,6 +1,7 @@
 import Card from "./Card";
 import avatarAi from "@assets/images/me.png";
 import ProjectSection from '@sections/ProjectSection';
+import ContactSection from '@sections/ContactSection';
 import HelloCard from "./HelloCard";
 
 const Cards = () => {
@@ -29,6 +30,7 @@ const Cards = () => {
 			</div>
 
 			<ProjectSection />
+			<ContactSection />
 		</main>
 	);
 };
