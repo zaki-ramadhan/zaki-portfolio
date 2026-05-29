@@ -1,7 +1,7 @@
 import Card from "./Card";
 import Badge from "./Badge";
 import ListSocialMedia from "./ListSocialMedia";
-import avatarAi from "@assets/images/me(cropped).webp";
+import avatarAi from "@assets/images/me.png";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
 import ProjectSection from '@sections/ProjectSection';
@@ -46,15 +46,15 @@ const Cards = () => {
 	return (
 		<main
 			id="cards"
-			className="container py-4 px-4 md:px-10 lg:px-14 flex flex-col -space-y-3"
+			className="container mx-auto py-4 px-4 md:px-10 lg:px-14 flex flex-col -space-y-3"
 		>
-			<div className="card__wrp container flex flex-col lg:flex-row gap-4">
+			<div className="card__wrp container mx-auto flex flex-col lg:flex-row gap-4">
 				{/* hello card */}
 				<Card
 					typeCard={
 						"hello-card"
 					}
-					setBgColor="container bg-linear-340/srgb from-additional from-[-110%] to-primary to-55%"
+					setBgColor="bg-linear-340/srgb from-additional from-[-110%] to-primary to-55%"
 					className={
 						"justify-between lg:rounded-ee-lg lg:basis-2/4 xl:basis-3/4"
 					}

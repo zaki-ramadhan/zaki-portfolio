@@ -32,9 +32,6 @@ export const projectData = [
 			{
 				icon: "logos:react",
 			},
-			{
-				icon: "logos:vitejs",
-			},
 		],
 	},
 
@@ -55,19 +52,10 @@ export const projectData = [
 		is_published: false,
 		techs: [
 			{
-				icon: "devicon:javascript",
-			},
-			{
 				icon: "devicon:tailwindcss",
 			},
 			{
-				icon: "devicon:jquery",
-			},
-			{
 				icon: "devicon:laravel",
-			},
-			{
-				icon: "logos:vitejs",
 			},
 			{
 				icon: "devicon:mysql",
@@ -96,9 +84,6 @@ export const projectData = [
 			},
 			{
 				icon: "logos:react",
-			},
-			{
-				icon: "logos:vitejs",
 			},
 			{
 				icon: "devicon:mysql",
@@ -132,9 +117,6 @@ export const projectData = [
 				icon: "devicon:laravel",
 			},
 			{
-				icon: "logos:vitejs",
-			},
-			{
 				icon: "logos:sqlite",
 			},
 		],
@@ -163,9 +145,6 @@ export const projectData = [
 				icon: "logos:react",
 			},
 			{
-				icon: "logos:vitejs",
-			},
-			{
 				icon: "devicon:mysql",
 			},
 		],
@@ -192,9 +171,6 @@ export const projectData = [
 			},
 			{
 				icon: "logos:react",
-			},
-			{
-				icon: "logos:vitejs",
 			},
 		],
 	},
@@ -225,9 +201,6 @@ export const projectData = [
 				icon: "devicon:tailwindcss",
 			},
 			{
-				icon: "logos:vitejs",
-			},
-			{
 				icon: "logos:sqlite",
 			},
 		],
@@ -254,9 +227,6 @@ export const projectData = [
 			},
 			{
 				icon: "logos:react",
-			},
-			{
-				icon: "logos:vitejs",
 			},
 			{
 				icon: "devicon:nodejs",
@@ -295,9 +265,6 @@ export const projectData = [
 			},
 			{
 				icon: "logos:react",
-			},
-			{
-				icon: "logos:vitejs",
 			},
 		],
 	},

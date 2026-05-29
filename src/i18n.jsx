@@ -9,6 +9,10 @@ const resources = {
                 present: "Profile",
                 projects: "Projects",
                 contact: "Contact",
+                specialty: "Front-end Developer",
+            },
+            projectSection: {
+                title: "My Projects",
             },
             helloCard: {
                 greeting: "Hi, I'm Zaki.",
@@ -67,6 +71,10 @@ const resources = {
                 present: "Perfil",
                 projects: "Proyectos",
                 contact: "Contacto",
+                specialty: "Desarrollador Front-end",
+            },
+            projectSection: {
+                title: "Mis Proyectos",
             },
             helloCard: {
                 greeting: "Hola, soy Zaki.",
@@ -125,6 +133,10 @@ const resources = {
                 present: "个人资料",
                 projects: "项目",
                 contact: "联系方式",
+                specialty: "前端开发工程师",
+            },
+            projectSection: {
+                title: "我的项目",
             },
             helloCard: {
                 greeting: "你好，我是 Zaki。",
@@ -170,7 +182,7 @@ const resources = {
                 },
                 dashLive: {
                     desc: "采用Livewire构建的Laravel生态系统内，极简实时用户数据管理Web平台，支持CRUD操作。",
-                    status: "Individual",
+                    status: "个人",
                 },
             },
         },
@@ -183,6 +195,10 @@ const resources = {
                 present: "プロフィール",
                 projects: "プロジェクト",
                 contact: "連絡先",
+                specialty: "フロントエンドエンジニア",
+            },
+            projectSection: {
+                title: "私のプロジェクト",
             },
             helloCard: {
                 greeting: "こんにちは、私は Zaki です。",
@@ -227,8 +243,8 @@ const resources = {
                     status: "個人",
                 },
                 dashLive: {
-                    desc: "Laravelエコシステム内でLivewireを利用した、CRUD操作を備えたミニマリストなWebベースのリアルタイムユーザーデータ管理プラットフォーム。",
-                    status: "Individual",
+                    desc: "Laravelエコシステム内でLivewireを利用した、CRUD操作を備えたミニマリストなWebベース의 リアルタイムユーザーデータ管理プラットフォーム。",
+                    status: "個人",
                 },
             },
         },
@@ -241,6 +257,10 @@ const resources = {
                 present: "Profil",
                 projects: "Proyek",
                 contact: "Kontak",
+                specialty: "Front-end Developer",
+            },
+            projectSection: {
+                title: "Proyek Saya",
             },
             helloCard: {
                 greeting: "Halo, saya Zaki.",

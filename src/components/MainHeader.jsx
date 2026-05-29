@@ -57,7 +57,9 @@ const MainHeader = ({ children }) => {
 				</h1>
 				<span className="text-secondary text-base md:text-xl lg:text-base">
 					,
-					Front-End
+					{t(
+						"header.specialty"
+					)}
 				</span>
 			</div>{" "}			<nav className="flex items-center gap-4 relative">
 				{/* Desktop Navigation */}
@@ -104,7 +106,9 @@ const MainHeader = ({ children }) => {
 								Zaki R
 							</h2>
 							<p className="text-sm text-secondary/80 mt-0.5">
-								Front-End Developer
+								{t(
+									"header.specialty"
+								)}
 							</p>
 						</div>
 						<button
@@ -137,7 +141,9 @@ const MainHeader = ({ children }) => {
 					<div className="px-6 py-4 border-t border-white/10">
 						<div className="text-left">
 							<p className="text-xs text-secondary/70">
-								Front-End Developer
+								{t(
+									"header.specialty"
+								)}
 							</p>
 						</div>
 					</div>

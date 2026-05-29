@@ -23,8 +23,9 @@ const Badge = () => {
 					)}
 				</h2>
 				<p className="text-secondary text-base line-clamp-1">
-					Front-end
-					developer
+					{t(
+						"header.specialty"
+					)}
 				</p>
 			</div>
 		</span>

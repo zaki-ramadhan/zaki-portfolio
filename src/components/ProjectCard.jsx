@@ -19,7 +19,7 @@ const SingleProjectCard = ({ project, is_image, className }) => {
       } ${className} rounded-4xl flex flex-col border border-additional/10 overflow-hidden`}
     >
       <div className="w-full h-fit">
-        <div className="container w-full title-status__wrp flex items-center justify-between gap-4">
+        <div className="w-full title-status__wrp flex items-center justify-between gap-4">
           <span className="title-icon__wrp flex items-center gap-2 basis-3/4 min-w-0">
             {/* Consider using <h2> or <h3> for section titles instead of <h1> 
               if this is not the main title of the entire page for better SEO and semantic HTML.
