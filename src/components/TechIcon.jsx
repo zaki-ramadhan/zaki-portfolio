@@ -101,7 +101,8 @@ return (<span
 						}
 						width="28"
 						height="28"
-						className={`inline-block ${item.color || ""}`}
+						style={{ color: item.color || 'inherit' }}
+						className="inline-block"
 					/>
 				</span>
 			)

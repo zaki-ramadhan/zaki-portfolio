@@ -23,7 +23,7 @@ const Cards = () => {
 							avatarAi
 						}
 						alt="avatar ai"
-						className="h-full select-none"
+						className="w-full h-full object-cover select-none group-hover:scale-105 transition-transform duration-700"
 					/>
 				</Card>
 			</div>

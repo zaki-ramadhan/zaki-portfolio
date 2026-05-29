@@ -36,10 +36,15 @@ const Admin = () => {
     const [uploading, setUploading] = useState(false);
     const [migrating, setMigrating] = useState(false);
     const [techInput, setTechInput] = useState("");
+    const [techColor, setTechColor] = useState("#FFFFFF"); // Default White
     const [errors, setErrors] = useState({});
     const [notification, setNotification] = useState(null);
     const [deleteConfirm, setDeleteConfirm] = useState(null); // id of project to delete
     const [migrateConfirm, setMigrateConfirm] = useState(false);
+
+    // Pagination State
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
 
     const showNotify = (message, type = "success") => {
         setNotification({ message, type });
@@ -82,9 +87,14 @@ const Admin = () => {
         }
     };
 
-    const handleAddTech = () => {
-        if (techInput) {
-            setFormData(prev => ({ ...prev, techs: [...prev.techs, { icon: techInput }] }));
+    const handleAddTech = (icon, color) => {
+        const iconToAdd = icon || techInput;
+        const colorToAdd = color || techColor;
+        if (iconToAdd) {
+            setFormData(prev => ({ 
+                ...prev, 
+                techs: [...prev.techs, { icon: iconToAdd, color: colorToAdd }] 
+            }));
             setTechInput("");
         }
     };
@@ -300,6 +310,13 @@ const Admin = () => {
         };
     }, [projects]);
 
+    const paginatedProjects = useMemo(() => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        return projects.slice(startIndex, startIndex + itemsPerPage);
+    }, [projects, currentPage, itemsPerPage]);
+
+    const totalPages = Math.ceil(projects.length / itemsPerPage);
+
     if (loading) return (
         <div className="min-h-screen bg-stone-950 flex flex-col items-center justify-center text-white gap-4 font-Archivo">
             <div className="w-12 h-12 border-4 border-additional/30 border-t-additional rounded-full animate-spin"></div>
@@ -407,6 +424,8 @@ const Admin = () => {
                         uploading={uploading}
                         techInput={techInput}
                         setTechInput={setTechInput}
+                        techColor={techColor}
+                        setTechColor={setTechColor}
                         handleAddTech={handleAddTech}
                         removeTech={removeTech}
                         setImageFile={setImageFile}
@@ -415,7 +434,16 @@ const Admin = () => {
                         errors={errors}
                     />
                     <ProjectList 
-                        projects={projects}
+                        projects={paginatedProjects}
+                        totalData={projects.length}
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={setCurrentPage}
+                        itemsPerPage={itemsPerPage}
+                        onItemsPerPageChange={(val) => {
+                            setItemsPerPage(val);
+                            setCurrentPage(1);
+                        }}
                         onDelete={handleDelete}
                         onEdit={handleEdit}
                     />
