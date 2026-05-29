@@ -182,39 +182,15 @@ const Admin = () => {
 
         // Check for duplicate names in database
         const normalizedName = formData.name.trim().toLowerCase();
-        const normalizedStyle = formData.styleName?.trim().toLowerCase();
 
         const duplicateName = projects.find(p => 
             p.name.trim().toLowerCase() === normalizedName && 
             p.id !== formData.id
         );
 
-        const duplicateStyle = projects.find(p => 
-            p.styleName?.trim().toLowerCase() === normalizedStyle && 
-            p.id !== formData.id
-        );
-
-        const identicalColors = projects.find(p => 
-            JSON.stringify(p.colors) === JSON.stringify(formData.colors) && 
-            p.id !== formData.id &&
-            p.styleName?.trim().toLowerCase() !== normalizedStyle
-        );
-
         if (duplicateName) {
             showNotify(`Project name "${formData.name}" already exists!`, "error");
             setErrors({ ...newErrors, name: true });
-            return;
-        }
-
-        if (duplicateStyle) {
-            showNotify(`Template style "${formData.styleName}" already exists!`, "error");
-            setErrors({ ...newErrors, styleName: true });
-            return;
-        }
-
-        if (identicalColors) {
-            showNotify(`These colors are already used by style "${identicalColors.styleName}"!`, "error");
-            setErrors({ ...newErrors, styleName: true });
             return;
         }
 
