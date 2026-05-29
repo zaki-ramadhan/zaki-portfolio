@@ -34,29 +34,29 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-stone-950 p-4 font-Archivo">
-            <div className="w-full max-w-md bg-stone-900/50 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl">
+            {/* Toast Notification - Moved outside to prevent stacking context issues */}
+            {notification && (
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-3xl border backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] animate-in slide-in-from-right duration-500 ring-1 ring-white/10 ${
+                    notification.type === 'error' 
+                    ? 'bg-red-500/10 border-red-500/20 text-red-500' 
+                    : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
+                }`}>
+                    <Icon 
+                        icon={notification.type === 'error' ? 'solar:danger-bold' : 'solar:check-circle-bold'} 
+                        width="24" 
+                    />
+                    <div className="flex flex-col">
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
+                            {notification.type === 'error' ? 'Access Denied' : 'System Message'}
+                        </span>
+                        <p className="text-sm font-bold tracking-tight">{notification.message}</p>
+                    </div>
+                </div>
+            )}
+
+            <div className="w-full max-w-md bg-stone-900/50 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl relative">
                 <h1 className="text-3xl font-bold text-white mb-6 text-center">Admin Access</h1>
                 <p className="text-stone-400 text-center mb-8 text-sm">Secure entry for project management</p>
-                
-                {/* Toast Notification */}
-                {notification && (
-                    <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl border backdrop-blur-xl shadow-2xl animate-in slide-in-from-right duration-300 ${
-                        notification.type === 'error' 
-                        ? 'bg-red-500/10 border-red-500/20 text-red-500' 
-                        : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
-                    }`}>
-                        <Icon 
-                            icon={notification.type === 'error' ? 'solar:danger-bold' : 'solar:check-circle-bold'} 
-                            width="24" 
-                        />
-                        <div className="flex flex-col">
-                            <span className="text-xs font-black uppercase tracking-widest opacity-50">
-                                {notification.type === 'error' ? 'Access Denied' : 'Success'}
-                            </span>
-                            <p className="text-sm font-semibold">{notification.message}</p>
-                        </div>
-                    </div>
-                )}
 
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div className="space-y-2">

@@ -29,7 +29,7 @@ const ProjectListItem = ({ project, onDelete, onEdit, isEditing }) => {
                     </button>
                     <button 
                         onClick={() => onDelete(project.id)} 
-                        className="p-2 text-stone-600 hover:text-red-500 transition-colors bg-stone-950/50 rounded-lg border border-white/5 active:scale-90"
+                        className="w-10 h-10 flex items-center justify-center text-stone-600 hover:text-red-500 bg-stone-950/50 rounded-xl border border-white/5 active:scale-95 transition-all"
                     >
                         <Icon icon="mdi:trash-can-outline" width="20" />
                     </button>

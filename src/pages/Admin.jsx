@@ -380,10 +380,10 @@ const Admin = () => {
     );
 
     return (
-        <div className="min-h-screen bg-stone-950 text-white font-Archivo p-4 md:p-8 selection:bg-emerald-500/30">
+        <div className="min-h-screen bg-stone-950 text-white font-Archivo p-4 md:p-8 selection:bg-emerald-500/30 relative">
             {/* Toast Notification */}
             {notification && (
-                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl border backdrop-blur-xl shadow-2xl animate-in slide-in-from-right duration-300 ${
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-3xl border backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] animate-in slide-in-from-right duration-500 ring-1 ring-white/10 ${
                     notification.type === 'error' 
                     ? 'bg-red-500/10 border-red-500/20 text-red-500' 
                     : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
@@ -393,13 +393,13 @@ const Admin = () => {
                         width="24" 
                     />
                     <div className="flex flex-col">
-                        <span className="text-xs font-bold opacity-50">
-                            {notification.type === 'error' ? 'System Error' : 'Success'}
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
+                            {notification.type === 'error' ? 'System Alert' : 'System Message'}
                         </span>
-                        <p className="text-sm font-semibold">{notification.message}</p>
+                        <p className="text-sm font-bold tracking-tight">{notification.message}</p>
                     </div>
-                    <button onClick={() => setNotification(null)} className="ml-4 opacity-50 hover:opacity-100 transition-opacity">
-                        <Icon icon="solar:close-circle-bold" width="20" />
+                    <button onClick={() => setNotification(null)} className="ml-4 opacity-30 hover:opacity-100 transition-opacity p-1">
+                        <Icon icon="solar:close-circle-bold" width="18" />
                     </button>
                 </div>
             )}

@@ -57,7 +57,7 @@ const ProjectForm = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-stone-900/50 backdrop-blur-xl p-0 overflow-hidden rounded-3xl border border-white/10 sticky top-8 animate-in fade-in duration-500 h-fit">
+        <form onSubmit={handleSubmit} className="bg-stone-900/50 backdrop-blur-xl p-0 overflow-hidden rounded-3xl border border-white/10 lg:sticky top-8 animate-in fade-in duration-500 h-fit">
             {/* Header / Tabs */}
             <div className="p-6 border-b border-white/5 bg-stone-900/30">
                 <h2 className="text-xl font-semibold mb-6 text-stone-200">
