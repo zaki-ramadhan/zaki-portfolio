@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useAuth } from "../utils/useAuth";
 import { useNavigate } from "react-router-dom";
-import { db, storage } from "../utils/firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { Icon } from "@iconify-icon/react";
+import { db } from "../utils/firebase";
+import { collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from "firebase/firestore";
+// Firebase Storage removed in favor of Cloudinary
 
 // Sub-components
 import AdminHeader from "../components/admin/AdminHeader";
@@ -19,7 +20,9 @@ const Admin = () => {
         desc: "",
         link: "",
         status: "Project Ongoing",
+        category: "Web",
         is_published: true,
+        styleName: "Default",
         colors: {
             titleColor: "text-primary",
             bgColor: "from-white to-slate-200",
@@ -31,14 +34,19 @@ const Admin = () => {
     });
     const [imageFile, setImageFile] = useState(null);
     const [uploading, setUploading] = useState(false);
+    const [migrating, setMigrating] = useState(false);
     const [techInput, setTechInput] = useState("");
+    const [errors, setErrors] = useState({});
+    const [notification, setNotification] = useState(null);
+    const [deleteConfirm, setDeleteConfirm] = useState(null); // id of project to delete
+    const [migrateConfirm, setMigrateConfirm] = useState(false);
 
-    useEffect(() => {
-        if (!loading && !user) navigate("/login");
-        if (user) fetchProjects();
-    }, [user, loading, navigate]);
+    const showNotify = (message, type = "success") => {
+        setNotification({ message, type });
+        setTimeout(() => setNotification(null), 4000);
+    };
 
-    const fetchProjects = async () => {
+    const fetchProjects = useCallback(async () => {
         try {
             const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
             const querySnapshot = await getDocs(q);
@@ -46,22 +54,31 @@ const Admin = () => {
             setProjects(projectsData);
         } catch (error) {
             console.error("Error fetching projects:", error);
+            showNotify("Failed to fetch projects database", "error");
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        if (!loading && !user) navigate("/login");
+        if (user) fetchProjects();
+    }, [user, loading, navigate, fetchProjects]);
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
-        if (name.includes("colors.")) {
+        if (name === "reset_form") {
+            resetForm();
+            return;
+        }
+        if (name === "colors_preset") {
+            setFormData(prev => ({ ...prev, colors: value }));
+        } else if (name.includes("colors.")) {
             const colorField = name.split(".")[1];
             setFormData(prev => ({
                 ...prev,
                 colors: { ...prev.colors, [colorField]: value }
             }));
         } else {
-            setFormData(prev => ({
-                ...prev,
-                [name]: type === "checkbox" ? checked : value
-            }));
+            setFormData(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
         }
     };
 
@@ -78,28 +95,120 @@ const Admin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validation Logic
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = true;
+        if (!formData.desc.trim()) newErrors.desc = true;
+        if (!formData.link.trim()) newErrors.link = true;
+        if (!formData.status.trim()) newErrors.status = true;
+        if (!formData.styleName || !formData.styleName.trim()) newErrors.styleName = true;
+        if (!formData.category.trim()) newErrors.category = true;
+        if (!imageFile && !formData.preview) newErrors.image = true;
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            showNotify("Please fill all required fields", "error");
+            return;
+        }
+
+        // Check for duplicate names in database
+        const normalizedName = formData.name.trim().toLowerCase();
+        const normalizedStyle = formData.styleName?.trim().toLowerCase();
+
+        const duplicateName = projects.find(p => 
+            p.name.trim().toLowerCase() === normalizedName && 
+            p.id !== formData.id
+        );
+
+        const duplicateStyle = projects.find(p => 
+            p.styleName?.trim().toLowerCase() === normalizedStyle && 
+            p.id !== formData.id
+        );
+
+        const identicalColors = projects.find(p => 
+            JSON.stringify(p.colors) === JSON.stringify(formData.colors) && 
+            p.id !== formData.id &&
+            p.styleName?.trim().toLowerCase() !== normalizedStyle
+        );
+
+        if (duplicateName) {
+            showNotify(`Project name "${formData.name}" already exists!`, "error");
+            setErrors({ ...newErrors, name: true });
+            return;
+        }
+
+        if (duplicateStyle) {
+            showNotify(`Template style "${formData.styleName}" already exists!`, "error");
+            setErrors({ ...newErrors, styleName: true });
+            return;
+        }
+
+        if (identicalColors) {
+            showNotify(`These colors are already used by style "${identicalColors.styleName}"!`, "error");
+            setErrors({ ...newErrors, styleName: true });
+            return;
+        }
+
         setUploading(true);
+        setErrors({});
+
         try {
+            console.log("🚀 Starting upload process with Cloudinary...");
             let imageUrl = formData.preview || "";
+
             if (imageFile) {
-                const storageRef = ref(storage, `projects/${Date.now()}_${imageFile.name}`);
-                await uploadBytes(storageRef, imageFile);
-                imageUrl = await getDownloadURL(storageRef);
+                console.log("📸 Uploading image to Cloudinary:", imageFile.name);
+                
+                const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+                const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+                if (!cloudName || !uploadPreset) {
+                    throw new Error("Cloudinary configuration missing in .env!");
+                }
+
+                const uploadData = new FormData();
+                uploadData.append("file", imageFile);
+                uploadData.append("upload_preset", uploadPreset);
+
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                    { method: "POST", body: uploadData }
+                );
+
+                if (!response.ok) throw new Error("Cloudinary upload failed");
+                
+                const data = await response.json();
+                imageUrl = data.secure_url;
+                console.log("✅ Image uploaded to Cloudinary:", imageUrl);
             }
 
+            console.log("💾 Saving project data to Firestore...");
             const projectToSave = {
                 ...formData,
                 preview: imageUrl,
-                createdAt: new Date().toISOString()
+                updatedAt: new Date().toISOString()
             };
 
-            await addDoc(collection(db, "projects"), projectToSave);
-            alert("Project added successfully!");
+            if (formData.id) {
+                console.log("📝 Updating existing project:", formData.id);
+                const { id, ...dataToUpdate } = projectToSave;
+                await updateDoc(doc(db, "projects", id), dataToUpdate);
+                showNotify("Project successfully updated!");
+            } else {
+                console.log("💾 Adding new project to Firestore...");
+                await addDoc(collection(db, "projects"), {
+                    ...projectToSave,
+                    createdAt: new Date().toISOString()
+                });
+                showNotify("Project successfully added!");
+            }
+
             resetForm();
             fetchProjects();
         } catch (error) {
-            console.error("Error adding project:", error);
-            alert("Error adding project");
+            console.error("❌ CRITICAL ERROR:", error);
+            showNotify(error.message, "error");
         } finally {
             setUploading(false);
         }
@@ -107,46 +216,89 @@ const Admin = () => {
 
     const resetForm = () => {
         setFormData({
-            name: "", desc: "", link: "", status: "Project Ongoing", is_published: true,
+            name: "", desc: "", link: "", status: "Project Ongoing", category: "Web", is_published: true,
             colors: { titleColor: "text-primary", bgColor: "from-white to-slate-200", btnColor: "bg-secondary/10", iconsBgColor: "bg-white/20", overlayColor: "from-slate-200 to-slate-200/0" },
             techs: []
         });
         setImageFile(null);
     };
 
+    const handleEdit = (project) => {
+        setFormData(project);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this project?")) {
-            try {
-                await deleteDoc(doc(db, "projects", id));
-                fetchProjects();
-            } catch (error) {
-                console.error("Error deleting project:", error);
-            }
+        setDeleteConfirm(id);
+    };
+
+    const confirmDelete = async () => {
+        if (!deleteConfirm) return;
+        
+        try {
+            await deleteDoc(doc(db, "projects", deleteConfirm));
+            showNotify("Project permanently deleted", "success");
+            fetchProjects();
+        } catch (error) {
+            console.error("Error deleting project:", error);
+            showNotify("Failed to delete project", "error");
+        } finally {
+            setDeleteConfirm(null);
         }
     };
 
-    const handleMigrate = async () => {
-        if (window.confirm("Migrate all static projects to Firestore?")) {
-            setUploading(true);
-            try {
-                const { projectData: staticProjects } = await import("../utils/projectData");
-                for (const project of staticProjects) {
-                    if (!projects.some(p => p.name === project.name)) {
-                        await addDoc(collection(db, "projects"), {
-                            ...project,
-                            createdAt: new Date().toISOString(),
-                        });
-                    }
+    const handleMigrate = () => {
+        setMigrateConfirm(true);
+    };
+
+    const confirmMigrate = async () => {
+        setMigrateConfirm(false);
+        setMigrating(true);
+        try {
+            const { projectData: staticProjects } = await import("../utils/projectData");
+            let count = 0;
+            for (const project of staticProjects) {
+                if (!projects.some(p => p.name === project.name)) {
+                    await addDoc(collection(db, "projects"), {
+                        ...project,
+                        createdAt: new Date().toISOString(),
+                    });
+                    count++;
                 }
-                alert("Migration complete!");
-                fetchProjects();
-            } catch (error) {
-                console.error("Migration failed:", error);
-            } finally {
-                setUploading(false);
             }
+            showNotify(`Migration successful! Added ${count} projects.`);
+            fetchProjects();
+        } catch (error) {
+            console.error("Migration failed:", error);
+            showNotify("Migration failed: " + error.message, "error");
+        } finally {
+            setMigrating(false);
         }
     };
+
+    const suggestions = useMemo(() => {
+        const icons = new Set();
+        const cats = new Set();
+        const stats = new Set();
+        const colorPresets = new Map();
+        
+        projects.forEach(p => {
+            if (p.techs) p.techs.forEach(t => icons.add(t.icon));
+            if (p.category) cats.add(p.category);
+            if (p.status) stats.add(p.status);
+            if (p.colors) {
+                const s = JSON.stringify(p.colors);
+                if (!colorPresets.has(s)) colorPresets.set(s, p.colors);
+            }
+        });
+
+        return {
+            icons: Array.from(icons),
+            categories: Array.from(cats),
+            statuses: Array.from(stats),
+            colorPresets: Array.from(colorPresets.values())
+        };
+    }, [projects]);
 
     if (loading) return (
         <div className="min-h-screen bg-stone-950 flex flex-col items-center justify-center text-white gap-4 font-Archivo">
@@ -157,13 +309,100 @@ const Admin = () => {
 
     return (
         <div className="min-h-screen bg-stone-950 text-white font-Archivo p-4 md:p-8 selection:bg-emerald-500/30">
+            {/* Toast Notification */}
+            {notification && (
+                <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl border backdrop-blur-xl shadow-2xl animate-in slide-in-from-right duration-300 ${
+                    notification.type === 'error' 
+                    ? 'bg-red-500/10 border-red-500/20 text-red-500' 
+                    : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
+                }`}>
+                    <Icon 
+                        icon={notification.type === 'error' ? 'solar:danger-bold' : 'solar:check-circle-bold'} 
+                        width="24" 
+                    />
+                    <div className="flex flex-col">
+                        <span className="text-xs font-bold opacity-50">
+                            {notification.type === 'error' ? 'System Error' : 'Success'}
+                        </span>
+                        <p className="text-sm font-semibold">{notification.message}</p>
+                    </div>
+                    <button onClick={() => setNotification(null)} className="ml-4 opacity-50 hover:opacity-100 transition-opacity">
+                        <Icon icon="solar:close-circle-bold" width="20" />
+                    </button>
+                </div>
+            )}
+
             <div className="max-w-6xl mx-auto">
-                <AdminHeader onMigrate={handleMigrate} />
+                {/* Custom Delete Confirmation Modal */}
+                {deleteConfirm && (
+                    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setDeleteConfirm(null)} />
+                        <div className="bg-stone-900 border border-white/10 p-8 rounded-[40px] max-w-sm w-full relative z-10 shadow-2xl animate-in zoom-in-95 duration-300">
+                            <div className="flex flex-col items-center">
+                                <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6 ring-8 ring-red-500/5">
+                                    <Icon icon="solar:trash-bin-minimalistic-bold" className="text-red-500" width="40" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-center mb-2 text-white">Confirmation</h3>
+                                <p className="text-stone-400 text-center text-sm mb-8 leading-relaxed">
+                                    Are you sure you want to delete this project? This action is permanent and cannot be undone.
+                                </p>
+                                <div className="flex flex-col w-full gap-3">
+                                    <button 
+                                        onClick={confirmDelete}
+                                        className="w-full py-4 rounded-2xl bg-red-500 hover:bg-red-600 font-bold text-sm transition-all shadow-lg shadow-red-500/20 active:scale-95"
+                                    >
+                                        Yes, Delete Permanently
+                                    </button>
+                                    <button 
+                                        onClick={() => setDeleteConfirm(null)}
+                                        className="w-full py-4 rounded-2xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold text-sm transition-all active:scale-95"
+                                    >
+                                        Cancel Action
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Custom Migration Confirmation Modal */}
+                {migrateConfirm && (
+                    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setMigrateConfirm(false)} />
+                        <div className="bg-stone-900 border border-white/10 p-8 rounded-[40px] max-w-sm w-full relative z-10 shadow-2xl animate-in zoom-in-95 duration-300">
+                            <div className="flex flex-col items-center">
+                                <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6 ring-8 ring-emerald-500/5">
+                                    <Icon icon="solar:database-bold" className="text-emerald-500" width="40" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-center mb-2 text-white">Sync Data</h3>
+                                <p className="text-stone-400 text-center text-sm mb-8 leading-relaxed">
+                                    This will migrate all static projects to your Firestore database. Duplicate names will be automatically skipped.
+                                </p>
+                                <div className="flex flex-col w-full gap-3">
+                                    <button 
+                                        onClick={confirmMigrate}
+                                        className="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 font-bold text-sm transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
+                                    >
+                                        Start Database Sync
+                                    </button>
+                                    <button 
+                                        onClick={() => setMigrateConfirm(false)}
+                                        className="w-full py-4 rounded-2xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-bold text-sm transition-all active:scale-95"
+                                    >
+                                        Cancel Action
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                <AdminHeader onMigrate={handleMigrate} migrating={migrating} />
 
                 <div className="grid lg:grid-cols-3 gap-8">
                     <ProjectForm 
                         formData={formData}
-                        handleInputChange={handleInputChange}
+                        onInputChange={handleInputChange}
                         handleSubmit={handleSubmit}
                         uploading={uploading}
                         techInput={techInput}
@@ -171,10 +410,14 @@ const Admin = () => {
                         handleAddTech={handleAddTech}
                         removeTech={removeTech}
                         setImageFile={setImageFile}
+                        imageFile={imageFile}
+                        suggestions={suggestions}
+                        errors={errors}
                     />
                     <ProjectList 
                         projects={projects}
                         onDelete={handleDelete}
+                        onEdit={handleEdit}
                     />
                 </div>
             </div>

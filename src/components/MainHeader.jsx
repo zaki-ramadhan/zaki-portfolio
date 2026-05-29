@@ -3,9 +3,12 @@ import { Icon } from "@iconify-icon/react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { navigationData } from "@utils/navigationData";
+import { useAuth } from "../utils/useAuth";
+import { Link } from "react-router-dom";
 
 const MainHeader = ({ children }) => {
 	const { t } = useTranslation();
+	const { user } = useAuth();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const toggleMobileMenu = () => {
@@ -71,6 +74,14 @@ const MainHeader = ({ children }) => {
 							</a>
 						</li>
 					))}
+					{user && (
+						<li>
+							<Link to="/admin" className="text-additional font-bold hover:text-white transition-colors flex items-center gap-2">
+								<Icon icon="solar:shield-user-bold" />
+								Dashboard
+							</Link>
+						</li>
+					)}
 				</ul>
 
 				{children}
@@ -134,6 +145,18 @@ const MainHeader = ({ children }) => {
 									</a>
 								</li>
 							))}
+							{user && (
+								<li>
+									<Link
+										to="/admin"
+										onClick={closeMobileMenu}
+										className="flex items-center gap-3 text-base text-additional font-bold py-3 px-4 rounded-lg bg-additional/5 border-l-2 border-additional"
+									>
+										<Icon icon="solar:shield-user-bold" width="20" />
+										Dashboard
+									</Link>
+								</li>
+							)}
 						</ul>
 					</div>
 

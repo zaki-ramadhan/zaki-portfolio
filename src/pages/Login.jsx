@@ -2,21 +2,33 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify-icon/react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [notification, setNotification] = useState(null);
     const navigate = useNavigate();
+
+    const showNotify = (message, type = "success") => {
+        setNotification({ message, type });
+        setTimeout(() => setNotification(null), 4000);
+    };
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
+
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate("/admin");
+            showNotify("Access Granted. Redirecting...");
+            setTimeout(() => navigate("/admin"), 1000);
         } catch (err) {
-            setError("Invalid credentials. Access denied.");
+            showNotify("Invalid credentials. Access denied.", "error");
             console.error(err);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -26,9 +38,23 @@ const Login = () => {
                 <h1 className="text-3xl font-bold text-white mb-6 text-center">Admin Access</h1>
                 <p className="text-stone-400 text-center mb-8 text-sm">Secure entry for project management</p>
                 
-                {error && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-xl mb-6 text-center text-sm">
-                        {error}
+                {/* Toast Notification */}
+                {notification && (
+                    <div className={`fixed top-8 right-8 z-[100] flex items-center gap-3 px-6 py-4 rounded-2xl border backdrop-blur-xl shadow-2xl animate-in slide-in-from-right duration-300 ${
+                        notification.type === 'error' 
+                        ? 'bg-red-500/10 border-red-500/20 text-red-500' 
+                        : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
+                    }`}>
+                        <Icon 
+                            icon={notification.type === 'error' ? 'solar:danger-bold' : 'solar:check-circle-bold'} 
+                            width="24" 
+                        />
+                        <div className="flex flex-col">
+                            <span className="text-xs font-black uppercase tracking-widest opacity-50">
+                                {notification.type === 'error' ? 'Access Denied' : 'Success'}
+                            </span>
+                            <p className="text-sm font-semibold">{notification.message}</p>
+                        </div>
                     </div>
                 )}
 
@@ -65,7 +91,19 @@ const Login = () => {
                         {/* Hover Glow Layer */}
                         <div className="absolute inset-0 bg-radial-[at_50%_130%] from-additional/70 via-additional/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         
-                        <span className="relative z-10">Sign In</span>
+                        <div className="relative z-10 flex items-center justify-center gap-2">
+                            {isLoading ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                    <span className="opacity-70">Verifying...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Icon icon="solar:lock-password-bold" width="20" />
+                                    <span>Sign In</span>
+                                </>
+                            )}
+                        </div>
                     </button>
                 </form>
             </div>

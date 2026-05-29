@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@layer base {
+  button, 
+  a, 
+  label, 
+  select, 
+  [role="button"] {
+    cursor: pointer;
+  }
+  
+  button:disabled,
+  button[disabled] {
+    cursor: not-allowed;
+  }
+}
+
 @theme {
   /* font */
   --font-Inter : 'Inter', sans-serif;
@@ -23,6 +38,14 @@ html {
   margin-inline: auto;
   padding-inline: 1.5rem;
   width: 100%;
+}
+
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -60,4 +83,14 @@ img {
 
 .animate-floating-ghost {
   animation: floating-ghost 1.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out 0s 2;
 }

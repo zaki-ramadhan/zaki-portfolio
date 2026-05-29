@@ -1,11 +1,8 @@
 /* eslint-disable react/prop-types */
-import { Icon } from "@iconify-icon/react";
-import TechIcons from "./TechIcon";
 import { useTranslation } from "react-i18next";
-import { projectData as staticProjectData } from "@utils/projectData";
-import { useState, useEffect } from "react";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../utils/firebase";
+import { Icon } from "@iconify-icon/react";
+import ProjectSkeleton from "./ProjectSkeleton";
+import TechIcons from "./TechIcon";
 
 // Single Project Card Component, extracted for reusability
 const SingleProjectCard = ({ project, is_image, className }) => {
@@ -73,50 +70,11 @@ const SingleProjectCard = ({ project, is_image, className }) => {
   );
 };
 
-import ProjectSkeleton from "./ProjectSkeleton";
-
 // Simple module-level cache to persist data during the session
-let projectsCache = null;
+export let projectsCache = null;
 
 // Main component that renders a list of Project Cards
-const ProjectCard = ({ is_image, className }) => {
-  const [projects, setProjects] = useState(projectsCache || [...staticProjectData].reverse());
-  const [isLoading, setIsLoading] = useState(!projectsCache);
-
-  useEffect(() => {
-    // If we have cached data, we can still fetch in the background to keep it fresh
-    const fetchProjects = async () => {
-      // Create a timeout to stop loading if Firebase hangs (usually due to misconfiguration)
-      const timeoutId = setTimeout(() => {
-        setIsLoading(false);
-      }, 4000);
-
-      try {
-        const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
-        const dynamicProjects = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        
-        const filteredStatic = staticProjectData.filter(s => 
-          !dynamicProjects.some(d => d.name === s.name)
-        );
-        
-        const mergedProjects = [...dynamicProjects, ...filteredStatic.reverse()];
-        setProjects(mergedProjects);
-        projectsCache = mergedProjects; // Update cache
-      } catch (error) {
-        console.error("Error fetching projects from Firebase:", error);
-      } finally {
-        clearTimeout(timeoutId);
-        setIsLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
+const ProjectCard = ({ is_image, className, projects = [], isLoading = false }) => {
   return (
     <>
       {isLoading && projects.length === 0 ? (
@@ -132,14 +90,23 @@ const ProjectCard = ({ is_image, className }) => {
                     <span className="text-secondary text-[10px] font-Archivo uppercase tracking-widest">Updating...</span>
                 </div>
             )}
-            {projects.map((project) => (
-                <SingleProjectCard
-                key={project.id || project.name}
-                project={project}
-                is_image={is_image}
-                className={className}
-                />
-            ))}
+            
+            {projects.length > 0 ? (
+                projects.map((project) => (
+                    <div key={project.id || project.name} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <SingleProjectCard
+                            project={project}
+                            is_image={is_image}
+                            className={className}
+                        />
+                    </div>
+                ))
+            ) : (
+                <div className="lg:col-span-2 py-20 flex flex-col items-center opacity-40">
+                    <Icon icon="solar:folder-error-broken" width="60" />
+                    <p className="mt-4 font-Archivo">No projects found for this selection.</p>
+                </div>
+            )}
         </>
       )}
     </>

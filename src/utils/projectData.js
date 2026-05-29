@@ -14,8 +14,9 @@ export const projectData = [
 	{
 		name: "Zappify",
 		desc: "projectCard.zappify.desc",
+        category: "Frontend",
 		link: "https://zappify.vercel.app",
-		status: "projectCard.zappify.status",
+		status: "Individual",
 		preview: zappifyPreview,
 		colors: {
 			titleColor: "text-white/80",
@@ -39,8 +40,9 @@ export const projectData = [
 	{
 		name: "Katering Ibu",
 		desc: "projectCard.kateringIbu.desc",
+        category: "Full-Stack",
 		link: "https://github.com/zaki-ramadhan/katering-ibu?tab=readme-ov-file#katering-ibu-a-laravel-based-catering-website",
-		status: "projectCard.kateringIbu.status",
+		status: "Individual",
 		preview: katIbuPreview,
 		colors: {
 			titleColor: "text-primary",
@@ -67,8 +69,9 @@ export const projectData = [
 	{
 		name: "Ortu Pintar",
 		desc: "projectCard.ortuPintar.desc",
+        category: "Full-Stack",
 		link: "https://github.com/zaki-ramadhan/OrtuPintar-app?tab=readme-ov-file#readme",
-		status: "projectCard.ortuPintar.status",
+		status: "Collaboration",
 		preview: ortuPintarPreview,
 		colors: {
 			titleColor: "text-primary",
@@ -95,8 +98,9 @@ export const projectData = [
 	{
 		name: "WebBlog",
 		desc: "projectCard.webBlog.desc",
+        category: "Full-Stack",
 		link: "https://github.com/zaki-ramadhan/web-blog?tab=readme-ov-file#readme",
-		status: "projectCard.webBlog.status",
+		status: "Individual",
 		preview: webBlogPreview,
 		colors: {
 			titleColor: "text-primary",
@@ -126,8 +130,9 @@ export const projectData = [
 	{
 		name: "PeerNote",
 		desc: "projectCard.peerNote.desc",
+        category: "Full-Stack",
 		link: "https://github.com/zaki-ramadhan/peer-note-sharing-platform?tab=readme-ov-file#readme",
-		status: "projectCard.peerNote.status",
+		status: "Collaboration",
 		preview: peerNotePreview,
 		colors: {
 			titleColor: "text-primary",
@@ -154,8 +159,9 @@ export const projectData = [
 	{
 		name: "Rancangin",
 		desc: "projectCard.rancangin.desc",
+        category: "Web",
 		link: "https://github.com/akbarryyan/rancanginid",
-		status: "projectCard.rancangin.status",
+		status: "Collaboration",
 		preview: rancanginPreview,
 		colors: {
 			titleColor: "text-white/80",
@@ -179,8 +185,9 @@ export const projectData = [
 	{
 		name: "DashLive",
 		desc: "projectCard.dashLive.desc",
+        category: "Web",
 		link: "https://github.com/akbarryyan/dashLive",
-		status: "projectCard.dashLive.status",
+		status: "Individual",
 		preview: dashLivePreview,
 		colors: {
 			titleColor: "text-primary",
@@ -210,8 +217,9 @@ export const projectData = [
 	{
 		name: "Paperloom",
 		desc: "projectCard.paperloom.desc",
+        category: "Full-Stack",
 		link: "https://github.com/zaki-ramadhan/paperloom?tab=readme-ov-file#readme",
-		status: "projectCard.paperloom.status",
+		status: "Individual",
 		preview: paperloomPreview,
 		colors: {
 			titleColor: "text-white/80",
@@ -248,8 +256,9 @@ export const projectData = [
 	{
 		name: "Belajar Linked In",
 		desc: "projectCard.belajarLinkedIn.desc",
+        category: "Frontend",
 		link: "https://belajar-linked-in-zaki.vercel.app",
-		status: "projectCard.belajarLinkedIn.status",
+		status: "Individual",
 		preview: belajarLinkedInPreview,
 		colors: {
 			titleColor: "text-primary",
