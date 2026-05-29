@@ -10,7 +10,11 @@ const categories = ["All", "Web", "Mobile", "Full-Stack", "Frontend", "Individua
 
 export default function ProjectSection() {
 	const { t } = useTranslation();
-    const [allProjects, setAllProjects] = useState(projectsCache || [...staticProjectData].reverse());
+    const [allProjects, setAllProjects] = useState(() => {
+        const cached = localStorage.getItem('portfolio_projects');
+        if (cached) return JSON.parse(cached);
+        return projectsCache || [...staticProjectData].reverse();
+    });
     const [isLoading, setIsLoading] = useState(!projectsCache);
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchTerm, setSearchTerm] = useState("");
@@ -23,10 +27,12 @@ export default function ProjectSection() {
                 const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
                 const querySnapshot = await getDocs(q);
                 const dynamicProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                // Ensure dynamic projects also follow the Individual/Collaboration status if they use i18n keys
+                
                 const filteredStatic = staticProjectData.filter(s => !dynamicProjects.some(d => d.name === s.name));
                 const mergedProjects = [...dynamicProjects, ...filteredStatic.reverse()];
+                
                 setAllProjects(mergedProjects);
+                localStorage.setItem('portfolio_projects', JSON.stringify(mergedProjects));
             } catch (error) {
                 console.error("Error fetching projects:", error);
             } finally {
@@ -46,7 +52,11 @@ export default function ProjectSection() {
     const getCategoryCount = (cat) => {
         if (cat === "All") return allProjects.length;
         if (cat === "Individual" || cat === "Collaboration") {
-            return allProjects.filter(p => p.status.includes(cat)).length;
+            return allProjects.filter(p => 
+                (p.status?.includes(cat)) || 
+                (p.status_en?.includes(cat)) || 
+                (p.status_id?.includes(cat))
+            ).length;
         }
         return allProjects.filter(p => p.category === cat).length;
     };
@@ -56,7 +66,9 @@ export default function ProjectSection() {
     const filteredProjects = allProjects.filter(p => {
         let matchesCategory = selectedCategory === "All";
         if (selectedCategory === "Individual" || selectedCategory === "Collaboration") {
-            matchesCategory = p.status.includes(selectedCategory);
+            matchesCategory = (p.status?.includes(selectedCategory)) || 
+                              (p.status_en?.includes(selectedCategory)) || 
+                              (p.status_id?.includes(selectedCategory));
         } else if (selectedCategory !== "All") {
             matchesCategory = p.category === selectedCategory;
         }

@@ -17,7 +17,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
         setInputValue(value || "");
     }, [value]);
 
-    const exactMatch = options.find(opt => opt.toLowerCase() === inputValue?.toLowerCase());
+    const exactMatch = options.find(opt => typeof opt === 'string' && opt.toLowerCase() === inputValue?.toLowerCase());
     const showCreateOption = inputValue && !exactMatch;
     
     // Status checks
@@ -26,7 +26,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
 
     useEffect(() => {
         const filtered = options.filter(opt => 
-            opt.toLowerCase().includes(inputValue?.toLowerCase() || "")
+            typeof opt === 'string' && opt.toLowerCase().includes(inputValue?.toLowerCase() || "")
         );
         setFilteredOptions(filtered);
         setActiveIndex(0);
@@ -34,7 +34,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
         // Auto-select if there's an exact case-insensitive match while typing
         // Added a check to ensure we only trigger onChange if the found match is ACTUALLY different
         // from the current prop value to prevent re-render loops
-        const match = options.find(opt => opt.toLowerCase() === inputValue?.toLowerCase());
+        const match = options.find(opt => typeof opt === 'string' && opt.toLowerCase() === inputValue?.toLowerCase());
         if (match && match !== value && inputValue === match) {
             onChange({ target: { name, value: match } });
         }
@@ -145,7 +145,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
                                 <Icon icon="solar:add-circle-linear" className="text-additional" width="18" />
                                 <div className="flex flex-col">
                                     <span className="font-semibold">Create: &quot;{inputValue}&quot;</span>
-                                    <span className="text-[10px] opacity-60 font-medium">Click to confirm and use this {label.toLowerCase()}</span>
+                                    <span className="text-[10px] opacity-60 font-medium">Click to confirm and use this {typeof label === 'string' ? label.toLowerCase() : 'value'}</span>
                                 </div>
                             </button>
                         )}
@@ -303,7 +303,7 @@ export const IconSelector = ({ techInput, setTechInput, techColor, setTechColor,
         { name: 'Git / Orange', hex: '#F05032' },
         { name: 'Vite / Purple', hex: '#646CFF' },
         { name: 'Linux / Yellow', hex: '#FCC624' },
-        { name: 'Next.js / White', hex: '#FFFFFF' },
+        { name: 'Next.js / White', hex: '#FFFFFE' },
         { name: 'Nuxt / Green', hex: '#00C58E' },
         { name: 'Wordpress / Blue', hex: '#21759B' },
         { name: 'Sass / Pink', hex: '#CC6699' },
@@ -405,9 +405,9 @@ export const IconSelector = ({ techInput, setTechInput, techColor, setTechColor,
                     </div>
 
                     <div className="flex flex-wrap gap-2.5 px-1 py-2">
-                        {solidColors.map((color) => (
+                        {solidColors.map((color, idx) => (
                             <button
-                                key={color.hex}
+                                key={`${color.hex}-${idx}`}
                                 type="button"
                                 onClick={() => setTechColor(color.hex)}
                                 title={color.name}

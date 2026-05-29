@@ -48,7 +48,7 @@ const resources = {
 					status: "Collaboration",
 				},
 				rancangin: {
-					desc: "A web service offering website development and UI/UX design solutions.",
+					desc: "A full-stack web service offering specialized website and mobile development solutions.",
 					status: "Collaboration",
 				},
 				paperloom: {
@@ -134,7 +134,7 @@ const resources = {
 					status: "Kolaborasi",
 				},
 				rancangin: {
-					desc: "Layanan web untuk pembuatan website dan solusi desain UI/UX.",
+					desc: "Layanan web full-stack untuk pembuatan website dan solusi pengembangan mobile.",
 					status: "Kolaborasi",
 				},
 				paperloom: {

@@ -12,14 +12,14 @@ const ProjectListItem = ({ project, onDelete, onEdit, isEditing }) => {
                 <div className="basis-1/2">
                     <h3 className={`font-bold text-lg transition-colors truncate ${isEditing ? 'text-emerald-400' : 'text-white group-hover:text-emerald-400'}`}>
                         {project.name}
-                        {isEditing && <span className="ml-2 text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full animate-pulse capitalize">Editing...</span>}
+                        {isEditing && <span className="ml-2 text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full animate-pulse font-bold tracking-tight">Editing...</span>}
                     </h3>
                     <p className="text-stone-500 text-xs truncate">{project.desc}</p>
                 </div>
                 <div className="flex gap-2">
                     <button 
                         onClick={() => onEdit(project)} 
-                        className={`p-2 transition-all rounded-lg border active:scale-90 ${
+                        className={`w-10 h-10 flex items-center justify-center transition-all rounded-xl border active:scale-90 ${
                             isEditing 
                             ? 'bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/20' 
                             : 'bg-stone-950/50 text-stone-600 hover:text-emerald-400 border-white/5'

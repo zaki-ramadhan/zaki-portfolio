@@ -49,7 +49,7 @@ const SingleProjectCard = ({ project, is_image, className }) => {
           </span>
           <span
             id="status-project"
-            className={`status basis-1/4 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none font-bold`}
+            className={`status basis-1/4 max-w-fit min-w-0 inline-block truncate ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none font-bold`}
           >
             {projectStatus}
           </span>

@@ -99,8 +99,8 @@ export default function ContactSection() {
                 <div className="lg:basis-2/3">
                     <form onSubmit={handleSubmit} className="bg-stone-900/40 backdrop-blur-xl border border-white/5 rounded-3xl p-8 md:p-10 space-y-6 relative overflow-hidden group">
                         {/* Decorative glows (Coklat Muda / Additional) */}
-                        <div className="absolute -top-32 -right-32 w-80 h-80 bg-additional/10 blur-[100px] rounded-full group-hover:bg-additional/20 transition-all duration-1000" />
-                        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-additional/5 blur-[120px] rounded-full group-hover:bg-additional/15 transition-all duration-1000" />
+                        <div className="absolute -top-32 -right-32 w-80 h-80 bg-additional/10 blur-[100px] rounded-full group-hover:bg-additional/20 transition-all duration-1000 pointer-events-none" />
+                        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-additional/5 blur-[120px] rounded-full group-hover:bg-additional/15 transition-all duration-1000 pointer-events-none" />
                         
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
