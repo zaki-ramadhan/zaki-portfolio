@@ -3,6 +3,7 @@ import i18n from "../i18n";
 import { Icon } from "@iconify-icon/react";
 import { languagesData } from "@utils/languagesData";
 
+// Dropdown for language selection - Using synced languagesData configuration
 const DropdownLanguages = () => {
 	// Mengambil bahasa yang tersimpan dari localStorage atau default "en"
 	const [language, setLanguage] = useState(() => {
