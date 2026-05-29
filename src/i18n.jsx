@@ -61,6 +61,13 @@ const resources = {
                     status: "Individual",
                 },
             },
+            error: {
+                not_found: "Page Not Found",
+                unauthorized: "Access Denied",
+                go_home: "Back to Home",
+                desc_404: "The page you are looking for doesn't exist or has been moved.",
+                desc_401: "You don't have permission to access this area."
+            }
         },
     },
 
@@ -123,6 +130,13 @@ const resources = {
                     status: "Individual",
                 },
             },
+            error: {
+                not_found: "Page Not Found",
+                unauthorized: "Access Denied",
+                go_home: "Back to Home",
+                desc_404: "The page you are looking for doesn't exist or has been moved.",
+                desc_401: "You don't have permission to access this area."
+            }
         },
     },
 
@@ -185,6 +199,13 @@ const resources = {
                     status: "个人",
                 },
             },
+            error: {
+                not_found: "Page Not Found",
+                unauthorized: "Access Denied",
+                go_home: "Back to Home",
+                desc_404: "The page you are looking for doesn't exist or has been moved.",
+                desc_401: "You don't have permission to access this area."
+            }
         },
     },
 
@@ -247,6 +268,13 @@ const resources = {
                     status: "個人",
                 },
             },
+            error: {
+                not_found: "Page Not Found",
+                unauthorized: "Access Denied",
+                go_home: "Back to Home",
+                desc_404: "The page you are looking for doesn't exist or has been moved.",
+                desc_401: "You don't have permission to access this area."
+            }
         },
     },
 
@@ -309,6 +337,13 @@ const resources = {
                     status: "Individual",
                 },
             },
+            error: {
+                not_found: "Page Not Found",
+                unauthorized: "Access Denied",
+                go_home: "Back to Home",
+                desc_404: "The page you are looking for doesn't exist or has been moved.",
+                desc_401: "You don't have permission to access this area."
+            }
         },
     },
 };

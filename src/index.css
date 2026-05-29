@@ -46,3 +46,18 @@ html {
 img {
   object-fit: cover;
 }
+
+@keyframes floating-ghost {
+  0%, 100% {
+    transform: translateY(-30%) scale(1.1, 0.95);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0) scale(0.9, 1.05);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-floating-ghost {
+  animation: floating-ghost 1.5s infinite;
+}

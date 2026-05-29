@@ -2,7 +2,10 @@
 import { Icon } from "@iconify-icon/react";
 import TechIcons from "./TechIcon";
 import { useTranslation } from "react-i18next";
-import { projectData } from "@utils/projectData";
+import { projectData as staticProjectData } from "@utils/projectData";
+import { useState, useEffect } from "react";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 // Single Project Card Component, extracted for reusability
 const SingleProjectCard = ({ project, is_image, className }) => {
@@ -11,8 +14,6 @@ const SingleProjectCard = ({ project, is_image, className }) => {
 
   return (
     <div
-      // Using a unique ID as the key for better performance and stability in lists.
-      // Make sure each project object in projectData has a unique 'id' property.
       key={project.id}
       className={`project-card relative h-80 lg:h-100 bg-radial-[at_100%_-40%] ${bgColor} to-60% ${
         !is_image ? "p-7 sm:p-10" : ""
@@ -21,9 +22,6 @@ const SingleProjectCard = ({ project, is_image, className }) => {
       <div className="w-full h-fit">
         <div className="w-full title-status__wrp flex items-center justify-between gap-4">
           <span className="title-icon__wrp flex items-center gap-2 basis-3/4 min-w-0">
-            {/* Consider using <h2> or <h3> for section titles instead of <h1> 
-              if this is not the main title of the entire page for better SEO and semantic HTML.
-            */}
             <h1 
               className={`${titleColor} text-2xl md:text-3xl font-Archivo max-w-full md:max-w-none overflow-hidden text-ellipsis whitespace-nowrap min-w-0`}
               style={{ flexShrink: 1 }}
@@ -62,33 +60,88 @@ const SingleProjectCard = ({ project, is_image, className }) => {
           src={project.preview}
           className="rounded-3xl md:rounded-2xl"
           alt={`${project.name} preview`}
-		  loading="lazy"
+		      loading="lazy"
         />
       </div>
       <div
         className={`overlay__layer w-full h-32 absolute bottom-0 left-1/2 -translate-x-1/2 bg-linear-0 ${overlayColor} from-20%`}
       ></div>
 
-      {/* Technology Icons Component */}
-      <TechIcons projectName={project.name} bg={bgColor} />
+      {/* Technology Icons Component - Passing techs directly */}
+      <TechIcons projectTechs={project.techs} bg={bgColor} />
     </div>
   );
 };
 
+import ProjectSkeleton from "./ProjectSkeleton";
+
+// Simple module-level cache to persist data during the session
+let projectsCache = null;
+
 // Main component that renders a list of Project Cards
 const ProjectCard = ({ is_image, className }) => {
-  const reversedProjectData = [...projectData].reverse();
+  const [projects, setProjects] = useState(projectsCache || [...staticProjectData].reverse());
+  const [isLoading, setIsLoading] = useState(!projectsCache);
+
+  useEffect(() => {
+    // If we have cached data, we can still fetch in the background to keep it fresh
+    const fetchProjects = async () => {
+      // Create a timeout to stop loading if Firebase hangs (usually due to misconfiguration)
+      const timeoutId = setTimeout(() => {
+        setIsLoading(false);
+      }, 4000);
+
+      try {
+        const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        const dynamicProjects = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        const filteredStatic = staticProjectData.filter(s => 
+          !dynamicProjects.some(d => d.name === s.name)
+        );
+        
+        const mergedProjects = [...dynamicProjects, ...filteredStatic.reverse()];
+        setProjects(mergedProjects);
+        projectsCache = mergedProjects; // Update cache
+      } catch (error) {
+        console.error("Error fetching projects from Firebase:", error);
+      } finally {
+        clearTimeout(timeoutId);
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <>
-      {reversedProjectData.map((project) => (
-        <SingleProjectCard
-          key={project.id}
-          project={project}
-          is_image={is_image}
-          className={className}
-        />
-      ))}
+      {isLoading && projects.length === 0 ? (
+        <>
+            <ProjectSkeleton />
+            <ProjectSkeleton />
+        </>
+      ) : (
+        <>
+            {isLoading && (
+                <div className="lg:col-span-2 flex items-center justify-center py-2 gap-2 opacity-50">
+                    <div className="w-3 h-3 border-2 border-additional/30 border-t-additional rounded-full animate-spin"></div>
+                    <span className="text-secondary text-[10px] font-Archivo uppercase tracking-widest">Updating...</span>
+                </div>
+            )}
+            {projects.map((project) => (
+                <SingleProjectCard
+                key={project.id || project.name}
+                project={project}
+                is_image={is_image}
+                className={className}
+                />
+            ))}
+        </>
+      )}
     </>
   );
 };

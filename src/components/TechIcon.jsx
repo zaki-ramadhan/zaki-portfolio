@@ -1,17 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Icon } from "@iconify-icon/react";
 import { useState, useEffect } from "react";
-import { projectData } from "@utils/projectData";
 
-const TechIcon = ({ projectName, bg }) => {
-	// state untuk mengatur ketika di klik
+const TechIcon = ({ projectTechs, bg }) => {
 	const [isActive, setIsActive] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
 	const [autoCloseTimeout, setAutoCloseTimeout] = useState(null);
 
 	const handleClick = () => {
 		setIsActive(true);
-		// Set auto close jika tidak sedang hover
 		if (!isHovering) {
 			const timeout = setTimeout(() => {
 				setIsActive(false);
@@ -22,7 +19,6 @@ const TechIcon = ({ projectName, bg }) => {
 
 	const handleMouseEnter = () => {
 		setIsHovering(true);
-		// Clear timeout jika ada
 		if (autoCloseTimeout) {
 			clearTimeout(autoCloseTimeout);
 			setAutoCloseTimeout(null);
@@ -30,42 +26,29 @@ const TechIcon = ({ projectName, bg }) => {
 	};
 	const handleMouseLeave = () => {
 		setIsHovering(false);
-		// Set timeout untuk menutup setelah mouse leave
 		if (isActive) {
 			const timeout = setTimeout(() => {
 				setIsActive(false);
-			}, 500); // Delay 500ms setelah mouse leave
+			}, 500);
 			setAutoCloseTimeout(timeout);
 		}
 	};
 
-	// Cleanup timeout saat component unmount
 	useEffect(() => {
 		return () => {
 			if (autoCloseTimeout) {
-				clearTimeout(autoCloseTimeout);
-			}
-		};
-	}, [autoCloseTimeout]);
+		clearTimeout(autoCloseTimeout);
+	}
+};
+}, [autoCloseTimeout]);
 
-	// Cari project yang sesuai
-	const project = projectData.find(
-		(item) =>
-			item.name ===
-			projectName
-	);
-
-	// Jika project tidak ditemukan, tampilkan pesan atau kosongkan
-	if (!project) return null;
-
-	return (<span
+return (<span
 		id="technologies"
 		onClick={handleClick}
 		onMouseEnter={handleMouseEnter}
 		onMouseLeave={handleMouseLeave}
 		className={`group overflow-visible max-w-fit p-2 md:p-2.5 pb-0.5 md:pb-1 flex items-center rounded-xl ${bg} border border-secondary/10 hover:border-secondary/20 backdrop-blur-xs hover:shadow-lg hover:shadow-black/2 active:shadow-lg active:shadow-black/2 absolute bottom-7 left-1/2 -translate-x-1/2 transition-all duration-300 overflow-hidden z-20 scale-120 sm:scale-100`}
 	>
-		{/* Ikon HTML5 (selalu terlihat) */}
 		<span
 			className={`logo__wrp not-odd:inline-block transation-all duration-300 delay-75 ${!isActive
 					? "text-zinc-400"
@@ -77,7 +60,7 @@ const TechIcon = ({ projectName, bg }) => {
 				width="26"
 				height="26"
 			/>
-			{project.techs.map(
+			{(projectTechs || []).map(
 				(
 					item,
 					index
@@ -98,8 +81,7 @@ const TechIcon = ({ projectName, bg }) => {
 			)}
 		</span>
 
-		{/* Ikon lainnya (muncul saat hover) */}
-		{project.techs.map(
+		{projectTechs.map(
 			(
 				item,
 				index
@@ -119,7 +101,7 @@ const TechIcon = ({ projectName, bg }) => {
 						}
 						width="28"
 						height="28"
-						className={`inline-block ${item.color}`}
+						className={`inline-block ${item.color || ""}`}
 					/>
 				</span>
 			)
