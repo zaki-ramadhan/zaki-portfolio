@@ -131,23 +131,54 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Validation Logic
+        // Validation Logic with Specific Messages
         const newErrors = {};
-        if (!formData.name.trim()) newErrors.name = true;
-        if (!formData.desc_en.trim()) newErrors.desc_en = true;
-        if (!formData.desc_id.trim()) newErrors.desc_id = true;
-        if (!formData.link.trim()) newErrors.link = true;
-        if (!formData.status_en.trim()) newErrors.status_en = true;
-        if (!formData.status_id.trim()) newErrors.status_id = true;
-        if (!formData.styleName || !formData.styleName.trim()) newErrors.styleName = true;
-        if (!formData.category.trim()) newErrors.category = true;
-        if (!imageFile && !formData.preview) newErrors.image = true;
+        const missingFields = [];
 
-        if (Object.keys(newErrors).length > 0) {
+        if (!formData.name?.trim()) {
+            newErrors.name = true;
+            missingFields.push("Project Name");
+        }
+
+        // Bilingual Fallback: logic if one is empty, use the other
+        const finalDescEn = formData.desc_en?.trim() || formData.desc_id?.trim();
+        const finalDescId = formData.desc_id?.trim() || formData.desc_en?.trim();
+        const finalStatusEn = formData.status_en?.trim() || formData.status_id?.trim();
+        const finalStatusId = formData.status_id?.trim() || formData.status_en?.trim();
+
+        if (!finalDescEn) {
+            newErrors.desc_en = true;
+            missingFields.push("Description");
+        }
+        if (!finalStatusEn) {
+            newErrors.status_en = true;
+            missingFields.push("Status");
+        }
+        if (!formData.link?.trim()) {
+            newErrors.link = true;
+            missingFields.push("Project Link");
+        }
+        if (!formData.category?.trim()) {
+            newErrors.category = true;
+            missingFields.push("Category");
+        }
+        if (!imageFile && !formData.preview) {
+            newErrors.image = true;
+            missingFields.push("Project Image");
+        }
+
+        if (missingFields.length > 0) {
             setErrors(newErrors);
-            showNotify("Please fill all required fields", "error");
+            showNotify(`Required fields missing: ${missingFields.join(", ")}`, "error");
             return;
         }
+
+        // Apply synchronized values
+        formData.desc_en = finalDescEn;
+        formData.desc_id = finalDescId;
+        formData.status_en = finalStatusEn;
+        formData.status_id = finalStatusId;
+        if (!formData.styleName?.trim()) formData.styleName = "Default";
 
         // Check for duplicate names in database
         const normalizedName = formData.name.trim().toLowerCase();
