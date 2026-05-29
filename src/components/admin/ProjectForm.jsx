@@ -171,16 +171,14 @@ const ProjectForm = ({
                             error={errors.category}
                         />
 
-                        <div className="flex items-center gap-3 px-1 pt-2">
-                            <input 
-                                type="checkbox" 
-                                id="is_published"
-                                name="is_published" 
-                                checked={formData.is_published} 
-                                onChange={localHandleChange} 
-                                className="w-5 h-5 accent-additional cursor-pointer" 
-                            />
-                            <label htmlFor="is_published" className="text-sm text-stone-300 font-medium cursor-pointer">Published to Live Site</label>
+                        <div className="flex items-center justify-between p-4 bg-stone-900/50 rounded-2xl border border-white/5 group hover:border-white/10 transition-all cursor-pointer" onClick={() => onInputChange({ target: { name: 'is_published', type: 'checkbox', checked: !formData.is_published } })}>
+                            <div className="flex flex-col">
+                                <span className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Visible to Public</span>
+                                <span className="text-[11px] text-stone-500 font-medium lowercase">Set this project status to published</span>
+                            </div>
+                            <div className={`w-12 h-6 rounded-full p-1 transition-all duration-300 relative ${formData.is_published ? 'bg-emerald-500 shadow-lg shadow-emerald-500/20' : 'bg-stone-800'}`}>
+                                <div className={`w-4 h-4 bg-white rounded-full shadow-lg transition-transform duration-300 ${formData.is_published ? 'translate-x-6' : 'translate-x-0'}`} />
+                            </div>
                         </div>
                     </div>
                 )}
@@ -431,9 +429,10 @@ const ProjectForm = ({
                     <button 
                         type="button"
                         onClick={() => onInputChange({ target: { name: 'reset_form', value: null } })}
-                        className="w-full py-3 mt-2 text-[11px] font-bold text-stone-600 hover:text-red-400 transition-colors"
+                        className="w-full py-4 mt-3 rounded-2xl bg-stone-800/10 hover:bg-red-500/10 text-stone-500 hover:text-red-400 font-semibold transition-all border border-white/5 hover:border-red-500/20 active:scale-95 flex items-center justify-center gap-3"
                     >
-                        ⇠ Cancel Edit Mode
+                        <Icon icon="solar:undo-left-round-bold" width="20" />
+                        <span>Cancel Edit Mode</span>
                     </button>
                 )}
             </div>

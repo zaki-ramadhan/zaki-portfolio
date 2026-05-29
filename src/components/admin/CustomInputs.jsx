@@ -32,8 +32,10 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
         setActiveIndex(0);
 
         // Auto-select if there's an exact case-insensitive match while typing
+        // Added a check to ensure we only trigger onChange if the found match is ACTUALLY different
+        // from the current prop value to prevent re-render loops
         const match = options.find(opt => opt.toLowerCase() === inputValue?.toLowerCase());
-        if (match && match !== value) {
+        if (match && match !== value && inputValue === match) {
             onChange({ target: { name, value: match } });
         }
     }, [inputValue, options, name, onChange, value]);
@@ -130,7 +132,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
                 </div>
             </div>
 
-            {isOpen && (
+            {isOpen && inputValue.trim().length > 0 && (
                 <div className="absolute z-50 top-[105%] left-0 w-full bg-stone-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-1 duration-200">
                     <div className="max-h-60 overflow-y-auto scrollbar-hide">
                         {showCreateOption && (
@@ -155,6 +157,9 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
                                 </div>
                                 {filteredOptions.map((opt, idx) => {
                                     const displayIdx = showCreateOption ? idx + 1 : idx;
+                                    const matchStart = opt.toLowerCase().indexOf(inputValue.toLowerCase());
+                                    const matchEnd = matchStart + inputValue.length;
+                                    
                                     return (
                                         <button
                                             key={idx}
@@ -164,10 +169,18 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
                                             className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between transition-colors cursor-pointer group ${displayIdx === activeIndex ? 'bg-white/5 text-white' : 'text-stone-400'}`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <Icon icon="solar:history-linear" width="16" className="opacity-40 group-hover:text-additional transition-colors" />
-                                                <span>{opt}</span>
+                                                <Icon icon="solar:history-linear" width="18" className="opacity-40 group-hover:text-additional transition-colors" />
+                                                <span className="font-bold tracking-tight">
+                                                    {matchStart !== -1 ? (
+                                                        <>
+                                                            {opt.substring(0, matchStart)}
+                                                            <span className="text-white">{opt.substring(matchStart, matchEnd)}</span>
+                                                            {opt.substring(matchEnd)}
+                                                        </>
+                                                    ) : opt}
+                                                </span>
                                             </div>
-                                            {value === opt && <Icon icon="solar:check-read-linear" width="16" className="text-emerald-500" />}
+                                            {value === opt && <Icon icon="solar:check-read-linear" width="20" className="text-emerald-500" />}
                                         </button>
                                     );
                                 })}

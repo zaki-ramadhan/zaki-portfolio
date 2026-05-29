@@ -446,6 +446,7 @@ const Admin = () => {
                         }}
                         onDelete={handleDelete}
                         onEdit={handleEdit}
+                        editingId={formData.id}
                     />
                 </div>
             </div>

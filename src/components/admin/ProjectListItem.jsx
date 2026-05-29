@@ -1,20 +1,31 @@
 /* eslint-disable react/prop-types */
 import { Icon } from "@iconify-icon/react";
 
-const ProjectListItem = ({ project, onDelete, onEdit }) => {
+const ProjectListItem = ({ project, onDelete, onEdit, isEditing }) => {
     return (
-        <div className="bg-stone-900/30 border border-white/5 p-4 rounded-3xl group relative overflow-hidden transition-all hover:bg-stone-900/50">
+        <div className={`p-4 rounded-3xl group relative overflow-hidden transition-all border ${
+            isEditing 
+            ? 'bg-emerald-500/10 border-emerald-500/50 shadow-2xl shadow-emerald-500/10' 
+            : 'bg-stone-900/30 border-white/5 hover:bg-stone-900/50 hover:border-white/10'
+        }`}>
             <div className="flex justify-between items-start mb-4">
                 <div className="basis-1/2">
-                    <h3 className="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors truncate">{project.name}</h3>
+                    <h3 className={`font-bold text-lg transition-colors truncate ${isEditing ? 'text-emerald-400' : 'text-white group-hover:text-emerald-400'}`}>
+                        {project.name}
+                        {isEditing && <span className="ml-2 text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full animate-pulse capitalize">Editing...</span>}
+                    </h3>
                     <p className="text-stone-500 text-xs truncate">{project.desc}</p>
                 </div>
                 <div className="flex gap-2">
                     <button 
                         onClick={() => onEdit(project)} 
-                        className="p-2 text-stone-600 hover:text-additional transition-colors bg-stone-950/50 rounded-lg border border-white/5 active:scale-90"
+                        className={`p-2 transition-all rounded-lg border active:scale-90 ${
+                            isEditing 
+                            ? 'bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/20' 
+                            : 'bg-stone-950/50 text-stone-600 hover:text-emerald-400 border-white/5'
+                        }`}
                     >
-                        <Icon icon="solar:pen-new-square-linear" width="20" />
+                        <Icon icon={isEditing ? "solar:pen-new-square-bold" : "solar:pen-new-square-linear"} width="20" />
                     </button>
                     <button 
                         onClick={() => onDelete(project.id)} 

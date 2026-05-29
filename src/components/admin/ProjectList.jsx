@@ -11,7 +11,8 @@ const ProjectList = ({
     itemsPerPage, 
     onItemsPerPageChange,
     onDelete, 
-    onEdit 
+    onEdit,
+    editingId
 }) => {
     return (
         <div className="lg:col-span-2 space-y-6">
@@ -20,13 +21,13 @@ const ProjectList = ({
                     Projects <span className="text-stone-500 text-lg font-bold">({totalData})</span>
                 </h2>
                 
-                <div className="flex items-center gap-3 bg-stone-900/50 p-1.5 rounded-xl border border-white/5">
-                    <span className="text-[11px] font-bold text-stone-500 uppercase ml-2">Show</span>
+                <div className="flex items-center gap-3 bg-stone-900/50 p-2 rounded-xl border border-white/5">
+                    <span className="text-xs font-black text-stone-500 uppercase ml-2 tracking-wider">Show</span>
                     {[4, 8, 12, 14, 16, 20].map(size => (
                         <button
                             key={size}
                             onClick={() => onItemsPerPageChange(size)}
-                            className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${itemsPerPage === size ? 'bg-additional text-white shadow-lg shadow-additional/20' : 'text-stone-500 hover:text-stone-300'}`}
+                            className={`px-3 py-1 rounded-lg text-sm font-black transition-all ${itemsPerPage === size ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-stone-500 hover:text-stone-300'}`}
                         >
                             {size}
                         </button>
@@ -41,6 +42,7 @@ const ProjectList = ({
                         project={project} 
                         onDelete={onDelete} 
                         onEdit={onEdit}
+                        isEditing={editingId === project.id}
                     />
                 ))}
             </div>
@@ -54,9 +56,9 @@ const ProjectList = ({
             )}
 
             {totalPages > 1 && (
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                    <p className="text-xs text-stone-500 font-medium">
-                        Page <span className="text-white">{currentPage}</span> of <span className="text-white">{totalPages}</span>
+                <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-white/5 gap-4">
+                    <p className="text-base text-stone-500 font-extrabold tracking-wide">
+                        Page <span className="text-emerald-400 mx-1">{currentPage}</span> / <span className="text-white mx-1">{totalPages}</span>
                     </p>
                     
                     <div className="flex items-center gap-2">
@@ -77,7 +79,7 @@ const ProjectList = ({
                                         <button
                                             key={page}
                                             onClick={() => onPageChange(page)}
-                                            className={`w-10 h-10 rounded-xl text-xs font-bold transition-all ${currentPage === page ? 'bg-additional text-white shadow-lg shadow-additional/20' : 'bg-stone-900/50 text-stone-500 hover:text-white'}`}
+                                            className={`w-10 h-10 rounded-xl text-sm font-black transition-all ${currentPage === page ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-stone-900/50 text-stone-500 hover:text-white'}`}
                                         >
                                             {page}
                                         </button>
