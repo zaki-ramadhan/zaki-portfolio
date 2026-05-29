@@ -88,7 +88,7 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
     return (
         <div className="space-y-2 relative" ref={dropdownRef}>
             <div className="flex justify-between items-center px-1">
-                <label className="text-sm text-stone-400 font-semibold ml-1">
+                <label className="text-sm text-stone-400 font-semibold ml-1 flex items-center gap-1">
                     {label}{required && <span className="text-red-500">*</span>}
                 </label>
                 {isConfirmed && <span className="text-[13px] text-emerald-500 font-bold flex items-center gap-1">

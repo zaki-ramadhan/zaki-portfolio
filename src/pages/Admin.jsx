@@ -17,9 +17,11 @@ const Admin = () => {
     const [projects, setProjects] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
-        desc: "",
+        desc_en: "",
+        desc_id: "",
         link: "",
-        status: "Project Ongoing",
+        status_en: "",
+        status_id: "",
         category: "Web",
         is_published: true,
         styleName: "Default",
@@ -109,9 +111,11 @@ const Admin = () => {
         // Validation Logic
         const newErrors = {};
         if (!formData.name.trim()) newErrors.name = true;
-        if (!formData.desc.trim()) newErrors.desc = true;
+        if (!formData.desc_en.trim()) newErrors.desc_en = true;
+        if (!formData.desc_id.trim()) newErrors.desc_id = true;
         if (!formData.link.trim()) newErrors.link = true;
-        if (!formData.status.trim()) newErrors.status = true;
+        if (!formData.status_en.trim()) newErrors.status_en = true;
+        if (!formData.status_id.trim()) newErrors.status_id = true;
         if (!formData.styleName || !formData.styleName.trim()) newErrors.styleName = true;
         if (!formData.category.trim()) newErrors.category = true;
         if (!imageFile && !formData.preview) newErrors.image = true;
@@ -194,8 +198,12 @@ const Admin = () => {
             }
 
             console.log("💾 Saving project data to Firestore...");
+            const sanitizedFormData = { ...formData };
+            delete sanitizedFormData.desc;
+            delete sanitizedFormData.status;
+            
             const projectToSave = {
-                ...formData,
+                ...sanitizedFormData,
                 preview: imageUrl,
                 updatedAt: new Date().toISOString()
             };
@@ -226,15 +234,35 @@ const Admin = () => {
 
     const resetForm = () => {
         setFormData({
-            name: "", desc: "", link: "", status: "Project Ongoing", category: "Web", is_published: true,
-            colors: { titleColor: "text-primary", bgColor: "from-white to-slate-200", btnColor: "bg-secondary/10", iconsBgColor: "bg-white/20", overlayColor: "from-slate-200 to-slate-200/0" },
+            name: "", 
+            desc_en: "", 
+            desc_id: "", 
+            link: "", 
+            status_en: "", 
+            status_id: "", 
+            category: "Web", 
+            is_published: true,
+            styleName: "Default",
+            colors: { 
+                titleColor: "text-primary", 
+                bgColor: "from-white to-slate-200", 
+                btnColor: "bg-secondary/10", 
+                iconsBgColor: "bg-white/20", 
+                overlayColor: "from-slate-200 to-slate-200/0" 
+            },
             techs: []
         });
         setImageFile(null);
     };
 
     const handleEdit = (project) => {
-        setFormData(project);
+        setFormData({
+            ...project,
+            desc_en: project.desc_en || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
+            desc_id: project.desc_id || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
+            status_en: project.status_en || (project.status?.includes("projectCard") ? "" : project.status) || "",
+            status_id: project.status_id || (project.status?.includes("projectCard") ? "" : project.status) || "",
+        });
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 

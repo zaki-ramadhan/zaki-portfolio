@@ -6,8 +6,15 @@ import TechIcons from "./TechIcon";
 
 // Single Project Card Component, extracted for reusability
 const SingleProjectCard = ({ project, is_image, className }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { titleColor, bgColor, btnColor, overlayColor } = project.colors;
+  
+  // Dynamic translation logic for multilingual DB fields
+  const currentLang = i18n.language; // 'en', 'id', 'es', 'ja', 'zh'
+  
+  // High priority: matched language. Secondary: English fallback. Tertiary: Legacy field/key
+  const projectStatus = project[`status_${currentLang}`] || project.status_en || (project.status ? t(project.status) : '...');
+  const projectDesc = project[`desc_${currentLang}`] || project.desc_en || (project.desc?.includes('projectCard') ? t(project.desc) : project.desc);
 
   return (
     <div
@@ -42,13 +49,13 @@ const SingleProjectCard = ({ project, is_image, className }) => {
           </span>
           <span
             id="status-project"
-            className={`status basis-1/4 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none`}
+            className={`status basis-1/4 max-w-fit ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none font-bold`}
           >
-            {t(project.status)}
+            {projectStatus}
           </span>
         </div>
         <p className="text-secondary text-base mt-1.5 lg:mt-01.5 lg:w-96 line-clamp-1">
-          {t(project.desc)}
+          {projectDesc}
         </p>
       </div>
 

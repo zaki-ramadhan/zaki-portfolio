@@ -21,6 +21,7 @@ const ProjectForm = ({
 }) => {
     const fileInputRef = useRef(null);
     const [previewUrl, setPreviewUrl] = useState(null);
+    const [formLang, setFormLang] = useState('en'); // 'en' or 'id'
 
     // Handle Image Preview
     useEffect(() => {
@@ -91,6 +92,26 @@ const ProjectForm = ({
                 {/* TAB 1: CONTENT */}
                 {activeTab === 'content' && (
                     <div className="space-y-6 animate-in slide-in-from-left duration-300">
+                        {/* Content Language Switcher */}
+                        <div className="flex justify-center bg-black/20 p-1.5 rounded-2xl border border-white/5">
+                            <div className="flex bg-stone-900 rounded-xl p-1 w-full sm:w-auto">
+                                {[
+                                    { id: 'en', label: 'English', icon: 'twemoji:flag-united-states' },
+                                    { id: 'id', label: 'Indonesia', icon: 'twemoji:flag-indonesia' }
+                                ].map(lang => (
+                                    <button
+                                        key={lang.id}
+                                        type="button"
+                                        onClick={() => setFormLang(lang.id)}
+                                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2 rounded-lg text-xs font-bold transition-all ${formLang === lang.id ? 'bg-stone-800 text-white shadow-sm ring-1 ring-white/5' : 'text-stone-500 hover:text-stone-400'}`}
+                                    >
+                                        <Icon icon={lang.icon} width="14" />
+                                        {lang.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
                             <label className="text-sm text-stone-400 font-semibold ml-1">
                                 Project Name<span className="text-red-500">*</span>
@@ -108,20 +129,22 @@ const ProjectForm = ({
                             />
                         </div>
 
+                        {/* Description - Conditional Rendering */}
                         <div className="space-y-2">
-                            <label className="text-sm text-stone-400 font-semibold ml-1">
-                                Description<span className="text-red-500">*</span>
+                            <label className="text-sm text-stone-400 font-semibold ml-1 flex items-center gap-2">
+                                <Icon icon={formLang === 'en' ? 'twemoji:flag-united-states' : 'twemoji:flag-indonesia'} width="14" /> 
+                                {formLang === 'en' ? 'Description (EN)' : 'Deskripsi (ID)'}<span className="text-red-500">*</span>
                             </label>
                             <textarea 
-                                name="desc" 
-                                value={formData.desc} 
+                                name={formLang === 'en' ? 'desc_en' : 'desc_id'} 
+                                value={formLang === 'en' ? formData.desc_en : formData.desc_id} 
                                 onChange={localHandleChange} 
-                                className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none h-32 resize-none transition-all placeholder:text-stone-600 text-sm ${
-                                    errors.desc 
+                                className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none h-32 resize-none transition-all placeholder:text-stone-600 text-sm font-medium ${
+                                    (formLang === 'en' ? errors.desc_en : errors.desc_id)
                                     ? 'border-red-500/50 ring-red-500/10 animate-shake' 
                                     : 'border-white/10 focus:border-additional/30 focus:ring-additional/5'
                                 }`} 
-                                placeholder="Enter project description or i18n key..."
+                                placeholder={formLang === 'en' ? 'English description...' : 'Deskripsi Bahasa Indonesia...'}
                             />
                         </div>
 
@@ -149,15 +172,16 @@ const ProjectForm = ({
                             />
                         </div>
 
+                        {/* Status - Conditional Rendering */}
                         <ComboInput 
-                            label="Status"
-                            name="status"
-                            value={formData.status}
+                            label={<span className="flex items-center gap-2 ml-1"><Icon icon={formLang === 'en' ? 'twemoji:flag-united-states' : 'twemoji:flag-indonesia'} width="14" /> {formLang === 'en' ? 'Status (EN)' : 'Status (ID)'}</span>}
+                            name={formLang === 'en' ? 'status_en' : 'status_id'}
+                            value={formLang === 'en' ? formData.status_en : formData.status_id}
                             onChange={localHandleChange}
                             options={suggestions.statuses}
-                            placeholder="..."
+                            placeholder={formLang === 'en' ? 'Project Ongoing...' : 'Proyek Berjalan...'}
                             required
-                            error={errors.status}
+                            error={formLang === 'en' ? errors.status_en : errors.status_id}
                         />
 
                         <ComboInput 
