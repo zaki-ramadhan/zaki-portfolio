@@ -25,20 +25,12 @@ export const ComboInput = ({ label, name, value, onChange, options = [], placeho
     const isPending = inputValue && inputValue !== value;
 
     useEffect(() => {
-        const filtered = options.filter(opt => 
+        const filtered = options.filter(opt =>
             typeof opt === 'string' && opt.toLowerCase().includes(inputValue?.toLowerCase() || "")
         );
         setFilteredOptions(filtered);
         setActiveIndex(0);
-
-        // Auto-select if there's an exact case-insensitive match while typing
-        // Added a check to ensure we only trigger onChange if the found match is ACTUALLY different
-        // from the current prop value to prevent re-render loops
-        const match = options.find(opt => typeof opt === 'string' && opt.toLowerCase() === inputValue?.toLowerCase());
-        if (match && match !== value && inputValue === match) {
-            onChange({ target: { name, value: match } });
-        }
-    }, [inputValue, options, name, onChange, value]);
+    }, [inputValue, options]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

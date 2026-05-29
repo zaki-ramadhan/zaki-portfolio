@@ -52,9 +52,9 @@ export default function ProjectSection() {
     const getCategoryCount = (cat) => {
         if (cat === "All") return allProjects.length;
         if (cat === "Individual" || cat === "Collaboration") {
-            return allProjects.filter(p => 
-                (p.status?.includes(cat)) || 
-                (p.status_en?.includes(cat)) || 
+            return allProjects.filter(p =>
+                (typeof p.status === 'string' && p.status.includes(cat)) ||
+                (p.status_en?.includes(cat)) ||
                 (p.status_id?.includes(cat))
             ).length;
         }
@@ -66,14 +66,15 @@ export default function ProjectSection() {
     const filteredProjects = allProjects.filter(p => {
         let matchesCategory = selectedCategory === "All";
         if (selectedCategory === "Individual" || selectedCategory === "Collaboration") {
-            matchesCategory = (p.status?.includes(selectedCategory)) || 
-                              (p.status_en?.includes(selectedCategory)) || 
-                              (p.status_id?.includes(selectedCategory));
+            matchesCategory =
+                (typeof p.status === 'string' && p.status.includes(selectedCategory)) ||
+                (p.status_en?.includes(selectedCategory)) ||
+                (p.status_id?.includes(selectedCategory));
         } else if (selectedCategory !== "All") {
             matchesCategory = p.category === selectedCategory;
         }
 
-        const matchesSearch = p.name.toLowerCase().includes(debouncedSearch.toLowerCase());
+        const matchesSearch = p.name?.toLowerCase().includes(debouncedSearch.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
@@ -106,7 +107,7 @@ export default function ProjectSection() {
                                         setSelectedCategory(cat);
                                         setVisibleCount(6); // Reset count on category change
                                     }}
-                                    className={`px-4 py-2.5 rounded-xl text-sm md:text-[15px] font-Archivo font-medium transition-all duration-300 border flex items-center gap-2 ${
+                                    className={`px-4 py-2.5 rounded-xl text-sm md:text-[15px] font-Archivo font-medium transition-all duration-300 border flex items-center gap-2 whitespace-nowrap ${
                                         selectedCategory === cat
                                             ? "bg-additional text-stone-900 border-additional shadow-lg shadow-additional/20"
                                             : "bg-stone-900/40 text-stone-400 border-white/5 hover:border-white/20 hover:text-white"

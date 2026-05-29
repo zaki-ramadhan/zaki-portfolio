@@ -40,7 +40,7 @@ const MessageList = ({ messages, onDelete, loading }) => {
                             </div>
                             <button 
                                 onClick={() => onDelete(msg.id)}
-                                className="p-2 rounded-xl bg-red-500/10 text-red-500 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white"
+                                className="w-9 h-9 shrink-0 flex items-center justify-center rounded-xl bg-red-500/10 text-red-500 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white"
                             >
                                 <Icon icon="solar:trash-bin-minimalistic-bold" width="18" />
                             </button>
@@ -52,9 +52,18 @@ const MessageList = ({ messages, onDelete, loading }) => {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between text-[10px] uppercase tracking-widest font-black text-stone-600">
-                            <span>{new Date(msg.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                            <span>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <div className="flex items-center justify-between text-[11px] uppercase tracking-widest font-black text-stone-500">
+                            {(() => {
+                                const raw = msg.createdAt;
+                                const d = raw?.toDate ? raw.toDate() : raw ? new Date(raw) : null;
+                                if (!d || isNaN(d)) return <span className="col-span-2">—</span>;
+                                return (
+                                    <>
+                                        <span>{d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                                        <span>{d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    </>
+                                );
+                            })()}
                         </div>
                     </div>
                 ))}
