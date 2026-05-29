@@ -49,7 +49,7 @@ const ProjectList = ({
 
             {projects.length === 0 && (
                 <div className="text-center py-24 bg-stone-900/10 rounded-[40px] border border-dashed border-white/5">
-                    <Icon icon="solar:folder-open-linear" width="48" className="text-stone-700 mx-auto mb-4" />
+                    <Icon icon="solar:folder-open-linear" width="48" className="text-stone-500 mx-auto mb-4 opacity-50" />
                     <p className="text-stone-500 font-medium">No projects found</p>
                     <p className="text-stone-600 text-xs mt-1">Start by adding your first project using the form.</p>
                 </div>

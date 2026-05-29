@@ -16,7 +16,7 @@ const Cards = () => {
 				<Card
 					is_image
 					className={
-						"card hidden lg:inline-block group lg:basis-2/4 xl:basis-2/4 max-w-80 rounded-es-lg border border-secondary/15 overflow-hidden"
+						"card hidden lg:inline-block group lg:basis-2/4 xl:basis-2/4 max-w-80 rounded-es-lg border border-secondary/15 overflow-hidden relative"
 					}
 				>
 					<img
@@ -26,6 +26,8 @@ const Cards = () => {
 						alt="avatar ai"
 						className="w-full h-full object-cover select-none group-hover:scale-105 transition-transform duration-700"
 					/>
+					{/* Bottom Shadow Overlay */}
+					<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none opacity-70 group-hover:opacity-90 transition-opacity duration-700" />
 				</Card>
 			</div>
 

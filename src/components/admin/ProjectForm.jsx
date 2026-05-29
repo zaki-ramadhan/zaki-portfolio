@@ -103,9 +103,9 @@ const ProjectForm = ({
                                         key={lang.id}
                                         type="button"
                                         onClick={() => setFormLang(lang.id)}
-                                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2 rounded-lg text-xs font-bold transition-all ${formLang === lang.id ? 'bg-stone-800 text-white shadow-sm ring-1 ring-white/5' : 'text-stone-500 hover:text-stone-400'}`}
+                                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${formLang === lang.id ? 'bg-stone-800 text-white shadow-sm ring-1 ring-white/5' : 'text-stone-500 hover:text-stone-400'}`}
                                     >
-                                        <Icon icon={lang.icon} width="14" />
+                                        <Icon icon={lang.icon} width="16" />
                                         {lang.label}
                                     </button>
                                 ))}

@@ -9,7 +9,8 @@ const resources = {
 				present: "Profile",
 				projects: "Projects",
 				contact: "Contact",
-				specialty: "Web & Mobile Developer",
+				dashboard: "Dashboard",
+				specialty: "Web & Mobile Dev",
 			},
 			projectSection: {
 				title: "My Projects",
@@ -94,7 +95,8 @@ const resources = {
 				present: "Profil",
 				projects: "Proyek",
 				contact: "Kontak",
-				specialty: "Web & Mobile Developer",
+				dashboard: "Dashboard",
+				specialty: "Web & Mobile Dev",
 			},
 			projectSection: {
 				title: "Proyek Saya",

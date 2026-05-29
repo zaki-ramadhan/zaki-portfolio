@@ -10,11 +10,15 @@ import { collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, updateDoc 
 import AdminHeader from "../components/admin/AdminHeader";
 import ProjectForm from "../components/admin/ProjectForm";
 import ProjectList from "../components/admin/ProjectList";
+import MessageList from "../components/admin/MessageList";
 
 const Admin = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
+    const [activeView, setActiveView] = useState("projects"); // 'projects' or 'messages'
     const [projects, setProjects] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const [fetchingMessages, setFetchingMessages] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         desc_en: "",
@@ -41,7 +45,8 @@ const Admin = () => {
     const [techColor, setTechColor] = useState("#FFFFFF"); // Default White
     const [errors, setErrors] = useState({});
     const [notification, setNotification] = useState(null);
-    const [deleteConfirm, setDeleteConfirm] = useState(null); // id of project to delete
+    const [deleteConfirm, setDeleteConfirm] = useState(null); // id of object to delete
+    const [deleteType, setDeleteType] = useState('project'); // 'project' or 'message'
     const [migrateConfirm, setMigrateConfirm] = useState(false);
 
     // Pagination State
@@ -65,10 +70,28 @@ const Admin = () => {
         }
     }, []);
 
+    const fetchMessages = useCallback(async () => {
+        setFetchingMessages(true);
+        try {
+            const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
+            const querySnapshot = await getDocs(q);
+            const messagesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setMessages(messagesData);
+        } catch (error) {
+            console.error("Error fetching messages:", error);
+            showNotify("Failed to fetch messages database", "error");
+        } finally {
+            setFetchingMessages(false);
+        }
+    }, []);
+
     useEffect(() => {
         if (!loading && !user) navigate("/login");
-        if (user) fetchProjects();
-    }, [user, loading, navigate, fetchProjects]);
+        if (user) {
+            if (activeView === 'projects') fetchProjects();
+            if (activeView === 'messages') fetchMessages();
+        }
+    }, [user, loading, navigate, fetchProjects, fetchMessages, activeView]);
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -263,10 +286,12 @@ const Admin = () => {
             status_en: project.status_en || (project.status?.includes("projectCard") ? "" : project.status) || "",
             status_id: project.status_id || (project.status?.includes("projectCard") ? "" : project.status) || "",
         });
+        setActiveView('projects');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = (id, type = 'project') => {
+        setDeleteType(type);
         setDeleteConfirm(id);
     };
 
@@ -274,12 +299,14 @@ const Admin = () => {
         if (!deleteConfirm) return;
         
         try {
-            await deleteDoc(doc(db, "projects", deleteConfirm));
-            showNotify("Project permanently deleted", "success");
-            fetchProjects();
+            const collectionName = deleteType === 'project' ? "projects" : "messages";
+            await deleteDoc(doc(db, collectionName, deleteConfirm));
+            showNotify(`${deleteType === 'project' ? 'Project' : 'Message'} permanently deleted`, "success");
+            if (deleteType === 'project') fetchProjects();
+            else fetchMessages();
         } catch (error) {
-            console.error("Error deleting project:", error);
-            showNotify("Failed to delete project", "error");
+            console.error("Error deleting:", error);
+            showNotify("Failed to delete", "error");
         } finally {
             setDeleteConfirm(null);
         }
@@ -444,39 +471,68 @@ const Admin = () => {
 
                 <AdminHeader onMigrate={handleMigrate} migrating={migrating} />
 
-                <div className="grid lg:grid-cols-3 gap-8">
-                    <ProjectForm 
-                        formData={formData}
-                        onInputChange={handleInputChange}
-                        handleSubmit={handleSubmit}
-                        uploading={uploading}
-                        techInput={techInput}
-                        setTechInput={setTechInput}
-                        techColor={techColor}
-                        setTechColor={setTechColor}
-                        handleAddTech={handleAddTech}
-                        removeTech={removeTech}
-                        setImageFile={setImageFile}
-                        imageFile={imageFile}
-                        suggestions={suggestions}
-                        errors={errors}
-                    />
-                    <ProjectList 
-                        projects={paginatedProjects}
-                        totalData={projects.length}
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={setCurrentPage}
-                        itemsPerPage={itemsPerPage}
-                        onItemsPerPageChange={(val) => {
-                            setItemsPerPage(val);
-                            setCurrentPage(1);
-                        }}
-                        onDelete={handleDelete}
-                        onEdit={handleEdit}
-                        editingId={formData.id}
-                    />
+                {/* View Switcher */}
+                <div className="flex gap-4 mb-10 bg-black/40 p-1.5 rounded-[28px] w-fit border border-white/5 mx-auto">
+                    <button 
+                        onClick={() => setActiveView('projects')}
+                        className={`px-8 py-3 rounded-[22px] text-sm font-bold transition-all flex items-center gap-3 ${activeView === 'projects' ? 'bg-stone-800 text-white shadow-xl ring-1 ring-white/10' : 'text-stone-500 hover:text-stone-300'}`}
+                    >
+                        <Icon icon="solar:folder-with-files-bold" width="18" />
+                        Projects
+                    </button>
+                    <button 
+                        onClick={() => setActiveView('messages')}
+                        className={`px-8 py-3 rounded-[22px] text-sm font-bold transition-all flex items-center gap-3 ${activeView === 'messages' ? 'bg-stone-800 text-white shadow-xl ring-1 ring-white/10' : 'text-stone-500 hover:text-stone-300'}`}
+                    >
+                        <Icon icon="solar:letter-bold" width="18" />
+                        Messages
+                        {messages.length > 0 && <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />}
+                    </button>
                 </div>
+
+                {activeView === 'projects' ? (
+                    <div className="grid lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom duration-500">
+                        <ProjectForm 
+                            formData={formData}
+                            onInputChange={handleInputChange}
+                            handleSubmit={handleSubmit}
+                            uploading={uploading}
+                            techInput={techInput}
+                            setTechInput={setTechInput}
+                            techColor={techColor}
+                            setTechColor={setTechColor}
+                            handleAddTech={handleAddTech}
+                            removeTech={removeTech}
+                            setImageFile={setImageFile}
+                            imageFile={imageFile}
+                            suggestions={suggestions}
+                            errors={errors}
+                        />
+                        <ProjectList 
+                            projects={paginatedProjects}
+                            totalData={projects.length}
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                            itemsPerPage={itemsPerPage}
+                            onItemsPerPageChange={(val) => {
+                                setItemsPerPage(val);
+                                setCurrentPage(1);
+                            }}
+                            onDelete={(id) => handleDelete(id, 'project')}
+                            onEdit={handleEdit}
+                            editingId={formData.id}
+                        />
+                    </div>
+                ) : (
+                    <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom duration-500">
+                        <MessageList 
+                            messages={messages} 
+                            onDelete={(id) => handleDelete(id, 'message')}
+                            loading={fetchingMessages} 
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );
