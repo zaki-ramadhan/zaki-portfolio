@@ -10,9 +10,11 @@ import ErrorPage from "./pages/ErrorPage";
 
 // We use BrowserRouter for better compatibility with standard web hosting
 const App = () => {
+
+    const routerBase = import.meta.env.BASE_URL;
     return (
         <I18nextProvider i18n={i18n}>
-            <Router>
+            <Router basename={routerBase}>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/0/admin" element={<Admin />} />
