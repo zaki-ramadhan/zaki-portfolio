@@ -24,10 +24,11 @@ export default function CertificateSection() {
                 const snap = await getDocs(q);
                 const dynamic = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                const filteredStatic = staticCertificates.filter(
+                /* const filteredStatic = staticCertificates.filter(
                     s => !dynamic.some(d => d.title === s.title)
                 );
-                const merged = [...dynamic, ...filteredStatic];
+                const merged = [...dynamic, ...filteredStatic]; */
+                const merged = dynamic;
                 setCertificates(merged);
                 localStorage.setItem('portfolio_certificates', JSON.stringify(merged));
             } catch (error) {

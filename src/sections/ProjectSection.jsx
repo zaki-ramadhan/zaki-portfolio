@@ -27,8 +27,9 @@ export default function ProjectSection() {
                 const querySnapshot = await getDocs(q);
                 const dynamicProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                const filteredStatic = staticProjectData.filter(s => !dynamicProjects.some(d => d.name === s.name));
-                const mergedProjects = [...dynamicProjects, ...filteredStatic.reverse()];
+                // const filteredStatic = staticProjectData.filter(s => !dynamicProjects.some(d => d.name === s.name));
+                // const mergedProjects = [...dynamicProjects, ...filteredStatic.reverse()];
+                const mergedProjects = dynamicProjects;
                 
                 setAllProjects(mergedProjects);
                 localStorage.setItem('portfolio_projects', JSON.stringify(mergedProjects));
