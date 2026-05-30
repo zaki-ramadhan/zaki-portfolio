@@ -4,6 +4,7 @@ import { Icon } from "@iconify-icon/react";
 import { certificateData as staticCertificates } from "@utils/certificateData";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../utils/firebase";
+import MediaViewer from "@components/MediaViewer";
 
 
 export default function CertificateSection() {
@@ -13,6 +14,8 @@ export default function CertificateSection() {
         const cached = localStorage.getItem('portfolio_certificates');
         return cached ? JSON.parse(cached) : staticCertificates;
     });
+
+    const [viewerData, setViewerData] = useState({ isOpen: false, fileUrl: '', title: '', fileType: '' });
 
     useEffect(() => {
         const fetchCertificates = async () => {
@@ -54,8 +57,26 @@ export default function CertificateSection() {
     const getCatCount = (cat) =>
         cat === "All" ? certificates.length : certificates.filter(c => c.category === cat).length;
 
+    const openViewer = (cert) => {
+        setViewerData({
+            isOpen: true,
+            fileUrl: cert.fileUrl,
+            title: cert.title,
+            fileType: cert.fileType || (cert.fileUrl.match(/\.(jpeg|jpg|gif|png|webp)$/i) ? 'image' : 'pdf')
+        });
+    };
+
     return (
         <section id="certificates" className="container mx-auto py-4 mt-16 lg:mt-12">
+            {/* Media Viewer Modal */}
+            <MediaViewer 
+                isOpen={viewerData.isOpen}
+                onClose={() => setViewerData({ ...viewerData, isOpen: false })}
+                fileUrl={viewerData.fileUrl}
+                title={viewerData.title}
+                fileType={viewerData.fileType}
+            />
+
             {/* Heading */}
             <div className="flex items-center w-full mb-8">
                 <h2 className="heading text-nowrap text-2xl md:text-3xl lg:text-4xl ml-1">
@@ -197,18 +218,15 @@ export default function CertificateSection() {
                             
                             {/* 📂 Main File Link (Image or Document) */}
                             {cert.fileUrl && (() => {
-                                const isImage = cert.fileType === 'image';
-                                const viewUrl = cert.fileUrl; // Use direct URL for both image and PDF
+                                const isImage = cert.fileType === 'image' || cert.fileUrl.match(/\.(jpeg|jpg|gif|png|webp)$/i);
                                 return (
-                                    <a
-                                        href={viewUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98]"
+                                    <button
+                                        onClick={() => openViewer(cert)}
+                                        className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98] cursor-pointer"
                                     >
                                          <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="20" />
                                          <span className="text-sm font-bold">{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
-                                     </a>
+                                    </button>
                                 );
                             })()}
                         </div>
@@ -240,3 +258,4 @@ export default function CertificateSection() {
         </section>
     );
 }
+

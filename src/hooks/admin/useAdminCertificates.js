@@ -78,7 +78,11 @@ export const useAdminCertificates = (showNotify) => {
         const certPreset = import.meta.env.VITE_CLOUDINARY_CERT_UPLOAD_PRESET;
 
         const isImage = file.type.startsWith('image/');
-        const resourceType = isImage ? 'image' : 'raw';
+        const isDocument = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(file.type) || 
+                          file.name.toLowerCase().match(/\.(pdf|doc|docx)$/);
+        
+        // Using 'image' resource_type for PDFs and Docs often works better in Cloudinary for public viewing
+        const resourceType = (isImage || isDocument) ? 'image' : 'raw';
         const fileType = isImage ? 'image' : 'document';
 
         const uploadData = new FormData();

@@ -79,6 +79,12 @@ const resources = {
 				viewImage: "View Photo Certificate",
 				empty: "No certificates in this category.",
 			},
+			mediaViewer: {
+				loading: "Loading PDF...",
+				errorTitle: "Failed to load PDF in the integrated viewer",
+				errorDesc: "This might be due to security (CORS) restrictions on the certificate provider.",
+				fallbackButton: "Open in New Tab Instead",
+			},
 			contactSection: {
 				title: "Get In Touch",
 				subtitle: "Have a project in mind or just want to say hi? Feel free to reach out!",
@@ -172,6 +178,12 @@ const resources = {
 				viewPdf: "Lihat PDF Sertifikat",
 				viewImage: "Lihat Foto Sertifikat",
 				empty: "Tidak ada sertifikat dalam kategori ini.",
+			},
+			mediaViewer: {
+				loading: "Sedang memuat PDF...",
+				errorTitle: "Gagal memuat PDF di penampil terintegrasi",
+				errorDesc: "Ini mungkin karena batasan keamanan (CORS) dari penyedia sertifikat.",
+				fallbackButton: "Buka di Tab Baru Saja",
 			},
 			contactSection: {
 				title: "Kontak",
