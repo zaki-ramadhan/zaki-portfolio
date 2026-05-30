@@ -9,7 +9,7 @@ const Cards = () => {
 	return (
 		<main
 			id="cards"
-			className="container mx-auto py-4 px-2.5 md:px-10 lg:px-14 flex flex-col -space-y-3"
+			className="container mx-auto py-4 px-1.5 md:px-10 lg:px-14 flex flex-col -space-y-3"
 		>
 			<div className="card__wrp container mx-auto flex flex-col lg:flex-row gap-4">
 				<HelloCard />

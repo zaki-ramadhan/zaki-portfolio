@@ -38,19 +38,31 @@ const MainHeader = ({ children }) => {
 	}, [isMobileMenuOpen]);
 
 	const navLinks = (isMobile = false) => (
-		<ul className={`${isMobile ? 'space-y-5 text-xl font-bold text-white' : 'hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base'}`}>
+		<ul className={`${isMobile ? 'space-y-2.5' : 'hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base'}`}>
 			{navigationData.map((navItem, index) => (
 				<li key={index}>
-					<a href={`${import.meta.env.BASE_URL}${navItem.href}`} onClick={isMobile ? closeMobileMenu : undefined}>
+					<a 
+						href={`${import.meta.env.BASE_URL}${navItem.href}`} 
+						onClick={isMobile ? closeMobileMenu : undefined}
+						className={isMobile ? "group flex items-center justify-between py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-all font-medium text-white/90 hover:text-white" : ""}
+					>
 						{t(navItem.labelKey)}
+						{isMobile && <Icon icon="solar:arrow-right-up-linear" width="20" className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />}
 					</a>
 				</li>
 			))}
 			{user && (
 				<li>
-					<Link to="/0/admin" onClick={isMobile ? closeMobileMenu : undefined} className="text-additional hover:text-white transition-colors flex items-center gap-2">
-						<Icon icon="solar:shield-user-linear" width={isMobile ? "20" : "18"} />
-						{t("header.dashboard")}
+					<Link 
+						to="/0/admin" 
+						onClick={isMobile ? closeMobileMenu : undefined} 
+						className={`text-additional hover:text-white transition-all flex items-center gap-2 ${isMobile ? 'group justify-between py-3.5 px-4 rounded-2xl bg-white/5 hover:bg-white/10 font-medium' : ''}`}
+					>
+						<div className="flex items-center gap-2">
+							<Icon icon="solar:shield-user-linear" width={isMobile ? "20" : "18"} />
+							{t("header.dashboard")}
+						</div>
+						{isMobile && <Icon icon="solar:arrow-right-up-linear" width="20" className="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />}
 					</Link>
 				</li>
 			)}
@@ -68,7 +80,7 @@ const MainHeader = ({ children }) => {
 					: "bg-transparent py-7 border-transparent"
 				}`}
 			>
-				<div className="container mx-auto px-3.5 md:px-12 lg:px-14 flex justify-between items-center">
+				<div className="container mx-auto px-5 md:px-12 lg:px-14 flex justify-between items-center">
 					<div className="dev-name">
 						<h1 className="inline text-lg md:text-xl lg:text-base font-bold text-white">
 							Zaki R

@@ -70,7 +70,7 @@ const TopHeader = () => {
 				href={whatsappURL}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="flex text-lg md:text-sm items-center gap-2 hover:underline font-Archivo"
+				className="flex text-base md:text-sm items-center gap-2 hover:underline font-Archivo"
 			>
 				{t(contactData.contactTextKey)}
 				<Icon

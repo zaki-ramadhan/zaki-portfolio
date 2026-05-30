@@ -63,7 +63,7 @@ export default function ContactSection() {
                         </h1>
                         <span className="inline w-full grow h-[0.05rem] bg-gradient-to-r from-stone-400 from-20% to-stone-200/0 ml-4"></span>
                     </div>
-                    <p className="text-secondary text-[19px] font-light leading-relaxed">
+                    <p className="text-secondary text-lg font-light leading-relaxed">
                         {t("contactSection.subtitle")}
                     </p>
                     
@@ -72,25 +72,25 @@ export default function ContactSection() {
                             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
                                 <Icon icon="solar:letter-broken" className="group-hover:text-additional transition-colors" width="24" />
                             </div>
-                            <a href="mailto:zakiram4dhan@gmail.com" className="font-Archivo text-lg hover:text-white transition-colors">zakiram4dhan@gmail.com</a>
+                            <a href="mailto:zakiram4dhan@gmail.com" className="font-Archivo hover:text-white transition-colors">zakiram4dhan@gmail.com</a>
                         </div>
                         <div className="flex items-center gap-4 text-secondary group">
                             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
                                 <Icon icon="basil:instagram-outline" className="group-hover:text-additional transition-colors" width="24" />
                             </div>
-                            <a href="https://www.instagram.com/zqramadhan_" target="_blank" rel="noreferrer" className="font-Archivo text-lg hover:text-white transition-colors">@zqramadhan_</a>
+                            <a href="https://www.instagram.com/zqramadhan_" target="_blank" rel="noreferrer" className="font-Archivo hover:text-white transition-colors">@zqramadhan_</a>
                         </div>
                         <div className="flex items-center gap-4 text-secondary group">
                             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
                                 <Icon icon="mdi:github" className="group-hover:text-additional transition-colors" width="24" />
                             </div>
-                            <a href="https://github.com/zaki-ramadhan" target="_blank" rel="noreferrer" className="font-Archivo text-lg hover:text-white transition-colors">zaki-ramadhan</a>
+                            <a href="https://github.com/zaki-ramadhan" target="_blank" rel="noreferrer" className="font-Archivo hover:text-white transition-colors">zaki-ramadhan</a>
                         </div>
                         <div className="flex items-center gap-4 text-secondary group">
                             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-additional/30 transition-all duration-300">
                                 <Icon icon="la:linkedin-in" className="group-hover:text-additional transition-colors" width="24" />
                             </div>
-                            <a href="https://www.linkedin.com/in/zaki-ramadhan" target="_blank" rel="noreferrer" className="font-Archivo text-lg hover:text-white transition-colors">Zaki Ramadhan</a>
+                            <a href="https://www.linkedin.com/in/zaki-ramadhan" target="_blank" rel="noreferrer" className="font-Archivo hover:text-white transition-colors">Zaki Ramadhan</a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ export default function ContactSection() {
                         
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <label className="text-base font-Archivo text-stone-400 ml-1">
+                                <label className="text-sm font-Archivo text-stone-400 ml-1">
                                     {t("contactSection.nameLabel")} <span className="text-additional">*</span>
                                 </label>
                                 <input 
@@ -115,11 +115,11 @@ export default function ContactSection() {
                                         setFormData({...formData, name: e.target.value});
                                         if (errors.name) setErrors({...errors, name: false});
                                     }}
-                                    className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white text-base font-Archivo`}
+                                    className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo`}
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-base font-Archivo text-stone-400 ml-1">
+                                <label className="text-sm font-Archivo text-stone-400 ml-1">
                                     {t("contactSection.emailLabel")} <span className="text-additional">*</span>
                                 </label>
                                 <input 
@@ -130,13 +130,13 @@ export default function ContactSection() {
                                         setFormData({...formData, email: e.target.value});
                                         if (errors.email) setErrors({...errors, email: false});
                                     }}
-                                    className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white text-base font-Archivo`}
+                                    className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo`}
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-base font-Archivo text-stone-400 ml-1">
+                            <label className="text-sm font-Archivo text-stone-400 ml-1">
                                 {t("contactSection.messageLabel")} <span className="text-additional">*</span>
                             </label>
                             <textarea 
@@ -147,7 +147,7 @@ export default function ContactSection() {
                                     setFormData({...formData, message: e.target.value});
                                     if (errors.message) setErrors({...errors, message: false});
                                 }}
-                                className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-4 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white text-base font-Archivo resize-none`}
+                                className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-4 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo resize-none`}
                             ></textarea>
                         </div>
 
