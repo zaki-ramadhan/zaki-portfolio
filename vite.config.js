@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
 	plugins: [react(), tailwindcss()],
-	base: mode === 'production' ? "/zaki-portfolio/" : "/",
+	base: mode === 'production' ? "/" : "/",
 	server: {
 		hmr: true,
 	},
