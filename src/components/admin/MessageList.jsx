@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Icon } from "@iconify-icon/react";
 
-const MessageList = ({ messages, onDelete, loading }) => {
-    if (loading) return (
+const MessageList = ({ messages, onDelete, fetching }) => {
+    if (fetching) return (
         <div className="flex flex-col items-center justify-center py-20 text-stone-500">
             <div className="w-10 h-10 border-2 border-stone-800 border-t-additional rounded-full animate-spin mb-4"></div>
             <p className="text-sm font-medium">Loading messages...</p>

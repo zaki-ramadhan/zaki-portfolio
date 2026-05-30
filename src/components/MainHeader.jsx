@@ -41,14 +41,14 @@ const MainHeader = ({ children }) => {
 		<ul className={`${isMobile ? 'space-y-3' : 'hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base'}`}>
 			{navigationData.map((navItem, index) => (
 				<li key={index}>
-					<a href={navItem.href} onClick={isMobile ? closeMobileMenu : undefined}>
+					<a href={`${import.meta.env.BASE_URL}${navItem.href}`} onClick={isMobile ? closeMobileMenu : undefined}>
 						{t(navItem.labelKey)}
 					</a>
 				</li>
 			))}
 			{user && (
 				<li>
-					<Link to="/admin" onClick={isMobile ? closeMobileMenu : undefined} className="text-additional hover:text-white transition-colors flex items-center gap-2">
+					<Link to="/0/admin" onClick={isMobile ? closeMobileMenu : undefined} className="text-additional hover:text-white transition-colors flex items-center gap-2">
 						<Icon icon="solar:shield-user-linear" width={isMobile ? "20" : "18"} />
 						{t("header.dashboard")}
 					</Link>

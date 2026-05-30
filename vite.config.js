@@ -8,9 +8,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	plugins: [react(), tailwindcss()],
-	base: "/zaki-portfolio/",
+	base: mode === 'production' ? "/zaki-portfolio/" : "/",
 	server: {
 		hmr: true,
 	},
@@ -42,4 +42,4 @@ export default defineConfig({
 			),
 		},
 	},
-});
+}));

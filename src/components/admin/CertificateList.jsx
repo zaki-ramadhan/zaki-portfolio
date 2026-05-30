@@ -3,7 +3,7 @@ import { Icon } from "@iconify-icon/react";
 
 const CertificateList = ({ 
     certificates, 
-    loading,
+    fetching,
     onDelete, 
     onEdit, 
     editingId,
@@ -35,7 +35,7 @@ const CertificateList = ({
                 </div>
             </div>
 
-            {loading ? (
+            {fetching ? (
                 <div className="py-24 flex flex-col items-center justify-center text-stone-600 gap-4 bg-stone-900/10 rounded-[40px] border border-dashed border-white/5">
                     <div className="w-12 h-12 border-4 border-additional/20 border-t-additional rounded-full animate-spin"></div>
                     <p className="text-sm font-bold text-stone-500 animate-pulse">Fetching credentials...</p>
