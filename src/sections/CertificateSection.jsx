@@ -130,7 +130,7 @@ export default function CertificateSection() {
                                 )}
                             </div>
                             <span
-                                className="text-xs font-bold px-3 py-1.5 rounded-xl border backdrop-blur-md"
+                                className="text-sm font-bold px-3 py-1.5 rounded-xl border backdrop-blur-md"
                                 style={{
                                     color: cert.color,
                                     borderColor: `${cert.color}30`,
@@ -143,10 +143,10 @@ export default function CertificateSection() {
 
                         {/* Title & issuer */}
                         <div className="flex flex-col gap-1.5 relative z-10">
-                             <h3 className="font-semibold text-white text-base leading-snug group-hover:text-additional transition-colors duration-300 line-clamp-2">
+                             <h3 className="font-semibold text-white text-[17px] leading-snug group-hover:text-additional transition-colors duration-300 line-clamp-2">
                                  {cert.title}
                              </h3>
-                             <div className="flex items-center gap-2 text-stone-500 text-sm font-medium">
+                             <div className="flex items-center gap-2 text-stone-500 text-[15px] font-medium">
                                  <Icon icon="solar:buildings-broken" width="16" />
                                  <span>{cert.issuer}</span>
                              </div>
@@ -157,7 +157,7 @@ export default function CertificateSection() {
                             {cert.skills?.map(skill => (
                                  <span
                                      key={skill}
-                                     className="text-[11px] px-2.5 py-1 rounded-lg bg-white/5 text-stone-400 font-medium border border-white/5"
+                                     className="text-xs px-2.5 py-1 rounded-lg bg-white/5 text-stone-400 font-medium border border-white/5"
                                  >
                                      {skill}
                                  </span>
@@ -167,7 +167,7 @@ export default function CertificateSection() {
         {/* Footer: date + verify link */}
                         <div className="flex flex-col gap-3 pt-4 border-t border-white/5 relative z-10">
                             <div className="flex items-center justify-between">
-                                 <div className="flex items-center gap-2 text-stone-500 text-xs font-bold uppercase tracking-wider">
+                                 <div className="flex items-center gap-2 text-stone-500 text-sm font-bold uppercase tracking-wider">
                                     <Icon icon="solar:calendar-minimalistic-broken" width="16" />
                                     <span>
                                         {cert.validFrom && cert.validUntil
@@ -183,14 +183,14 @@ export default function CertificateSection() {
                                         title="Verify this credential on the issuer's platform"
                                         className="flex items-center gap-1.5 text-xs font-bold text-additional/60 hover:text-additional transition-colors"
                                     >
-                                         <Icon icon="solar:verified-check-bold" width="14" />
-                                         <span>{t("certificateSection.verify")}</span>
-                                         <Icon icon="solar:arrow-right-up-linear" width="13" />
+                                         <Icon icon="solar:verified-check-bold" width="15" />
+                                         <span className="text-sm">{t("certificateSection.verify")}</span>
+                                         <Icon icon="solar:arrow-right-up-linear" width="14" />
                                      </a>
                                 )}
                             </div>
                             {cert.credentialId && (
-                                 <p className="text-[11px] font-mono text-stone-400 tracking-wider truncate">
+                                 <p className="text-xs font-mono text-stone-400 tracking-wider truncate">
                                      ID: {cert.credentialId}
                                  </p>
                             )}
@@ -206,8 +206,8 @@ export default function CertificateSection() {
                                         rel="noopener noreferrer"
                                         className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98]"
                                     >
-                                         <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="18" />
-                                         <span>{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
+                                         <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="20" />
+                                         <span className="text-sm font-bold">{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
                                      </a>
                                 );
                             })()}
