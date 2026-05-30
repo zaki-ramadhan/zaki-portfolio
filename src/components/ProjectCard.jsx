@@ -27,7 +27,7 @@ const SingleProjectCard = ({ project, is_image, className }) => {
         <div className="w-full title-status__wrp flex items-center justify-between gap-4">
           <span className="title-icon__wrp flex items-center gap-2 basis-3/4 min-w-0">
             <h1 
-              className={`${titleColor} text-2xl md:text-3xl font-Archivo max-w-full md:max-w-none overflow-hidden text-ellipsis whitespace-nowrap min-w-0`}
+              className={`${titleColor} text-[28px] md:text-3xl font-Archivo font-bold max-w-full md:max-w-none overflow-hidden text-ellipsis whitespace-nowrap min-w-0`}
               style={{ flexShrink: 1 }}
             >
               {project.name}
@@ -49,12 +49,12 @@ const SingleProjectCard = ({ project, is_image, className }) => {
           </span>
           <span
             id="status-project"
-            className={`status basis-1/4 max-w-fit min-w-0 inline-block truncate ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-xs ring-[0.8px] ring-secondary/30 select-none font-bold`}
+            className={`status basis-1/4 max-w-fit min-w-0 inline-block truncate ${titleColor} py-1.5 px-3 rounded-full ${btnColor} text-sm ring-[0.8px] ring-secondary/30 select-none font-extrabold`}
           >
             {projectStatus}
           </span>
         </div>
-        <p className="text-secondary text-base mt-1.5 lg:mt-01.5 lg:w-96 line-clamp-1">
+        <p className="text-secondary text-[17px] mt-1.5 lg:mt-01.5 lg:w-96 line-clamp-1">
           {projectDesc}
         </p>
       </div>

@@ -42,9 +42,14 @@ export default function CertificateSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [certificates]);
 
+    const [visibleCount, setVisibleCount] = useState(6);
+
     const filtered = selected === "All"
         ? certificates
         : certificates.filter(c => c.category === selected);
+
+    const displayCertificates = filtered.slice(0, visibleCount);
+    const hasMore = filtered.length > visibleCount;
 
     const getCatCount = (cat) =>
         cat === "All" ? certificates.length : certificates.filter(c => c.category === cat).length;
@@ -65,7 +70,10 @@ export default function CertificateSection() {
                     {categories.map(cat => (
                         <button
                             key={cat}
-                            onClick={() => setSelected(cat)}
+                            onClick={() => {
+                                setSelected(cat);
+                                setVisibleCount(6);
+                            }}
                             className={`px-4 py-2.5 rounded-xl text-sm md:text-[15px] font-Archivo font-medium transition-all duration-300 border whitespace-nowrap flex items-center gap-2 ${
                                 selected === cat
                                     ? "bg-additional text-stone-900 border-additional shadow-lg shadow-additional/20"
@@ -85,7 +93,7 @@ export default function CertificateSection() {
 
             {/* Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered.map((cert, i) => (
+                {displayCertificates.map((cert, i) => (
                     <div
                         key={cert.id || i}
                         className="group relative bg-stone-900/40 border border-white/5 rounded-3xl p-6 hover:border-white/15 hover:bg-stone-900/70 transition-all duration-300 overflow-hidden flex flex-col gap-5"
@@ -122,7 +130,7 @@ export default function CertificateSection() {
                                 )}
                             </div>
                             <span
-                                className="text-xs font-bold px-3 py-1.5 rounded-xl border backdrop-blur-md"
+                                className="text-sm font-medium px-3 py-1.5 rounded-xl border backdrop-blur-md"
                                 style={{
                                     color: cert.color,
                                     borderColor: `${cert.color}30`,
@@ -135,31 +143,31 @@ export default function CertificateSection() {
 
                         {/* Title & issuer */}
                         <div className="flex flex-col gap-1.5 relative z-10">
-                            <h3 className="font-bold text-white text-base leading-snug group-hover:text-additional transition-colors duration-300 line-clamp-2">
-                                {cert.title}
-                            </h3>
-                            <div className="flex items-center gap-2 text-stone-500 text-sm font-medium">
-                                <Icon icon="solar:buildings-broken" width="16" />
-                                <span>{cert.issuer}</span>
-                            </div>
+                             <h3 className="font-bold text-white text-lg leading-snug group-hover:text-additional transition-colors duration-300 line-clamp-2">
+                                 {cert.title}
+                             </h3>
+                             <div className="flex items-center gap-2 text-stone-400 text-base font-medium">
+                                 <Icon icon="solar:buildings-broken" width="16" />
+                                 <span>{cert.issuer}</span>
+                             </div>
                         </div>
 
                         {/* Skills */}
                         <div className="flex flex-wrap gap-2 mt-auto relative z-10">
                             {cert.skills?.map(skill => (
-                                <span
-                                    key={skill}
-                                    className="text-[11px] px-2.5 py-1 rounded-lg bg-white/5 text-stone-400 font-medium border border-white/5"
-                                >
-                                    {skill}
-                                </span>
+                                 <span
+                                     key={skill}
+                                     className="text-xs px-2.5 py-1 rounded-lg bg-white/5 text-stone-300 font-bold border border-white/5"
+                                 >
+                                     {skill}
+                                 </span>
                             ))}
                         </div>
 
         {/* Footer: date + verify link */}
                         <div className="flex flex-col gap-3 pt-4 border-t border-white/5 relative z-10">
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2 text-stone-500 text-xs font-bold uppercase tracking-wider">
+                                 <div className="flex items-center gap-2 text-stone-400 text-sm font-bold uppercase tracking-wider">
                                     <Icon icon="solar:calendar-minimalistic-broken" width="16" />
                                     <span>
                                         {cert.validFrom && cert.validUntil
@@ -175,24 +183,22 @@ export default function CertificateSection() {
                                         title="Verify this credential on the issuer's platform"
                                         className="flex items-center gap-1.5 text-xs font-bold text-additional/60 hover:text-additional transition-colors"
                                     >
-                                        <Icon icon="solar:verified-check-bold" width="14" />
-                                        <span>{t("certificateSection.verify")}</span>
-                                        <Icon icon="solar:arrow-right-up-linear" width="13" />
-                                    </a>
+                                         <Icon icon="solar:verified-check-bold" width="15" />
+                                         <span className="text-sm">{t("certificateSection.verify")}</span>
+                                         <Icon icon="solar:arrow-right-up-linear" width="14" />
+                                     </a>
                                 )}
                             </div>
                             {cert.credentialId && (
-                                <p className="text-[10px] font-mono text-stone-600 tracking-wider truncate">
-                                    ID: {cert.credentialId}
-                                </p>
+                                 <p className="text-xs font-mono text-stone-500 tracking-wider truncate">
+                                     ID: {cert.credentialId}
+                                 </p>
                             )}
                             
                             {/* 📂 Main File Link (Image or Document) */}
                             {cert.fileUrl && (() => {
                                 const isImage = cert.fileType === 'image';
-                                const viewUrl = isImage
-                                    ? cert.fileUrl
-                                    : `https://docs.google.com/viewer?url=${encodeURIComponent(cert.fileUrl)}&embedded=true`;
+                                const viewUrl = cert.fileUrl; // Use direct URL for both image and PDF
                                 return (
                                     <a
                                         href={viewUrl}
@@ -200,15 +206,29 @@ export default function CertificateSection() {
                                         rel="noopener noreferrer"
                                         className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98]"
                                     >
-                                        <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="18" />
-                                        <span>{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
-                                    </a>
+                                         <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="20" />
+                                         <span className="text-sm">{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
+                                     </a>
                                 );
                             })()}
                         </div>
                     </div>
                 ))}
             </div>
+
+            {hasMore && (
+                <div className="flex justify-center mt-12 mb-4">
+                    <button 
+                        onClick={() => setVisibleCount(prev => prev + 6)}
+                        className="group flex flex-col items-center gap-3 text-secondary hover:text-additional transition-all duration-300"
+                    >
+                        <span className="font-Archivo text-sm font-medium tracking-widest uppercase">{t("certificateSection.showMore") || "Show More"}</span>
+                        <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-additional/30 group-hover:bg-additional/5 transition-all">
+                            <Icon icon="solar:alt-arrow-down-broken" width="24" className="group-hover:translate-y-1 transition-transform" />
+                        </div>
+                    </button>
+                </div>
+            )}
 
             {/* Empty state */}
             {filtered.length === 0 && (

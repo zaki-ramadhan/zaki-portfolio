@@ -57,7 +57,7 @@ const CertificateList = ({
                             key={cert.id} 
                             className={`group relative p-4 rounded-[28px] border transition-all duration-500 flex gap-4 items-center ${
                                 editingId === cert.id 
-                                ? 'bg-additional/5 border-additional/30 shadow-[0_0_40px_rgba(var(--color-additional),0.1)]' 
+                                ? 'bg-emerald-500/10 border-emerald-500/40 shadow-2xl shadow-emerald-500/10 ring-1 ring-emerald-500/10' 
                                 : 'bg-stone-900/20 border-white/5 hover:bg-stone-800/40 hover:border-white/10'
                             }`}
                         >
@@ -74,8 +74,8 @@ const CertificateList = ({
                                     </div>
                                 )}
                                 {editingId === cert.id && (
-                                    <div className="absolute inset-0 bg-additional/20 backdrop-blur-[1px] flex items-center justify-center">
-                                        <Icon icon="solar:pen-bold" className="text-additional animate-bounce" width="22" />
+                                    <div className="absolute inset-0 bg-emerald-500/20 backdrop-blur-[1px] flex items-center justify-center">
+                                        <Icon icon="solar:pen-bold" className="text-emerald-400 animate-bounce" width="22" />
                                     </div>
                                 )}
                             </div>
@@ -83,12 +83,21 @@ const CertificateList = ({
                             {/* Info */}
                             <div className="flex-1 min-w-0 space-y-1.5">
                                 <div className="flex items-center gap-2">
-                                    <span className="px-2.5 py-0.5 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-stone-400">
+                                    <span className={`px-2.5 py-0.5 rounded-lg border text-[11px] font-bold transition-colors ${
+                                        editingId === cert.id 
+                                        ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-400' 
+                                        : 'bg-white/5 border-white/10 text-stone-400'
+                                    }`}>
                                         {cert.category}
                                     </span>
                                     <span className="text-xs font-semibold text-stone-600">{cert.date}</span>
                                 </div>
-                                <h3 className="text-[15px] font-bold text-white truncate leading-snug group-hover:text-additional transition-colors">{cert.title}</h3>
+                                <h3 className={`text-[15px] font-bold truncate leading-snug transition-colors ${
+                                    editingId === cert.id ? 'text-emerald-400' : 'text-white group-hover:text-emerald-400'
+                                }`}>
+                                    {cert.title}
+                                    {editingId === cert.id && <span className="ml-2 inline-block w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />}
+                                </h3>
                                 <p className="text-xs text-stone-500 font-medium truncate">{cert.issuer}</p>
                             </div>
 
@@ -96,9 +105,13 @@ const CertificateList = ({
                             <div className="flex flex-col items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100 pr-1 shrink-0">
                                 <button 
                                     onClick={() => onEdit(cert)}
-                                    className="w-9 h-9 rounded-xl bg-stone-800 text-stone-400 hover:bg-additional hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
+                                    className={`w-9 h-9 rounded-xl transition-all flex items-center justify-center shadow-xl active:scale-90 ${
+                                        editingId === cert.id 
+                                        ? 'bg-emerald-500 text-white shadow-emerald-500/20' 
+                                        : 'bg-stone-800 text-stone-400 hover:bg-emerald-500 hover:text-white'
+                                    }`}
                                 >
-                                    <Icon icon="solar:pen-bold" width="16" />
+                                    <Icon icon={editingId === cert.id ? "solar:pen-new-square-bold" : "solar:pen-bold"} width="16" />
                                 </button>
                                 <button 
                                     onClick={() => onDelete(cert.id)}

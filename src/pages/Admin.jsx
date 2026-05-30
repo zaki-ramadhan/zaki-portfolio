@@ -136,7 +136,7 @@ const Admin = () => {
     );
 
     return (
-        <div className="min-h-screen bg-stone-950 text-white font-Archivo p-4 md:p-8 selection:bg-emerald-500/30 relative">
+        <div className="min-h-screen bg-stone-950 text-white font-Archivo px-2.5 py-4 md:p-8 selection:bg-emerald-500/30 relative">
             <AdminToasts notification={notification} onClose={() => setNotification(null)} />
             
             <div className="max-w-6xl mx-auto">

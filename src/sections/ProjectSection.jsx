@@ -157,7 +157,7 @@ export default function ProjectSection() {
                                 setSearchTerm(e.target.value);
                                 setVisibleCount(6); // Reset count on search
                             }}
-                            className="w-full bg-stone-900/80 border border-white/15 rounded-xl py-3.5 pl-12 pr-4 text-sm md:text-base font-Archivo font-medium outline-none focus:ring-1 focus:ring-additional/50 focus:border-additional/30 transition-all placeholder:text-stone-500"
+                            className="w-full bg-stone-900/80 border border-white/15 rounded-xl py-3.5 pl-12 pr-4 text-base font-Archivo font-medium outline-none focus:ring-1 focus:ring-additional/50 focus:border-additional/30 transition-all placeholder:text-stone-500"
                         />
                         {searchTerm && (
                             <button 

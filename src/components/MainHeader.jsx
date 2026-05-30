@@ -38,7 +38,7 @@ const MainHeader = ({ children }) => {
 	}, [isMobileMenuOpen]);
 
 	const navLinks = (isMobile = false) => (
-		<ul className={`${isMobile ? 'space-y-3' : 'hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base'}`}>
+		<ul className={`${isMobile ? 'space-y-5 text-xl font-bold text-white' : 'hidden md:flex md:gap-7 lg:gap-12 text-secondary text-lg *:hover:text-white *:active:text-white *:duration-100 lg:text-base'}`}>
 			{navigationData.map((navItem, index) => (
 				<li key={index}>
 					<a href={`${import.meta.env.BASE_URL}${navItem.href}`} onClick={isMobile ? closeMobileMenu : undefined}>
@@ -68,7 +68,7 @@ const MainHeader = ({ children }) => {
 					: "bg-transparent py-7 border-transparent"
 				}`}
 			>
-				<div className="container mx-auto px-6 md:px-12 lg:px-14 flex justify-between items-center">
+				<div className="container mx-auto px-3.5 md:px-12 lg:px-14 flex justify-between items-center">
 					<div className="dev-name">
 						<h1 className="inline text-lg md:text-xl lg:text-base font-bold text-white">
 							Zaki R
