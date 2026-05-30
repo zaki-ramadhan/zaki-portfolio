@@ -12,11 +12,11 @@ import ErrorPage from "./pages/ErrorPage";
 const App = () => {
     return (
         <I18nextProvider i18n={i18n}>
-            <Router basename={import.meta.env.BASE_URL}>
+            <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/0/admin" element={<Admin />} />
-                    <Route path="/0/login" element={<Login />} />
+                    <Route path="/login" element={<Login />} />
                     {/* Catch-all 404 route */}
                     <Route path="*" element={<ErrorPage code="404" />} />
                 </Routes>

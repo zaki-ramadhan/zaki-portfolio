@@ -13,10 +13,10 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
 
     const filteredSkills = allSkillSuggestions.filter(s =>
         s.toLowerCase().includes(tagInput.toLowerCase()) &&
-        !formData.skills.includes(s)
+        !(formData.skills || []).includes(s)
     );
     const exactMatch = allSkillSuggestions.find(s => s.toLowerCase() === tagInput.trim().toLowerCase());
-    const isDuplicate = formData.skills.some(s => s.toLowerCase() === tagInput.trim().toLowerCase());
+    const isDuplicate = (formData.skills || []).some(s => s.toLowerCase() === tagInput.trim().toLowerCase());
     const showCreate = tagInput.trim().length > 0 && !exactMatch && !isDuplicate;
     const totalItems = (showCreate ? 1 : 0) + filteredSkills.length;
 
@@ -32,14 +32,14 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
 
     const addSkill = (value) => {
         const trimmed = value?.trim().replace(/,$/, "");
-        if (!trimmed || formData.skills.includes(trimmed)) return;
+        if (!trimmed || (formData.skills || []).includes(trimmed)) return;
         onInputChange({ target: { name: "skills", value: [...formData.skills, trimmed] } });
         setTagInput("");
         setIsSkillOpen(false);
     };
 
     const removeSkill = (index) => {
-        onInputChange({ target: { name: "skills", value: formData.skills.filter((_, i) => i !== index) } });
+        onInputChange({ target: { name: "skills", value: (formData.skills || []).filter((_, i) => i !== index) } });
     };
 
     const handleKeyDown = (e) => {
@@ -68,7 +68,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                 </label>
                 <input
                     name="title"
-                    value={formData.title}
+                    value={formData.title || ''}
                     onChange={onInputChange}
                     className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none transition-all text-sm ${
                         errors.title ? 'border-red-500/50 ring-red-500/10 animate-shake' : 'border-white/10 focus:border-additional/30 focus:ring-additional/5'
@@ -83,7 +83,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                     <label className="text-sm text-stone-400 font-semibold ml-1">Organizer</label>
                     <input
                         name="issuer"
-                        value={formData.issuer}
+                        value={formData.issuer || ''}
                         onChange={onInputChange}
                         className="w-full bg-stone-800/40 rounded-xl p-3.5 border border-white/10 outline-none text-sm focus:border-additional/30 focus:ring-4 focus:ring-additional/5 transition-all"
                         placeholder="e.g. Dicoding"
@@ -103,7 +103,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                         type="number"
                         min="2000"
                         max="2100"
-                        value={formData.date}
+                        value={formData.date || ''}
                         onChange={onInputChange}
                         className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none transition-all text-sm [appearance:textfield] ${
                             formData.date && (formData.date < 2000 || formData.date > 2100)
@@ -127,7 +127,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                         type="number"
                         min="2000"
                         max="2100"
-                        value={formData.validFrom}
+                        value={formData.validFrom || ''}
                         onChange={onInputChange}
                         className="w-full bg-stone-800/40 rounded-xl p-3.5 border border-white/10 outline-none text-sm [appearance:textfield] focus:border-additional/30 focus:ring-4 focus:ring-additional/5 transition-all"
                         placeholder="From (e.g. 2024)"
@@ -137,7 +137,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                         type="number"
                         min="2000"
                         max="2200"
-                        value={formData.validUntil}
+                        value={formData.validUntil || ''}
                         onChange={onInputChange}
                         className="w-full bg-stone-800/40 rounded-xl p-3.5 border border-white/10 outline-none text-sm [appearance:textfield] focus:border-additional/30 focus:ring-4 focus:ring-additional/5 transition-all"
                         placeholder="Until (e.g. 2027)"
@@ -153,7 +153,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                 </div>
                 <input
                     name="credentialId"
-                    value={formData.credentialId}
+                    value={formData.credentialId || ''}
                     onChange={onInputChange}
                     className="w-full bg-stone-800/40 rounded-xl p-3.5 border border-white/10 outline-none focus:border-additional/30 focus:ring-4 focus:ring-additional/5 transition-all text-sm font-mono"
                     placeholder="e.g. ABCD1234 or leave blank"
@@ -172,7 +172,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                 </div>
                 <input
                     name="credentialUrl"
-                    value={formData.credentialUrl}
+                    value={formData.credentialUrl || ''}
                     onChange={onInputChange}
                     className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none transition-all text-sm ${
                         formData.credentialUrl && !isUrl(formData.credentialUrl)
@@ -187,7 +187,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
             <ComboInput
                 label="Category"
                 name="category"
-                value={formData.category}
+                value={formData.category || ''}
                 onChange={onInputChange}
                 options={certSuggestions?.categories?.length ? certSuggestions.categories : (suggestions.categories || ["Frontend", "Backend", "Cloud", "Tools", "Fundamental"])}
                 placeholder="e.g. Frontend"
@@ -278,7 +278,7 @@ const CertificateInfoTab = ({ formData, onInputChange, errors, isUrl, suggestion
                     )}
                 </div>
 
-                {formData.skills.length > 0 && (
+                {(formData.skills || []).length > 0 && (
                     <div className="flex flex-wrap gap-2 pt-1">
                         {formData.skills.map((skill, i) => (
                             <span

@@ -117,6 +117,9 @@ export default function ContactSection() {
                                     }}
                                     className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo`}
                                 />
+                                    {errors.name && (
+                                        <p className="text-red-500 text-sm mt-1">{t('contactSection.nameError')}</p>
+                                    )}
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-Archivo text-stone-400 ml-1">
@@ -132,6 +135,9 @@ export default function ContactSection() {
                                     }}
                                     className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-3.5 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo`}
                                 />
+                                    {errors.email && (
+                                        <p className="text-red-500 text-sm mt-1">{t('contactSection.emailError')}</p>
+                                    )}
                             </div>
                         </div>
 
@@ -149,6 +155,9 @@ export default function ContactSection() {
                                 }}
                                 className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} rounded-xl py-4 px-4 outline-none focus:ring-1 focus:ring-additional/30 focus:border-additional/20 hover:border-white/20 transition-all text-white font-Archivo resize-none`}
                             ></textarea>
+                                    {errors.message && (
+                                        <p className="text-red-500 text-sm mt-1">{t('contactSection.messageError')}</p>
+                                    )}
                         </div>
 
                         <button 

@@ -47,7 +47,7 @@ const Admin = () => {
     const msg = useAdminMessages(showNotify);
 
     useEffect(() => {
-        if (!loading && !user) navigate("/0/login");
+        if (!loading && !user) navigate("/login");
     }, [user, loading, navigate]);
 
     useEffect(() => {
@@ -60,19 +60,29 @@ const Admin = () => {
     }, [user, activeView]);
 
     const handleEdit = (project) => {
-        proj.setFormData({
-            ...project,
-            desc_en: project.desc_en || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
-            desc_id: project.desc_id || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
-            status_en: project.status_en || (project.status?.includes("projectCard") ? "" : project.status) || "",
-            status_id: project.status_id || (project.status?.includes("projectCard") ? "" : project.status) || "",
-        });
+        // If the same project is already being edited, deactivate edit mode
+        if (proj.formData.id === project.id) {
+            proj.setFormData({}); // clear form data
+        } else {
+            proj.setFormData({
+                ...project,
+                desc_en: project.desc_en || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
+                desc_id: project.desc_id || (project.desc?.includes("projectCard") ? "" : project.desc) || "",
+                status_en: project.status_en || (project.status?.includes("projectCard") ? "" : project.status) || "",
+                status_id: project.status_id || (project.status?.includes("projectCard") ? "" : project.status) || "",
+            });
+        }
         setActiveView('projects');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleCertEdit = (certificate) => {
-        cert.setFormData(certificate);
+        // Toggle edit mode for certificates
+        if (cert.formData.id === certificate.id) {
+            cert.setFormData({}); // clear
+        } else {
+            cert.setFormData(certificate);
+        }
         setActiveView('certificates');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };

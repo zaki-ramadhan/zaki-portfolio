@@ -40,7 +40,7 @@ const ContentTab = ({
                 </label>
                 <input 
                     name="name" 
-                    value={formData.name} 
+                    value={formData.name || ''} 
                     onChange={localHandleChange} 
                     className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none transition-all text-sm ${
                         errors.name 
@@ -59,7 +59,7 @@ const ContentTab = ({
                 </label>
                 <textarea 
                     name={formLang === 'en' ? 'desc_en' : 'desc_id'} 
-                    value={formLang === 'en' ? formData.desc_en : formData.desc_id} 
+                    value={formLang === 'en' ? (formData.desc_en || '') : (formData.desc_id || '')} 
                     onChange={localHandleChange} 
                     className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none h-32 resize-none transition-all placeholder:text-stone-600 text-sm font-medium ${
                         (formLang === 'en' ? errors.desc_en : errors.desc_id)
@@ -83,7 +83,7 @@ const ContentTab = ({
                 </div>
                 <input 
                     name="link" 
-                    value={formData.link} 
+                    value={formData.link || ''} 
                     onChange={localHandleChange} 
                     className={`w-full bg-stone-800/40 rounded-xl p-3.5 border focus:ring-4 outline-none transition-all text-sm ${
                         errors.link 

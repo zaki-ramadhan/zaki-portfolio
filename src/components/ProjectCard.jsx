@@ -14,7 +14,7 @@ const SingleProjectCard = ({ project, is_image, className }) => {
   
   // High priority: matched language. Secondary: English fallback. Tertiary: Legacy field/key
   const projectStatus = project[`status_${currentLang}`] || project.status_en || (project.status ? t(project.status) : '...');
-  const projectDesc = project[`desc_${currentLang}`] || project.desc_en || (project.desc?.includes('projectCard') ? t(project.desc) : project.desc);
+  const projectDesc = project[`desc_${currentLang}`] || project.desc_en || (project.desc?.startsWith('projectCard') ? '' : project.desc);
 
   return (
     <div
@@ -59,14 +59,15 @@ const SingleProjectCard = ({ project, is_image, className }) => {
         </p>
       </div>
 
-      <div className="web-preview__wrp relative w-full h-fit mt-8 select-none">
-        <img
-          src={project.preview}
-          className="rounded-3xl md:rounded-2xl"
-          alt={`${project.name} preview`}
-		      loading="lazy"
-        />
-      </div>
+          <div className="web-preview__wrp relative w-full h-fit mt-8 select-none">
+  <img
+    src={project.preview}
+    className="rounded-3xl md:rounded-2xl"
+    alt={`${project.name} preview`}
+    loading="lazy"
+    onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/400x300?text=No+Image'; }}
+  />
+</div>
       <div
         className={`overlay__layer w-full h-32 absolute bottom-0 left-1/2 -translate-x-1/2 bg-linear-0 ${overlayColor} from-20%`}
       ></div>

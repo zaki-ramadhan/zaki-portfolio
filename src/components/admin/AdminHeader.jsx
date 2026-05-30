@@ -18,24 +18,7 @@ const AdminHeader = ({ onMigrate, migrating }) => {
                 <p className="text-stone-400 mt-2">Manage your portfolio projects dynamically</p>
             </div>
             <div className="flex flex-wrap gap-4">
-                <button 
-                    onClick={onMigrate} 
-                    disabled={migrating}
-                    className={`px-6 py-2 rounded-xl transition-all border text-sm font-medium flex items-center gap-2 ${
-                        migrating 
-                        ? "bg-stone-800 border-white/5 text-stone-500 cursor-not-allowed" 
-                        : "bg-blue-600/20 text-blue-400 border-blue-500/20 hover:bg-blue-600/30"
-                    }`}
-                >
-                    {migrating ? (
-                        <>
-                            <div className="w-4 h-4 border-2 border-stone-500/30 border-t-stone-400 rounded-full animate-spin"></div>
-                            <span>Migrating...</span>
-                        </>
-                    ) : (
-                        "Migrate Static"
-                    )}
-                </button>
+
                 <button 
                     onClick={() => auth.signOut()} 
                     className="bg-stone-800 hover:bg-red-900/30 text-stone-300 hover:text-red-400 px-6 py-2 rounded-xl transition-all border border-white/5 text-sm font-medium"

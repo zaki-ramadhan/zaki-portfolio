@@ -3,7 +3,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const SESSION_KEY = "admin_session_start";
-const SESSION_DURATION_MS = 8 * 60 * 60 * 1000; // 8 hours
+const SESSION_DURATION_MS = 2 * 60 * 60 * 1000; // 2 hours
 
 export const useAuth = () => {
     const [user, setUser] = useState(null);

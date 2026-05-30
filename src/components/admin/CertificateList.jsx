@@ -60,6 +60,11 @@ const CertificateList = ({
                                 ? 'bg-emerald-500/10 border-emerald-500/40 shadow-2xl shadow-emerald-500/10 ring-1 ring-emerald-500/10' 
                                 : 'bg-stone-900/20 border-white/5 hover:bg-stone-800/40 hover:border-white/10'
                             }`}
+                            onClick={() => onEdit(cert)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyPress={(e)=>{if(e.key==='Enter') onEdit(cert);}}
+                            style={{cursor:'pointer'}}
                         >
                             {/* Thumbnail */}
                             <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden bg-stone-800 flex-shrink-0 border border-white/5 relative">
@@ -104,17 +109,7 @@ const CertificateList = ({
                             {/* Actions */}
                             <div className="flex flex-col items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100 pr-1 shrink-0">
                                 <button 
-                                    onClick={() => onEdit(cert)}
-                                    className={`w-9 h-9 rounded-xl transition-all flex items-center justify-center shadow-xl active:scale-90 ${
-                                        editingId === cert.id 
-                                        ? 'bg-emerald-500 text-white shadow-emerald-500/20' 
-                                        : 'bg-stone-800 text-stone-400 hover:bg-emerald-500 hover:text-white'
-                                    }`}
-                                >
-                                    <Icon icon={editingId === cert.id ? "solar:pen-new-square-bold" : "solar:pen-bold"} width="16" />
-                                </button>
-                                <button 
-                                    onClick={() => onDelete(cert.id)}
+                                    onClick={(e) => { e.stopPropagation(); onDelete(cert.id); }}
                                     className="w-9 h-9 rounded-xl bg-stone-800 text-stone-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
                                 >
                                     <Icon icon="solar:trash-bin-minimalistic-bold" width="16" />
