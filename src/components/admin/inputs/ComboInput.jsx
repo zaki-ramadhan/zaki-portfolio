@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from "react";
 import { Icon } from "@iconify-icon/react";
+import { toTitleCase } from "../../../utils/strings";
 
 const ComboInput = ({ label, name, value, onChange, options = [], placeholder, required, error }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -38,8 +39,9 @@ const ComboInput = ({ label, name, value, onChange, options = [], placeholder, r
     }, [value]);
 
     const handleSelect = (selectedVal) => {
-        onChange({ target: { name, value: selectedVal } });
-        setInputValue(selectedVal);
+        const normalized = toTitleCase(selectedVal);
+        onChange({ target: { name, value: normalized } });
+        setInputValue(normalized);
         setIsOpen(false);
     };
 
@@ -123,7 +125,7 @@ const ComboInput = ({ label, name, value, onChange, options = [], placeholder, r
                                 <Icon icon="solar:add-circle-linear" className="text-additional" width="18" />
                                 <div className="flex flex-col">
                                     <span className="font-semibold">Create: &quot;{inputValue}&quot;</span>
-                                    <span className="text-[10px] opacity-60 font-medium tracking-tight">Confirmed new custom value</span>
+                                    <span className="text-[11px] opacity-60 font-medium tracking-tight">Confirmed new custom value</span>
                                 </div>
                             </button>
                         )}

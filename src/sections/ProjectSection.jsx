@@ -6,7 +6,6 @@ import { projectData as staticProjectData } from "@utils/projectData";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
-const categories = ["All", "Web", "Mobile", "Full-Stack", "Frontend", "Individual", "Collaboration"];
 
 export default function ProjectSection() {
 	const { t } = useTranslation();
@@ -63,6 +62,27 @@ export default function ProjectSection() {
 
     const [visibleCount, setVisibleCount] = useState(6);
 
+    // Derive unique project categories from data dynamically
+    const hasStatus = (status) => allProjects.some(p =>
+        (typeof p.status === 'string' && p.status.includes(status)) ||
+        p.status_en?.includes(status) ||
+        p.status_id?.includes(status)
+    );
+    const dynamicCategories = [
+        "All",
+        ...Array.from(new Set(allProjects.map(p => p.category).filter(Boolean))).sort(),
+        ...(hasStatus("Individual") ? ["Individual"] : []),
+        ...(hasStatus("Collaboration") ? ["Collaboration"] : []),
+    ];
+
+    // Reset selectedCategory if it disappears from data
+    useEffect(() => {
+        if (selectedCategory !== "All" && !dynamicCategories.includes(selectedCategory)) {
+            setSelectedCategory("All");
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [allProjects]);
+
     const filteredProjects = allProjects.filter(p => {
         let matchesCategory = selectedCategory === "All";
         if (selectedCategory === "Individual" || selectedCategory === "Collaboration") {
@@ -98,7 +118,7 @@ export default function ProjectSection() {
                     {/* Category Chips - Scrollable on mobile */}
                     <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap gap-2 order-2 md:order-1 no-scrollbar scroll-smooth">
                         <div className="flex flex-nowrap md:flex-wrap gap-2">
-                        {categories.map((cat) => {
+                        {dynamicCategories.map((cat) => {
                             const count = getCategoryCount(cat);
                             return (
                                 <button

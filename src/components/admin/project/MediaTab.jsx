@@ -33,14 +33,14 @@ const MediaTab = ({
                             <img src={previewUrl || formData.preview} className="w-full h-full object-cover" alt="Preview" />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 backdrop-blur-[2px]">
                                 <Icon icon="solar:camera-rotate-bold" className="text-white text-3xl" />
-                                <span className="text-white text-[10px] font-bold uppercase tracking-widest">Replace Image</span>
+                                <span className="text-white text-[11px] font-bold uppercase tracking-widest">Replace Image</span>
                             </div>
                         </div>
                     ) : (
                         <div className="w-full h-64 border-2 border-dashed border-white/5 rounded-3xl flex flex-col items-center justify-center text-stone-600 bg-stone-800/20 hover:bg-stone-800/40 hover:border-white/10 transition-all">
                             <Icon icon="solar:camera-add-broken" width="48" />
                             <span className="text-sm mt-3 font-semibold">Click to Upload Image</span>
-                            <p className="text-[10px] mt-1 text-stone-500 opacity-60 uppercase tracking-[0.15em]">Recommended: 16:9 aspect ratio</p>
+                            <p className="text-[11px] mt-1 text-stone-500 opacity-60 uppercase tracking-[0.15em]">Recommended: 16:9 aspect ratio</p>
                         </div>
                     )}
 

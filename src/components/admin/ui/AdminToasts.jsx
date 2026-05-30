@@ -15,7 +15,7 @@ const AdminToasts = ({ notification, onClose }) => {
                 width="24" 
             />
             <div className="flex flex-col">
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
+                <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-40">
                     {notification.type === 'error' ? 'System Alert' : 'System Message'}
                 </span>
                 <p className="text-sm font-bold tracking-tight">{notification.message}</p>

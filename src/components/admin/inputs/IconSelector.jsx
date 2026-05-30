@@ -137,7 +137,7 @@ export const IconSelector = ({ techInput, setTechInput, techColor, setTechColor,
                         <div className="flex items-center gap-3 ml-auto pl-4 border-l border-white/5">
                            <input type="color" value={techColor} onChange={(e) => setTechColor(e.target.value)} className="w-10 h-10 rounded-xl bg-stone-800 border border-white/10 cursor-pointer overflow-hidden p-0" />
                            <div className="flex flex-col">
-                               <span className="text-[10px] text-stone-600 font-bold uppercase tracking-wider">Custom Hex</span>
+                               <span className="text-[11px] text-stone-600 font-bold uppercase tracking-wider">Custom Hex</span>
                                <span className="text-xs font-mono text-stone-400 font-bold uppercase">{techColor}</span>
                            </div>
                         </div>

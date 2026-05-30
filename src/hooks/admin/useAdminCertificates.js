@@ -1,6 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { db } from '../../utils/firebase';
 import { collection, addDoc, getDocs, doc, query, orderBy, updateDoc } from "firebase/firestore";
+import { toTitleCase } from '../../utils/strings';
 
 export const useAdminCertificates = (showNotify) => {
     const [certificates, setCertificates] = useState([]);
@@ -9,7 +10,11 @@ export const useAdminCertificates = (showNotify) => {
     const [formData, setFormData] = useState({
         title: "",
         issuer: "",
+        issuerLogo: "",
         date: "",
+        credentialId: "",
+        validFrom: "",
+        validUntil: "",
         credentialUrl: "",
         category: "Frontend",
         fileUrl: "",
@@ -38,8 +43,10 @@ export const useAdminCertificates = (showNotify) => {
 
     const resetForm = useCallback(() => {
         setFormData({
-            title: "", issuer: "", date: "", credentialUrl: "", 
-            category: "Frontend", fileUrl: "", fileType: "image", 
+            title: "", issuer: "", issuerLogo: "", date: "",
+            credentialId: "", validFrom: "", validUntil: "",
+            credentialUrl: "", category: "Frontend",
+            fileUrl: "", fileType: "image",
             skills: [], color: "#61DAFB"
         });
         setFile(null);
@@ -47,10 +54,8 @@ export const useAdminCertificates = (showNotify) => {
 
     const handleInputChange = useCallback((e) => {
         const { name, value } = e.target;
-        if (name === "reset_form") {
-            resetForm();
-            return;
-        }
+        if (name === "reset_form") { resetForm(); return; }
+        // skills passed as array from InfoTab tag input
         setFormData(prev => ({ ...prev, [name]: value }));
     }, [resetForm]);
 
@@ -98,18 +103,30 @@ export const useAdminCertificates = (showNotify) => {
         setUploading(true);
         try {
             let { fileUrl, fileType } = formData;
+            let fileFormat = formData.format ?? null;
             if (file) {
                 const uploaded = await uploadFile(file);
                 fileUrl = uploaded.url;
                 fileType = uploaded.type;
+                fileFormat = uploaded.format ?? null;
             }
 
             const certToSave = {
                 ...formData,
+                category: toTitleCase(formData.category),
+                // Skills: always an array of strings
+                skills: Array.isArray(formData.skills) ? formData.skills : [],
+                // Optional fields: only include if non-empty
+                credentialId: formData.credentialId?.trim() || null,
+                validFrom: formData.validFrom ? Number(formData.validFrom) : null,
+                validUntil: formData.validUntil ? Number(formData.validUntil) : null,
                 fileUrl,
                 fileType,
+                ...(fileFormat && { format: fileFormat }),
                 updatedAt: new Date().toISOString()
             };
+            // Strip null optional fields so Firestore stays clean
+            Object.keys(certToSave).forEach(k => certToSave[k] === null && delete certToSave[k]);
 
             if (formData.id) {
                 const { id, ...dataToUpdate } = certToSave;
@@ -132,6 +149,12 @@ export const useAdminCertificates = (showNotify) => {
         }
     };
 
+    const suggestions = useMemo(() => ({
+        icons: Array.from(new Set(certificates.map(c => c.issuerLogo).filter(Boolean))),
+        categories: Array.from(new Set(certificates.map(c => c.category).filter(Boolean))),
+        skills: Array.from(new Set(certificates.flatMap(c => c.skills || []).filter(Boolean)))
+    }), [certificates]);
+
     return {
         certificates,
         formData,
@@ -146,6 +169,7 @@ export const useAdminCertificates = (showNotify) => {
         handleAddSkill,
         removeSkill,
         resetForm,
+        suggestions,
         techInput,
         setTechInput,
         techColor,

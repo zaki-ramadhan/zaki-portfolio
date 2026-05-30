@@ -5,7 +5,6 @@ import { certificateData as staticCertificates } from "@utils/certificateData";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
-const categories = ["All", "Frontend", "Backend", "Cloud", "Tools", "Fundamental"];
 
 export default function CertificateSection() {
     const { t } = useTranslation();
@@ -34,6 +33,14 @@ export default function CertificateSection() {
         };
         fetchCertificates();
     }, []);
+
+    const categories = ["All", ...Array.from(new Set(certificates.map(c => c.category).filter(Boolean))).sort()];
+
+    // If current selected category is removed from data, fall back to All
+    useEffect(() => {
+        if (selected !== "All" && !categories.includes(selected)) setSelected("All");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [certificates]);
 
     const filtered = selected === "All"
         ? certificates
@@ -92,11 +99,15 @@ export default function CertificateSection() {
                             </div>
                         )}
 
-                        {/* Glow accent */}
+                        {/* Glow accent — top right circle */}
                         <div
-                            className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+                            className="absolute -top-6 -right-6 w-40 h-40 rounded-full blur-2xl opacity-5 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
                             style={{ background: cert.color }}
                         />
+
+                        {/* Bottom gradient decoration — ala contact form */}
+                        <div className="absolute -bottom-10 -left-10 w-52 h-52 rounded-full blur-3xl opacity-0 group-hover:opacity-5 transition-opacity duration-700 pointer-events-none bg-additional" />
+                        <div className="absolute bottom-0 inset-x-0 h-20 rounded-b-3xl pointer-events-none bg-gradient-to-t from-additional/3 via-stone-900/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                         {/* Top row: icon + category badge */}
                         <div className="flex items-start justify-between relative z-10">
@@ -107,7 +118,7 @@ export default function CertificateSection() {
                                 {cert.issuerLogo?.includes(':') ? (
                                     <Icon icon={cert.issuerLogo} width="30" style={{ color: cert.color }} />
                                 ) : (
-                                    <img src={cert.issuerLogo || 'https://icon-sets.iconify.design/solar/diploma-broken.svg'} className="w-8 h-8 object-contain" alt="" />
+                                    <Icon icon="solar:globe-broken" width="30" style={{ color: cert.color }} />
                                 )}
                             </div>
                             <span
@@ -145,38 +156,55 @@ export default function CertificateSection() {
                             ))}
                         </div>
 
-                        {/* Footer: date + verify link */}
-                        <div className="flex flex-col gap-4 pt-4 border-t border-white/5 relative z-10">
+        {/* Footer: date + verify link */}
+                        <div className="flex flex-col gap-3 pt-4 border-t border-white/5 relative z-10">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2 text-stone-500 text-xs font-bold uppercase tracking-wider">
                                     <Icon icon="solar:calendar-minimalistic-broken" width="16" />
-                                    <span>{cert.date}</span>
+                                    <span>
+                                        {cert.validFrom && cert.validUntil
+                                            ? `${cert.validFrom} – ${cert.validUntil}`
+                                            : cert.date}
+                                    </span>
                                 </div>
                                 {cert.credentialUrl && (
                                     <a 
                                         href={cert.credentialUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        title="Verify this credential on the issuer's platform"
                                         className="flex items-center gap-1.5 text-xs font-bold text-additional/60 hover:text-additional transition-colors"
                                     >
+                                        <Icon icon="solar:verified-check-bold" width="14" />
                                         <span>{t("certificateSection.verify")}</span>
-                                        <Icon icon="solar:arrow-right-up-linear" width="15" />
+                                        <Icon icon="solar:arrow-right-up-linear" width="13" />
                                     </a>
                                 )}
                             </div>
-                            
-                            {/* 📂 Main File Link (Image or PDF) */}
-                            {cert.fileUrl && (
-                                <a
-                                    href={cert.fileUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98]"
-                                >
-                                    <Icon icon={cert.fileType === 'pdf' ? "solar:file-text-bold" : "solar:gallery-bold"} width="18" />
-                                    <span>{cert.fileType === 'pdf' ? t("certificateSection.viewPdf") : t("certificateSection.viewImage")}</span>
-                                </a>
+                            {cert.credentialId && (
+                                <p className="text-[10px] font-mono text-stone-600 tracking-wider truncate">
+                                    ID: {cert.credentialId}
+                                </p>
                             )}
+                            
+                            {/* 📂 Main File Link (Image or Document) */}
+                            {cert.fileUrl && (() => {
+                                const isImage = cert.fileType === 'image';
+                                const viewUrl = isImage
+                                    ? cert.fileUrl
+                                    : `https://docs.google.com/viewer?url=${encodeURIComponent(cert.fileUrl)}&embedded=true`;
+                                return (
+                                    <a
+                                        href={viewUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-white/5 hover:bg-additional hover:text-stone-900 text-stone-300 text-xs font-bold transition-all duration-300 border border-white/5 hover:border-additional active:scale-[0.98]"
+                                    >
+                                        <Icon icon={isImage ? "solar:gallery-bold" : "solar:file-text-bold"} width="18" />
+                                        <span>{isImage ? t("certificateSection.viewImage") : t("certificateSection.viewPdf")}</span>
+                                    </a>
+                                );
+                            })()}
                         </div>
                     </div>
                 ))}

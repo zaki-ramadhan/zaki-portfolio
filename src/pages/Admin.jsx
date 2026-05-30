@@ -215,6 +215,7 @@ const Admin = () => {
                             setCertificateFile={cert.setFile}
                             certificateFile={cert.file}
                             suggestions={proj.suggestions}
+                            certSuggestions={cert.suggestions}
                             techInput={cert.techInput}
                             setTechInput={cert.setTechInput}
                             techColor={cert.techColor}

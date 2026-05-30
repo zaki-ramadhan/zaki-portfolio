@@ -103,7 +103,7 @@ const DesignTab = ({
                             <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${preset.colors.bgColor} border border-white/10 flex items-center justify-center transition-all ${JSON.stringify(formData.colors) === JSON.stringify(preset.colors) ? 'ring-2 ring-emerald-500' : ''}`}>
                                 <div className={`w-2.5 h-2.5 rounded-full ${preset.colors.titleColor.replace('text-', 'bg-')}`} />
                             </div>
-                            <span className={`text-[10px] font-semibold text-center leading-tight transition-colors ${JSON.stringify(formData.colors) === JSON.stringify(preset.colors) ? 'text-white' : 'text-stone-600 group-hover:text-stone-400'}`}>
+                            <span className={`text-[11px] font-semibold text-center leading-tight transition-colors ${JSON.stringify(formData.colors) === JSON.stringify(preset.colors) ? 'text-white' : 'text-stone-600 group-hover:text-stone-400'}`}>
                                 {preset.name}
                             </span>
                         </button>
@@ -123,11 +123,11 @@ const DesignTab = ({
             {showAdvanced && (
                 <div className="grid grid-cols-1 gap-4 animate-in slide-in-from-top duration-300">
                     <div className="space-y-2">
-                        <label className="text-[10px] text-stone-500 uppercase font-black ml-1">BG Classes</label>
+                        <label className="text-[11px] text-stone-500 uppercase font-black ml-1">BG Classes</label>
                         <input name="colors.bgColor" value={formData.colors.bgColor} onChange={localHandleChange} className="w-full bg-stone-950 rounded-xl p-3 text-xs font-mono text-stone-400 border border-white/5 outline-none focus:border-additional/30 transition-all" />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[10px] text-stone-500 uppercase font-black ml-1">Title Class</label>
+                        <label className="text-[11px] text-stone-500 uppercase font-black ml-1">Title Class</label>
                         <input name="colors.titleColor" value={formData.colors.titleColor} onChange={localHandleChange} className="w-full bg-stone-950 rounded-xl p-3 text-xs font-mono text-stone-400 border border-white/5 outline-none focus:border-additional/30 transition-all" />
                     </div>
                 </div>

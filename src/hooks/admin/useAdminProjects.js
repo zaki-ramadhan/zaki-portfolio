@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { db } from '../../utils/firebase';
 import { collection, addDoc, getDocs, doc, query, orderBy, updateDoc } from "firebase/firestore";
+import { toTitleCase } from '../../utils/strings';
 
 export const useAdminProjects = (showNotify) => {
     const [projects, setProjects] = useState([]);
@@ -143,8 +144,9 @@ export const useAdminProjects = (showNotify) => {
                 ...formData,
                 desc_en: finalDescEn,
                 desc_id: finalDescId,
-                status_en: finalStatusEn,
-                status_id: finalStatusId,
+                status_en: toTitleCase(finalStatusEn),
+                status_id: toTitleCase(finalStatusId),
+                category: toTitleCase(formData.category),
                 preview: imageUrl,
                 updatedAt: new Date().toISOString()
             };

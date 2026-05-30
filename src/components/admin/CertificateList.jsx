@@ -62,47 +62,49 @@ const CertificateList = ({
                             }`}
                         >
                             {/* Thumbnail */}
-                            <div className="w-20 h-20 rounded-2xl overflow-hidden bg-stone-800 flex-shrink-0 border border-white/5 relative">
+                            <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden bg-stone-800 flex-shrink-0 border border-white/5 relative">
                                 {cert.fileType === 'image' ? (
                                     <img src={cert.fileUrl} className="w-full h-full object-cover" alt={cert.title} />
                                 ) : (
                                     <div className="w-full h-full flex flex-col items-center justify-center text-stone-500">
-                                        <Icon icon="solar:file-bold" width="32" />
-                                        <span className="text-[8px] font-bold uppercase mt-1">PDF</span>
+                                        <Icon icon="solar:file-bold" width="28" />
+                                        <span className="text-[11px] font-bold uppercase mt-1">
+                                            {cert.format?.toUpperCase() || 'DOC'}
+                                        </span>
                                     </div>
                                 )}
                                 {editingId === cert.id && (
                                     <div className="absolute inset-0 bg-additional/20 backdrop-blur-[1px] flex items-center justify-center">
-                                        <Icon icon="solar:pen-bold" className="text-additional animate-bounce" width="24" />
+                                        <Icon icon="solar:pen-bold" className="text-additional animate-bounce" width="22" />
                                     </div>
                                 )}
                             </div>
 
                             {/* Info */}
-                            <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 text-[9px] font-black uppercase text-stone-500 tracking-wider">
+                            <div className="flex-1 min-w-0 space-y-1.5">
+                                <div className="flex items-center gap-2">
+                                    <span className="px-2.5 py-0.5 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-stone-400">
                                         {cert.category}
                                     </span>
-                                    <span className="text-[10px] font-bold text-stone-600">{cert.date}</span>
+                                    <span className="text-xs font-semibold text-stone-600">{cert.date}</span>
                                 </div>
-                                <h3 className="text-sm font-bold text-white truncate group-hover:text-additional transition-colors">{cert.title}</h3>
-                                <p className="text-[11px] text-stone-500 font-medium truncate">{cert.issuer}</p>
+                                <h3 className="text-[15px] font-bold text-white truncate leading-snug group-hover:text-additional transition-colors">{cert.title}</h3>
+                                <p className="text-xs text-stone-500 font-medium truncate">{cert.issuer}</p>
                             </div>
 
                             {/* Actions */}
-                            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100 pr-2">
+                            <div className="flex flex-col items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100 pr-1 shrink-0">
                                 <button 
                                     onClick={() => onEdit(cert)}
-                                    className="w-10 h-10 rounded-xl bg-stone-800 text-stone-400 hover:bg-additional hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
+                                    className="w-9 h-9 rounded-xl bg-stone-800 text-stone-400 hover:bg-additional hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
                                 >
-                                    <Icon icon="solar:pen-bold" width="18" />
+                                    <Icon icon="solar:pen-bold" width="16" />
                                 </button>
                                 <button 
                                     onClick={() => onDelete(cert.id)}
-                                    className="w-10 h-10 rounded-xl bg-stone-800 text-stone-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
+                                    className="w-9 h-9 rounded-xl bg-stone-800 text-stone-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center shadow-xl active:scale-90"
                                 >
-                                    <Icon icon="solar:trash-bin-minimalistic-bold" width="18" />
+                                    <Icon icon="solar:trash-bin-minimalistic-bold" width="16" />
                                 </button>
                             </div>
                         </div>

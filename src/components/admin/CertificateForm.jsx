@@ -12,15 +12,10 @@ const CertificateForm = ({
     onInputChange,
     handleSubmit,
     uploading,
-    techInput,
-    setTechInput,
-    techColor,
-    setTechColor,
-    handleAddTech,
-    removeTech,
     setCertificateFile,
     certificateFile,
     suggestions,
+    certSuggestions,
     errors = {}
 }) => {
     const fileInputRef = useRef(null);
@@ -82,7 +77,8 @@ const CertificateForm = ({
                         onInputChange={onInputChange} 
                         errors={errors} 
                         isUrl={isUrl} 
-                        suggestions={suggestions} 
+                        suggestions={suggestions}
+                        certSuggestions={certSuggestions}
                     />
                 )}
                 {activeTab === 'file' && (
@@ -96,16 +92,10 @@ const CertificateForm = ({
                     />
                 )}
                 {activeTab === 'styling' && (
-                    <CertificateStyleTab 
-                        formData={formData} 
-                        onInputChange={onInputChange} 
-                        techInput={techInput} 
-                        setTechInput={setTechInput} 
-                        techColor={techColor} 
-                        setTechColor={setTechColor} 
-                        handleAddTech={handleAddTech} 
-                        removeTech={removeTech} 
-                        suggestions={suggestions} 
+                    <CertificateStyleTab
+                        formData={formData}
+                        onInputChange={onInputChange}
+                        usedIcons={certSuggestions?.icons || []}
                     />
                 )}
             </div>
