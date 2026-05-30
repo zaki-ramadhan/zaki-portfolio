@@ -1,6 +1,7 @@
 import Card from "./Card";
 import avatarAi from "@assets/images/me.png";
 import ProjectSection from '@sections/ProjectSection';
+import CertificateSection from '@sections/CertificateSection';
 import ContactSection from '@sections/ContactSection';
 import HelloCard from "./HelloCard";
 
@@ -32,6 +33,7 @@ const Cards = () => {
 			</div>
 
 			<ProjectSection />
+			<CertificateSection />
 			<ContactSection />
 		</main>
 	);

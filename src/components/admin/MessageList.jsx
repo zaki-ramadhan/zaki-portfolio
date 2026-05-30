@@ -10,9 +10,14 @@ const MessageList = ({ messages, onDelete, loading }) => {
     );
 
     if (messages.length === 0) return (
-        <div className="flex flex-col items-center justify-center py-20 text-stone-600 bg-stone-900/20 rounded-[40px] border border-dashed border-white/5">
-            <Icon icon="solar:letter-opened-broken" width="48" className="text-stone-500 opacity-50 mb-4" />
-            <p className="text-sm font-semibold text-stone-500">No messages received yet.</p>
+        <div className="py-24 flex flex-col items-center justify-center text-stone-600 gap-4 bg-stone-900/10 rounded-[40px] border border-dashed border-white/5">
+            <div className="w-20 h-20 rounded-full bg-stone-800/30 flex items-center justify-center border border-dashed border-white/5">
+                <Icon icon="solar:letter-opened-bold" width="40" className="text-stone-500" />
+            </div>
+            <div className="text-center">
+                <p className="text-lg font-bold text-stone-400">No Messages Yet</p>
+                <p className="text-sm">Your inbox is currently empty. Incoming inquiries will appear here.</p>
+            </div>
         </div>
     );
 

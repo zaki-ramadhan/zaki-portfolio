@@ -8,6 +8,7 @@ const resources = {
 			header: {
 				present: "Profile",
 				projects: "Projects",
+				certificates: "Certificates",
 				contact: "Contact",
 				dashboard: "Dashboard",
 				specialty: "Web & Mobile Dev",
@@ -71,6 +72,13 @@ const resources = {
 				desc_404: "The page you are looking for doesn't exist or has been moved.",
 				desc_401: "You don't have permission to access this area.",
 			},
+			certificateSection: {
+				title: "My Certificates",
+				verify: "Verify",
+				viewPdf: "View PDF Certificate",
+				viewImage: "View Photo Certificate",
+				empty: "No certificates in this category.",
+			},
 			contactSection: {
 				title: "Get In Touch",
 				subtitle: "Have a project in mind or just want to say hi? Feel free to reach out!",
@@ -94,6 +102,7 @@ const resources = {
 			header: {
 				present: "Profil",
 				projects: "Proyek",
+				certificates: "Sertifikat",
 				contact: "Kontak",
 				dashboard: "Dashboard",
 				specialty: "Web & Mobile Dev",
@@ -156,6 +165,13 @@ const resources = {
 				go_home: "Back to Home",
 				desc_404: "The page you are looking for doesn't exist or has been moved.",
 				desc_401: "You don't have permission to access this area.",
+			},
+			certificateSection: {
+				title: "Sertifikat Saya",
+				verify: "Verifikasi",
+				viewPdf: "Lihat PDF Sertifikat",
+				viewImage: "Lihat Foto Sertifikat",
+				empty: "Tidak ada sertifikat dalam kategori ini.",
 			},
 			contactSection: {
 				title: "Kontak",

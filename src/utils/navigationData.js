@@ -9,6 +9,10 @@ export const navigationData = [
 		labelKey: "header.projects",
 	},
 	{
+		href: "#certificates",
+		labelKey: "header.certificates",
+	},
+	{
 		href: "#contact",
 		labelKey: "header.contact",
 	},

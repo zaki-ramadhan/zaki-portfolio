@@ -316,7 +316,7 @@ export const IconSelector = ({ techInput, setTechInput, techColor, setTechColor,
         } else {
             const available = usedIcons.filter(icon => !currentTechs.some(t => t.icon === icon));
             setFilteredIcons(available.slice(0, 5));
-            setIsMenuOpen(available.length > 0);
+            setIsMenuOpen(false); // Only open when typing or manual focus
         }
     }, [techInput, usedIcons, currentTechs]);
 
@@ -444,7 +444,9 @@ export const IconSelector = ({ techInput, setTechInput, techColor, setTechColor,
                             className="flex items-center gap-2.5 bg-stone-900 border border-white/10 pl-3 pr-2 py-2 rounded-xl text-[13px] font-medium hover:border-additional/30 transition-colors group animate-in zoom-in duration-200"
                         >
                             <Icon icon={t.icon} className="text-xl" style={{ color: t.color || '#FFFFFF' }} />
-                            <span className="text-stone-300 group-hover:text-white transition-colors">{t.icon.split(':').pop()}</span>
+                            <span className="text-stone-300 group-hover:text-white transition-colors">
+                                {t.label || t.name || t.icon.split(':').pop()}
+                            </span>
                             <button 
                                 type="button" 
                                 onClick={() => removeTech(i)} 

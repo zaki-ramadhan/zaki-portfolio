@@ -48,10 +48,14 @@ const ProjectList = ({
             </div>
 
             {projects.length === 0 && (
-                <div className="text-center py-24 bg-stone-900/10 rounded-[40px] border border-dashed border-white/5">
-                    <Icon icon="solar:folder-open-linear" width="48" className="text-stone-500 mx-auto mb-4 opacity-50" />
-                    <p className="text-stone-500 font-medium">No projects found</p>
-                    <p className="text-stone-600 text-xs mt-1">Start by adding your first project using the form.</p>
+                <div className="py-24 flex flex-col items-center justify-center text-stone-600 gap-4 bg-stone-900/10 rounded-[40px] border border-dashed border-white/5">
+                    <div className="w-20 h-20 rounded-full bg-stone-800/30 flex items-center justify-center border border-dashed border-white/5">
+                        <Icon icon="solar:folder-open-bold" width="40" className="text-stone-500" />
+                    </div>
+                    <div className="text-center">
+                        <p className="text-lg font-bold text-stone-400">No Projects Found</p>
+                        <p className="text-sm">Start by adding your first project using the form.</p>
+                    </div>
                 </div>
             )}
 
