@@ -23,7 +23,7 @@ const Login = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             showNotify("Access Granted. Redirecting...");
-            setTimeout(() => navigate("/admin"), 1000);
+            setTimeout(() => navigate("/0/admin"), 1000);
         } catch (err) {
             showNotify("Invalid credentials. Access denied.", "error");
             console.error(err);

@@ -60,8 +60,8 @@ export default function CertificateSection() {
             </div>
 
             {/* Category Filter */}
-            <div className="flex overflow-x-auto no-scrollbar pb-2 mb-8">
-                <div className="flex flex-nowrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2">
                     {categories.map(cat => (
                         <button
                             key={cat}

@@ -38,9 +38,9 @@ const MessageList = ({ messages, onDelete, fetching }) => {
                                 <div className="w-10 h-10 rounded-full bg-additional/10 flex items-center justify-center text-additional text-lg font-black italic">
                                     {msg.name?.charAt(0).toUpperCase()}
                                 </div>
-                                <div className="flex flex-col">
-                                    <h4 className="font-bold text-white text-base leading-tight">{msg.name}</h4>
-                                    <span className="text-xs text-stone-500 font-medium">{msg.email}</span>
+                                <div className="flex flex-col min-w-0">
+                                    <h4 className="font-bold text-white text-base leading-tight truncate">{msg.name}</h4>
+                                    <span className="text-xs text-stone-500 font-medium truncate">{msg.email}</span>
                                 </div>
                             </div>
                             <button 
@@ -51,8 +51,8 @@ const MessageList = ({ messages, onDelete, fetching }) => {
                             </button>
                         </div>
                         
-                        <div className="bg-black/20 p-4 rounded-2xl border border-white/5 mb-3">
-                            <p className="text-sm text-stone-300 leading-relaxed whitespace-pre-wrap">
+                        <div className="bg-black/20 p-4 rounded-2xl border border-white/5 mb-3 overflow-hidden">
+                            <p className="text-sm text-stone-300 leading-relaxed whitespace-pre-wrap break-words">
                                 {msg.message}
                             </p>
                         </div>

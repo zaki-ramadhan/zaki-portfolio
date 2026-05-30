@@ -116,8 +116,8 @@ export default function ProjectSection() {
                 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     {/* Category Chips - Scrollable on mobile */}
-                    <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap gap-2 order-2 md:order-1 no-scrollbar scroll-smooth">
-                        <div className="flex flex-nowrap md:flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 order-2 md:order-1">
+                        <div className="flex flex-wrap gap-2">
                         {dynamicCategories.map((cat) => {
                             const count = getCategoryCount(cat);
                             return (
