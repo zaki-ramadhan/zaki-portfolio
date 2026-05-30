@@ -13,13 +13,13 @@ const CertificateFileTab = ({
         <div className="space-y-6 animate-in slide-in-from-right duration-300">
             <div className={`space-y-2 p-1 rounded-2xl transition-all ${errors.file ? 'bg-red-500/10' : ''}`}>
                 <label className="text-sm text-stone-400 font-semibold ml-1">
-                    Certificate File (Image or PDF)<span className="text-red-500">*</span>
+                    Certificate File<span className="text-red-500">*</span>
                 </label>
                 
                 <input 
                     type="file" 
                     ref={fileInputRef}
-                    accept="image/*,application/pdf"
+                    accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx,.pptx"
                     onChange={(e) => setCertificateFile(e.target.files[0])} 
                     className="hidden" 
                 />
@@ -54,7 +54,7 @@ const CertificateFileTab = ({
                         <div className="w-full h-64 border-2 border-dashed border-white/5 rounded-3xl flex flex-col items-center justify-center text-stone-600 bg-stone-800/20 hover:bg-stone-800/40 hover:border-white/10 transition-all">
                             <Icon icon="solar:upload-bold" width="48" />
                             <span className="text-sm mt-3 font-semibold">Click to Upload Certificate</span>
-                            <p className="text-[10px] mt-1 text-stone-500 opacity-60 uppercase tracking-[0.15em]">Image or PDF (Max 10MB)</p>
+                            <p className="text-[10px] mt-1 text-stone-500 opacity-60 uppercase tracking-[0.15em]">Image · PDF · DOCX · XLSX · PPTX (Max 10MB)</p>
                         </div>
                     )}
 
@@ -75,7 +75,7 @@ const CertificateFileTab = ({
             <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-2xl flex gap-3 text-blue-500/80">
                 <Icon icon="solar:info-circle-bold" width="20" className="flex-shrink-0" />
                 <p className="text-[12px] leading-relaxed">
-                    Uploaded document will be stored securely. If it&apos;s a PDF, a direct download/view link will be provided to visitors.
+                    Supported: images, PDF, DOCX, DOC, XLSX, XLS, PPTX. Documents are stored securely on Cloudinary.
                 </p>
             </div>
         </div>

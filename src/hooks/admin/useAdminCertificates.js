@@ -70,23 +70,27 @@ export const useAdminCertificates = (showNotify) => {
 
     const uploadFile = async (file) => {
         const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
-        
-        const isPdf = file.type === 'application/pdf';
-        const resourceType = isPdf ? 'raw' : 'image';
+        const certPreset = import.meta.env.VITE_CLOUDINARY_CERT_UPLOAD_PRESET;
+
+        const isImage = file.type.startsWith('image/');
+        const resourceType = isImage ? 'image' : 'raw';
+        const fileType = isImage ? 'image' : 'document';
 
         const uploadData = new FormData();
         uploadData.append("file", file);
-        uploadData.append("upload_preset", uploadPreset);
+        uploadData.append("upload_preset", certPreset);
 
         const response = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
             { method: "POST", body: uploadData }
         );
 
-        if (!response.ok) throw new Error("Cloudinary upload failed");
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData?.error?.message || "Cloudinary upload failed");
+        }
         const data = await response.json();
-        return { url: data.secure_url, type: isPdf ? 'pdf' : 'image' };
+        return { url: data.secure_url, type: fileType, format: data.format };
     };
 
     const handleSubmit = async (e) => {

@@ -47,7 +47,7 @@ const Admin = () => {
     const msg = useAdminMessages(showNotify);
 
     useEffect(() => {
-        if (!loading && !user) navigate("/login");
+        if (!loading && !user) navigate("/0/login");
     }, [user, loading, navigate]);
 
     useEffect(() => {
